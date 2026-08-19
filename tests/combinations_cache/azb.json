@@ -193,5 +193,45 @@
     "id": 44,
     "question_annotated": "{place,park}-da {n,6} qız var. Əgər {place,park}-da oğlanların sayı {mult_txt,iki dəfə} qatdırsa, {place,park}-da neçə uşaq var?\n\n#init:\n- place = sample(['park', 'həyət', 'sahə', 'oynamaq yeri', 'bağ'])\n- $n = range(5, 51)\n- mult_txt, mult_val = sample(multi_times)\n\n#conditions:\n- is_int(n * mult_val + 1)\n- n * (mult_val + 1) <= 200\n\n#answer: n * (mult_val + 1)",
     "count": 100
+  },
+  {
+    "id": 45,
+    "question_annotated": "{name,Pat}-in {length,111} {unit_length,metr} uzunluğunda bir çiçək yatağı var. {name,Pat} çiçək yatağını bitkilərlə doldurmaq istəyir. {name,Pat}-in çiçəkləri {plant_width,12} santimetr enində böyüyür, və bağçılıq qaydaları yataq boyunca hər {space,1.5} {unit_length,metr} üçün bir çiçək əkməyi tələb edir. {name,Pat} artıq {owned,17} çiçəyə malikdir. Hər çiçəkli bitki dükanında {cur,$}{cost,6} qiymətinə malikdir. {name,Pat} çiçək yatağını doldurmaq üçün dükanında nə qədər pul xərcləyəcək?\n\n#init:\n- name = sample(names_female)\n- unit_length = sample(['metr'])\n- cur = sample(currencies_sym)\n- $length = range(110, 220)\n- $plant_width = range(2, 13)\n- $space = arange(1, 20, 0.25)\n- $owned = range(10, 30)\n- $cost = range(3, 15)\n\n#conditions:\n- plant_width * 3 < length\n- plant_width < space\n- is_int(length / space)\n- length / space > owned\n\n#answer: int((length / space - owned) * cost)",
+    "count": 100
+  },
+  {
+    "id": 46,
+    "question_annotated": "{school,Apple Liseyi} bu il öz {venue,İncəsənət Mərkəzi}-də məzun mərasimi keçirir və bu yer {total,6000} nəfərlik tutuma malikdir. {graduates,950} məzun üçün yer və {faculty,300} iştirak edən tədris heyəti üçün yer nəzərə alındıqdan sonra, əgər biletlər bərabər paylanarsa, hər məzun dostları və ailəsi üçün vermək üçün nə qədər bilet alacaq?\n\n#init:\n- school = sample([\"Oakwood Liseyi\", \"Riverside Akademiyası\", \"Sunnyside Liseyi\", \"Greenville Liseyi\"])\n- venue = sample([\"Auditoriya\", \"İdman zalı\", \"İdman Arenası\", \"Konfrans Mərkəzi\"])\n- $total = range(3000, 10000, 100)\n- $graduates = range(100, 1500, 50)\n- $faculty = range(100, 500, 50)\n\n#conditions:\n- total > graduates + faculty\n- is_int((total - graduates - faculty) / graduates)\n\n#answer: (total - graduates - faculty) // graduates",
+    "count": 100
+  },
+  {
+    "id": 47,
+    "question_annotated": "{name1,Cole} Yumurtalıq ovu üçün həyətdə {n,3} düz yumurta gizlətdi. {name2,Lamar} {x,5} yumurta tapır. {name3,Stacy}, {name2,Lamar}-ın tapdığından {mult1_txt,iki dəfə} çox tapır. {name4,Charlie}, {name3,Stacy}-dan {y,2} az tapır, {name5,Mei} isə {name4,Charlie}-nın tapdığından {frac_txt,yarım} qədər tapır. Həyətdə hələ neçə yumurta gizli qaldı?\n\n#init:\n- name1, name2, name3, name4, name5 = sample(names, 5)\n- $n = range(2, 10)\n- $x = range(3, 15)\n- $y = range(1, 5)\n- mult1_txt, mult1_val = sample(multi_times)\n- frac_txt, frac_val = sample(fraction_alnum)\n\n#conditions:\n- is_int(n * 12 - (x + mult1_val * x + (mult1_val * x - y) + frac_val * (mult1_val * x - y)))\n- is_int(x * mult1_val)\n- x * mult1_val - y > 0\n- is_int((x * mult1_val - y) * frac_val)\n- n * 12 > x + mult1_val * x + (mult1_val * x - y) + frac_val * (mult1_val * x - y)\n\n#answer: n * 12 - (x + mult1_val * x + (mult1_val * x - y) + frac_val * (mult1_val * x - y))",
+    "count": 100
+  },
+  {
+    "id": 48,
+    "question_annotated": "{name,Emili} dəqiqədə {n1,6} {food,karides} soyub {t,10} dəqiqədə {n2,30} {food,karides} qızara bilir. Onun {total,90} {food,karides} soyub qızartması üçün nə qədər vaxt lazımdır? {name,Emili} eyni vaxtda soyub qızara bilmir.\n\n#init:\n- name = sample(names_female)\n- food = sample([\"karides\", \"soğan\", \"yerkökü\", \"göbələk\", \"midyə\"])\n- $n1 = range(4, 15)\n- $n2 = range(20, 50, 5)\n- $t = range(5, 20)\n- $total = range(60, 200, 10)\n\n#conditions:\n- divides(total, n1)\n- divides(total, n2)\n\n#answer: total // n1 + (total // n2) * t",
+    "count": 100
+  },
+  {
+    "id": 49,
+    "question_annotated": "{name,Eldar} {n,3} fərqli yaşayış kompleksindən zibil yığır. İlk {n_first_txt,iki} hər biri {a,200} mənzilə malikdir və sonuncusu digər {n_first_txt,iki} nin cəmindən {p,60}% daha böyükdür. O, hər yerdən həftədə {f,3} dəfə zibil yığır və hər mənzil üçün hər yığım üzrə {cur,₼}{r,0.4} qazanır. O, həftədə nə qədər pul qazanır?\n\n#init:\n- name = sample(names_male)\n- cur = sample(currencies_sym)\n- $n = range(3, 8)\n- n_first_txt, n_first_val = range_str(2, 7, 1, numbers)\n- $a = range(100, 500, 50)\n- $p = range(20, 81, 5)\n- $f = range(2, 6)\n- $r = arange(0.20, 0.55, 0.05)\n\n#conditions:\n- n_first_val == n-1\n- is_int((n-1)*a*p/100)\n- is_int(((n-1)*a + (n-1)*a + (n-1)*a*p/100) * f * r)\n\n\n#answer: int(((n-1)*a + (n-1)*a + (n-1)*a*p/100) * f * r)",
+    "count": 100
+  },
+  {
+    "id": 50,
+    "question_annotated": "{name,Billie}'nin düzbucaqlı {room_type,yataq otağı}nin sahəsi {area,360} kvadrat futdur. Otağın uzunluğu {length,3} yard olarsa, otağın perimetri fut ilə nə qədərdir?\n\n#init:\n- name = sample(names_male)\n- room_type = sample([\"qonaq otağı\", \"iş otağı\", \"ofis\", \"mətbəx\"])\n- $area = range(200, 1200)\n- $length = range(3, 44)\n\n#conditions:\n- is_int(area / (length * 3))\n- area / (length * 3) > length * 3\n\n#answer: 2 * (area // (length * 3) + length * 3)",
+    "count": 100
+  },
+  {
+    "id": 51,
+    "question_annotated": "{name,Artie} {location,Kənd Bazarı}-nda {product,gül} dükanı var. O, üç növ {product,gül} satır: {item1,balqabaq çiçəyi}, {item2,petuniya} və {item3,begoniya}. O, adətən {item1,balqabaq çiçəyi}ni hər {unit,qab} üçün {cur,₼}{p1,2.74}, {item2,petuniya}nı {cur,₼}{p2,1.87} və {item3,begoniya}nı {cur,₼}{p3,2.12} qiymətinə satır. {name,Artie}nin bu gün dəyişməsi yoxdur, ona görə də bütün qiymətlərini ən yaxın manata yuvarlaqlaşdırmağa qərar verib. Əgər {name,Artie} {n1,12} {unit,qab} {item1,balqabaq çiçəyi}, {n2,9} {unit,qab} {item2,petuniya} və {n3,17} {unit,qab} {item3,begoniya} satarsa, neçə qazanacaq?\n\n#init:\n- name = sample(names_male)\n- product = sample([\"tərəvəz\", \"gül\", \"bitki otu\", \"bitki\"])\n- location = sample([\"yerli yarmarka\", \"ictimai bazar\", \"küçə bazarı\", \"şəhər meydanı\"])\n- item1, item2, item3 = sample([\"gül\", \"xırxıllar\", \"lalə\", \"zanbaq\", \"günəbaxan\", \"orkide\"], 3)\n- unit = sample([\"dəstə\", \"səbət\", \"buket\", \"bağ\"])\n- cur = sample(currencies_sym)\n- $p1 = arange(1.26, 3.53, 0.33)\n- $p2 = arange(2.27, 5.53, 0.26)\n- $p3 = arange(4.85, 6.53, 0.31)\n- $n1 = range(5, 21)\n- $n2 = range(15, 31)\n- $n3 = range(35, 41)\n\n\n#answer: n1*round(p1) + n2*round(p2) + n3*round(p3)",
+    "count": 100
+  },
+  {
+    "id": 52,
+    "question_annotated": "{name,Kreyq}nin {n,2} ədəd {cur,$}{bill,20} banknotu var. O {m_txt,altı} ədəd {item1,su püskürtən} alır, hər biri {cur}{p1,2}. O həmçinin {k,3} paket {item2,su balonu} alır, hər biri {cur}{p2,3}. O nə qədər pulu qalıb?\n\n#init:\n- name = sample(names_male)\n- $bill = sample([5, 10, 20, 50, 100])\n- item1 = sample([\"oyun maşını\", \"aksiya fiquru\", \"rəsm kitabı\", \"yığma oyuncaq\", \"lövhə oyunu\"])\n- item2 = sample([\"yapışqan\", \"şirniyyat çubuğu\", \"kolleksiya kartı\", \"qələm\", \"silgi\"])\n- cur = sample(currencies_sym)\n- $n = range(1, 10)\n- m_txt, m_val = range_str(2, 15, 1, numbers)\n- $k = range(2, 10)\n- $p1 = range(1, 10)\n- $p2 = range(1, 10)\n\n#conditions:\n- n * int(bill) > m_val * p1 + k * p2\n\n#answer: n * int(bill) - (m_val * p1 + k * p2)",
+    "count": 100
   }
 ]

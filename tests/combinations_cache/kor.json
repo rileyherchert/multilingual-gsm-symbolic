@@ -328,5 +328,40 @@
     "id": 66,
     "question_annotated": "{name,캔디}는 {n1,15} 개의 연한 {c1,파란색} 실을, {n2,45} 개의 진한 {c1,파란색} 실을, {n3,40} 개의 연한 {c2,초록색} 실을, 그리고 {n4,50} 개의 진한 {c2,초록색} 실을 가지고 있습니다. 그녀의 실 중 {c1,파란색} 실은 몇 퍼센트입니까?\n\n#init:\n- name = sample(names)\n- c1, c2 = sample(colors, 2)\n- $n1 = range(15, 100, 5)\n- $n2 = range(45, 150, 5)\n- $n3 = range(20, 80, 5)\n- $n4 = range(50, 100, 5)\n\n#conditions:\n- is_int(100 * (n1 + n2) / (n1 + n2 + n3 + n4))\n\n#answer: int(100 * (n1 + n2) / (n1 + n2 + n3 + n4))",
     "count": 100
+  },
+  {
+    "id": 67,
+    "question_annotated": "{name,존} 의 {vehicle,자동차} 가 고장 났다. {vehicle,자동차} 의 무게는 {weight_vehicle,1200} {unit,파운드} 이고 그 안에는 무게가 {weight_item,250} {unit,파운드} 인 {item,수하물} 이 있다. 그는 또한 {num_passengers_txt,두} 명의 어린 {passenger_type,아이들} 을 태우고 있으며, 각각 무게는 {weight_passenger,75} {unit,파운드} 이다. {vehicle,자동차} 를 움직이는 데 필요한 힘이 무게의 {force_percent,1}% 라면, 그는 {vehicle,자동차} 를 밀기 위해 얼마나 많은 힘이 필요한가?\n\n#init:\n- name = sample(names_male)\n- vehicle = sample(['자동차', '밴', '트럭', 'SUV'])\n- item = sample(['수하물', '식료품', '장비', '가구'])\n- passenger_type = sample(['아이들', '친구들', '동료들', '팀원들'])\n- unit = sample(['파운드', '킬로그램'])\n- $weight_vehicle = range(1000, 3000, 50)\n- $weight_item = range(100, 500, 25)\n- $weight_passenger = range(50, 100, 5)\n- num_passengers_txt, num_passengers_val = range_str(2, 5, 1, numbers)\n- $force_percent = range(1, 6)\n\n#conditions:\n- is_int((weight_vehicle + weight_item + num_passengers_val * weight_passenger) * force_percent / 100)\n\n#answer: int((weight_vehicle + weight_item + num_passengers_val * weight_passenger) * force_percent / 100)",
+    "count": 100
+  },
+  {
+    "id": 68,
+    "question_annotated": "{name,카르멘}는 {game1,크로스워드 퍼즐}를 끝내는 데 {t1,10} 분이 걸리고 {game2,스도쿠 퍼즐}를 끝내는 데 {t2,5} 분이 걸립니다. {period,주말} 동안 그녀는 {n1,3} 개의 {game1,크로스워드 퍼즐}와 {n2,8} 개의 {game2,스도쿠 퍼즐}를 풀었습니다. 그녀는 이 게임들을 하는 데 총 얼마의 시간을 보냈나요?\n\n#init:\n- name = sample(names_female)\n- game1, game2 = sample([\"크로스워드 퍼즐\", \"스도쿠 퍼즐\", \"단어 퍼즐\", \"조각 퍼즐\", \"체스 퍼즐\", \"수수께끼\", \"두뇌 트레일러\"], 2)\n- period = sample([\"주말\", \"휴가\", \"공휴일\", \"휴일\", \"자유 시간\"])\n- $t1 = range(5, 30)\n- $t2 = range(3, 20)\n- $n1 = range(2, 10)\n- $n2 = range(4, 15)\n\n#conditions:\n- t1 > t2\n\n#answer: t1*n1 + t2*n2",
+    "count": 100
+  },
+  {
+    "id": 69,
+    "question_annotated": "{day3,화요일}에 {name,피터}는 {day2,월요일}과 {day1,일요일}에 운동한 시간의 합계의 {mult_txt,두 배}만큼 운동하고 싶어 합니다. {day1,일요일}에 그는 {t1,23}분 동안 운동했습니다. {day2,월요일}에 그는 {t2,16}분 동안 운동했습니다. 목표를 달성하기 위해 {day3,화요일}에 몇 분 동안 운동해야 합니까?\n\n#init:\n- name = sample(names)\n- day1, day2, day3 = sample_sequential(weekdays, 3)\n- $t1 = range(10, 60)\n- $t2 = range(10, 60)\n- mult_txt, mult_val = sample(multi_times)\n\n#conditions:\n- t1 + t2 > 0\n- (t1 + t2) * mult_val / 60 < 14\n#answer: (t1 + t2) * mult_val",
+    "count": 100
+  },
+  {
+    "id": 70,
+    "question_annotated": "한 {occupation,건설업자} 는 매월 {w,4} 주 동안 일하고 매주 {d,6} 일 동안 일합니다. 만약 그가 매일 {cur,$}{p,50} 를 받는다면, 1 년 동안 일할 경우 얼마를 벌게 됩니까?\n\n#init:\n- occupation = sample([\"배관공\", \"전기기사\", \"페인트공\", \"목수\", \"조경사\"])\n- cur = sample(currencies_sym)\n- $w = range(2, 5)\n- $d = range(4, 7)\n- $p = range(40, 200, 5)\n\n\n#answer: w * d * p * 12",
+    "count": 100
+  },
+  {
+    "id": 71,
+    "question_annotated": "{name,네이트}는 가축에게 {food,건초}를 주고 있습니다. 각 {animal1,염소}는 {n1,5} {unit,파운드}가 필요하고, 각 {animal2,라마}는 각 {animal1,염소}가 필요로 하는 양의 두 배보다 {n2,3} {unit,파운드} 적습니다. 만약 {k1,15}마리의 {animal1,염소}와 {k2,12}마리의 {animal2,라마}가 있다면, {name,네이트}는 {food,건초}를 몇 {unit,파운드}나 필요로 할까요?\n\n#init:\n- name = sample(names_male)\n- food = sample([\"건초\", \"곡물\", \"사료\", \"사일리지\"])\n- animal1, animal2 = sample([\"염소\", \"소\", \"말\", \"당나귀\", \"라마\", \"알파카\", \"돼지\", \"칠면조\", \"오리\"], 2)\n- unit = sample([\"파운드\", \"킬로그램\", \"kg\"])\n- $n1 = range(3, 15)\n- $n2 = range(1, 10)\n- $k1 = range(10, 50)\n- $k2 = range(10, 50)\n\n#conditions:\n- 2*n1 - n2 > 0\n\n#answer: k1*n1 + k2*(2*n1 - n2)",
+    "count": 100
+  },
+  {
+    "id": 72,
+    "question_annotated": "{name,마이크}는 {n1,5}명과 펜팔 친구였습니다. 그는 그들 중 {n2,2}명과 펜팔 관계를 끊었습니다. 그들은 각각 주에 {l,2}통의 편지를 보내며, 각 편지는 {p,5}페이지 분량입니다. 그는 이에 맞춰 답장을 보냅니다. 그는 {t,6}분마다 한 페이지를 쓸 수 있습니다. 그는 일주일에 쓰기에 몇 시간을 보낼까요?\n\n#init:\n- name = sample(names_male)\n- $n1 = range(5, 15)\n- $n2 = range(1, 5)\n- $l = range(2, 5)\n- $p = range(5, 12)\n- $t = range(4, 15)\n\n#conditions:\n- n2 < n1\n- is_int(((n1 - n2) * l * p * t) / 60)\n\n#answer: ((n1 - n2) * l * p * t) // 60",
+    "count": 100
+  },
+  {
+    "id": 73,
+    "question_annotated": "{comet_name,할레이} 혜성이 {orbit_period,75}년마다 태양을 공전합니다. {name,빌}의 {relative,아빠}는 {relative_age,30}살 때 혜성을 보았습니다. {name,빌}은 혜성을 두 번째로 보았을 때, {relative,아빠}가 혜성을 보았을 때의 나이의 {multiple_txt,세} 배였습니다. {name,빌}이 혜성을 처음 보았을 때 나이는 몇 살이었습니까?\n\n#init:\n- comet_name = sample(['할레이', '헤일-밥', '히야쿠타케', '엔케'])\n- name = sample(names_male)\n- relative = sample(['아빠', '아버지', '삼촌', '할아버지'])\n- $orbit_period = range(50, 101, 5)\n- $relative_age = range(20, 51)\n- multiple_txt, multiple_val = range_str(2, 6, 1, numbers)\n\n#conditions:\n- multiple_val * relative_age < 100\n- multiple_val * relative_age > orbit_period\n- is_int(multiple_val * relative_age - orbit_period)\n\n#answer: multiple_val * relative_age - orbit_period",
+    "count": 100
   }
 ]

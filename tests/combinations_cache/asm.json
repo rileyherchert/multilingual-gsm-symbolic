@@ -193,5 +193,45 @@
     "id": 44,
     "question_annotated": "{n,6} টি ছোৱালী {place,পাৰ্ক}ত আছে। যদি {place,পাৰ্ক}ত ছোৰাৰ সংখ্যা {mult_txt,দুগুণ} হয়, তেন্তে {place,পাৰ্ক}ত মুঠ কিমান শিশু আছে?\n\n#init:\n- place = sample(['পাৰ্ক', 'আঙিনা', 'মাঠ', 'খেলপথাৰ', 'বাগিচা'])\n- $n = range(5, 51)\n- mult_txt, mult_val = sample(multi_times)\n\n#conditions:\n- is_int(n * mult_val + 1)\n- n * (mult_val + 1) <= 200\n\n#answer: n * (mult_val + 1)",
     "count": 100
+  },
+  {
+    "id": 45,
+    "question_annotated": "{name,প্যাট} এর একটি ফুলের গাদা আছে যা {length,111} {unit_length,মিটার} দীর্ঘ। {name,প্যাট} তার ফুলের গাদা গাছে পূর্ণ করতে চান। {name,প্যাট}-এর ফুলগুলো {plant_width,12} সেন্টিমিটার প্রশস্ত হয়, এবং বাগান করার নির্দেশিকা বলে বেডের ধারে প্রতি {space,1.5} {unit_length,মিটার} অন্তর একটি ফুল রোপণ করতে হবে। {name,প্যাট} আগে থেকেই {owned,17}টি ফুলের গাছের মালিক। প্রতিটি ফুলের গাছ দোকানে {cur,$}{cost,6} দামে পাওয়া যায়। তার ফুলের গাদা পূর্ণ করতে দোকানে {name,প্যাট} কত টাকা খরচ করবে?\n\n#init:\n- name = sample(names_female)\n- unit_length = sample(['মিটার'])\n- cur = sample(currencies_sym)\n- $length = range(110, 220)\n- $plant_width = range(2, 13)\n- $space = arange(1, 20, 0.25)\n- $owned = range(10, 30)\n- $cost = range(3, 15)\n\n#conditions:\n- plant_width * 3 < length\n- plant_width < space\n- is_int(length / space)\n- length / space > owned\n\n#answer: int((length / space - owned) * cost)",
+    "count": 100
+  },
+  {
+    "id": 46,
+    "question_annotated": "{school,এপল হাই স্কুল} এই বছৰ তেওঁলোকৰ {venue,ফাইন আৰ্টছ চেণ্টাৰ}ত বিদায়ী সমাৱৰণ কৰিছে যিটোত {total,6000} জন লোকৰ বাবে স্থান আছে। বিবেচনা কৰাৰ পিছত {graduates,950}খন আসন উত্তীৰ্ণ ছাত্ৰ-ছাত্ৰীৰ বাবে আৰু {faculty,300}খন আসন উপস্থিত থাকিব লগা শিক্ষকসকলৰ বাবে, যদি টিকটবোৰ সমানে ভাগ কৰা হয়, তেন্তে প্ৰতিজন উত্তীৰ্ণ ছাত্ৰ-ছাত্ৰীয়ে তেওঁলোকৰ বন্ধু আৰু পৰিয়ালৰ বাবে কিমান টিকট পাব?\n\n#init:\n- school = sample([\"ওকউড হাই স্কুল\", \"ৰিভাৰচাইড একাডেমি\", \"চানিচাইড হাই\", \"গ্ৰিনভিল হাই স্কুল\"])\n- venue = sample([\"অডিটৰিয়াম\", \"জিমেনেছিয়াম\", \"স্পৰ্টছ এৰেনা\", \"কনভেনচন চেণ্টাৰ\"])\n- $total = range(3000, 10000, 100)\n- $graduates = range(100, 1500, 50)\n- $faculty = range(100, 500, 50)\n\n#conditions:\n- total > graduates + faculty\n- is_int((total - graduates - faculty) / graduates)\n\n#answer: (total - graduates - faculty) // graduates",
+    "count": 100
+  },
+  {
+    "id": 47,
+    "question_annotated": "{name1,কোল} বাৰীত ইষ্টাৰৰ ডিম খোজা খেলৰ বাবে {n,3} ডজন ডিম লুকাইছিল। {name2,লামাৰ} {x,5} টা ডিম পায়। {name3,ষ্টেচি} {name2,লামাৰ}ৰ তুলনাত {mult1_txt,দুগুণ} ডিম পায়। {name4,চাৰ্লি} {name3,ষ্টেচি}ৰ তকৈ {y,2} টা কম পায়, আৰু {name5,মেই} {name4,চাৰ্লি}ৰ তুলনাত {frac_txt,আধা} ডিম পায়। বাৰীত কিমান টা ডিম ইয়াৰে লুকাই আছে?\n\n#init:\n- name1, name2, name3, name4, name5 = sample(names, 5)\n- $n = range(2, 10)\n- $x = range(3, 15)\n- $y = range(1, 5)\n- mult1_txt, mult1_val = sample(multi_times)\n- frac_txt, frac_val = sample(fraction_alnum)\n\n#conditions:\n- is_int(n * 12 - (x + mult1_val * x + (mult1_val * x - y) + frac_val * (mult1_val * x - y)))\n- is_int(x * mult1_val)\n- x * mult1_val - y > 0\n- is_int((x * mult1_val - y) * frac_val)\n- n * 12 > x + mult1_val * x + (mult1_val * x - y) + frac_val * (mult1_val * x - y)\n\n#answer: n * 12 - (x + mult1_val * x + (mult1_val * x - y) + frac_val * (mult1_val * x - y))",
+    "count": 100
+  },
+  {
+    "id": 48,
+    "question_annotated": "{name,এমিলি} এটা মিনিটত {n1,6} {food,চিংগা} চোলাব পাৰে আৰু {n2,30} {food,চিংগা} {t,10} মিনিটত ভাজিব পাৰে। {total,90} {food,চিংগা} চোলাব আৰু ভাজিবলৈ তাৰ বাবে কিমান সময় লাগিব? {name,এমিলি} একেলগে চোলাব আৰু ভাজিব নোৱাৰে।\n\n#init:\n- name = sample(names_female)\n- food = sample([\"চিংগা\", \"পেঁয়াজ\", \"গাজৰ\", \"মশ্ৰুম\", \"শামুক\"])\n- $n1 = range(4, 15)\n- $n2 = range(20, 50, 5)\n- $t = range(5, 20)\n- $total = range(60, 200, 10)\n\n#conditions:\n- divides(total, n1)\n- divides(total, n2)\n\n#answer: total // n1 + (total // n2) * t",
+    "count": 100
+  },
+  {
+    "id": 49,
+    "question_annotated": "{name,জন} এ {n,3}টা বেলেগ বেলেগ আপাৰ্টমেন্ট কমপ্লেক্সৰ পৰা কচৰাত সংগ্ৰহ কৰে। প্ৰথম {n_first_txt,দুটা}ত প্ৰতিটোত {a,200}টা ফ্ল্যাট আছে আৰু শেষটো আন {n_first_txt,দুটা}ৰ মুঠতকৈ {p,60}% ডাঙৰ। তেওঁ প্ৰতি সপ্তাহত প্ৰতি ঠাইৰ পৰা {f,3} বাৰ কচৰাত সংগ্ৰহ কৰে আৰু প্ৰতিটো ফ্ল্যাটৰ প্ৰতি সংগ্ৰহৰ বাবে তেওঁ {cur,টকা}{r,0.4} পাযে। সপ্তাহত তেওঁ কিমান টকা উপাৰ্জন কৰে?\n\n#init:\n- name = sample(names_male)\n- cur = sample(currencies_sym)\n- $n = range(3, 8)\n- n_first_txt, n_first_val = range_str(2, 7, 1, numbers)\n- $a = range(100, 500, 50)\n- $p = range(20, 81, 5)\n- $f = range(2, 6)\n- $r = arange(0.20, 0.55, 0.05)\n\n#conditions:\n- n_first_val == n-1\n- is_int((n-1)*a*p/100)\n- is_int(((n-1)*a + (n-1)*a + (n-1)*a*p/100) * f * r)\n\n\n#answer: int(((n-1)*a + (n-1)*a + (n-1)*a*p/100) * f * r)",
+    "count": 100
+  },
+  {
+    "id": 50,
+    "question_annotated": "{name,বিলি}'ৰ আয়তাকাৰ {room_type,শয্যাকক্ষ} ৰ কালি {area,360} বৰ্গ ফুট। যদি কোঠাৰ দৈৰ্ঘ্য {length,3} গজ হয়, তেন্তে কোঠাৰ পৰিসীমা ফুটত কিমান হ'ব?\n\n#init:\n- name = sample(names_male)\n- room_type = sample([\"অতিথি কক্ষ\", \"পঢ়াঘৰ\", \"কৰ্মকক্ষ\", \"ৰান্ধনঘৰ\"])\n- $area = range(200, 1200)\n- $length = range(3, 44)\n\n#conditions:\n- is_int(area / (length * 3))\n- area / (length * 3) > length * 3\n\n#answer: 2 * (area // (length * 3) + length * 3)",
+    "count": 100
+  },
+  {
+    "id": 51,
+    "question_annotated": "{name,আৰ্টী}-এ {location,কৃষক বজার}-ত এটা {product,ফুল}ৰ ষ্টল আছে। তেওঁ তিনি প্ৰকাৰৰ {product,ফুল} বিক্ৰী কৰে: {item1,গেন্দা}, {item2,পেটুনিয়া} আৰু {item3,বেগোনিয়া}। তেওঁ সাধাৰণতে {item1,গেন্দা} প্ৰতি {unit,গামলা}-ত {cur,₹}{p1,2.74}-ত, {item2,পেটুনিয়া} প্ৰতি {unit,গামলা}-ত {cur,₹}{p2,1.87}-ত আৰু {item3,বেগোনিয়া} প্ৰতি {unit,গামলা}-ত {cur,₹}{p3,2.12}-ত বিক্ৰী কৰে। {name,আৰ্টী}-ৰ আজি সৰু টকா নাই, সেযেহে তেওঁ সকলো মূল্য নিকটতম টকালৈ লৈ যোৱাৰ সিদ্ধান্ত লৈছে। যদি {name,আৰ্টী}-এ {n1,12} টা {unit,গামলা} {item1,গেন্দা}, {n2,9} টা {unit,গামলা} {item2,পেটুনিয়া} আৰু {n3,17} টা {unit,গামলা} {item3,বেগোনিয়া} বিক্ৰী কৰে, তেন্তে তেওঁ কিমান উপাৰ্জন কৰিব?\n\n#init:\n- name = sample(names_male)\n- product = sample([\"সবজি\", \"ফুল\", \"সুগন্ধি গাছ\", \"উদ্ভিদ\"])\n- location = sample([\"স্থানীয় মেলা\", \"সম্প্ৰদায্য বজার\", \"ৰাস্তাৰ বজাৰ\", \"চহৰৰ চতৰ\"])\n- item1, item2, item3 = sample([\"গোলাপ\", \"ডেজি\", \"টিউলিপ\", \"লিলি\", \"সূৰ্য্যমুখী\", \"অৰ্কিড\"], 3)\n- unit = sample([\"গুচ্ছ\", \"ঝুৰি\", \"ফুলৰ মাল্য\", \"পেকেট\"])\n- cur = sample(currencies_sym)\n- $p1 = arange(1.26, 3.53, 0.33)\n- $p2 = arange(2.27, 5.53, 0.26)\n- $p3 = arange(4.85, 6.53, 0.31)\n- $n1 = range(5, 21)\n- $n2 = range(15, 31)\n- $n3 = range(35, 41)\n\n\n#answer: n1*round(p1) + n2*round(p2) + n3*round(p3)",
+    "count": 100
+  },
+  {
+    "id": 52,
+    "question_annotated": "{name,ক্ৰেগ} ৰ {n,2} টা {cur,টকা}{bill,20} নোট আছে। তেওঁ {m_txt,ছয়} টা {item1,পানীৰ বন্দুক}সমূহ {cur,টকা}{p1,2} ৰ হারে কিনিছে। তেওঁ {k,3} টা পেকেট {item2,পানীৰ বেলুন}সমূহ {cur,টকা}{p2,3} ৰ হারেও কিনিছে। তেওঁৰ কিমান টকা বাকী থাকে?\n\n#init:\n- name = sample(names_male)\n- $bill = sample([5, 10, 20, 50, 100])\n- item1 = sample([\"খেলনা গাড়ী\", \"একশ্যন ফিগাৰ\", \"ৰঙৰ বই\", \"পাজল\", \"বোর্ড গেম\"])\n- item2 = sample([\"চিক্টিৰ\", \"চেন্ডি বৰ\", \"ট্ৰেডিং কাৰ্ড\", \"পেন্সিল\", \"ৰবাৰ\"])\n- cur = sample(currencies_sym)\n- $n = range(1, 10)\n- m_txt, m_val = range_str(2, 15, 1, numbers)\n- $k = range(2, 10)\n- $p1 = range(1, 10)\n- $p2 = range(1, 10)\n\n#conditions:\n- n * int(bill) > m_val * p1 + k * p2\n\n#answer: n * int(bill) - (m_val * p1 + k * p2)",
+    "count": 100
   }
 ]
