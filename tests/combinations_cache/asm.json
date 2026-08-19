@@ -233,5 +233,35 @@
     "id": 52,
     "question_annotated": "{name,ক্ৰেগ} ৰ {n,2} টা {cur,টকা}{bill,20} নোট আছে। তেওঁ {m_txt,ছয়} টা {item1,পানীৰ বন্দুক}সমূহ {cur,টকা}{p1,2} ৰ হারে কিনিছে। তেওঁ {k,3} টা পেকেট {item2,পানীৰ বেলুন}সমূহ {cur,টকা}{p2,3} ৰ হারেও কিনিছে। তেওঁৰ কিমান টকা বাকী থাকে?\n\n#init:\n- name = sample(names_male)\n- $bill = sample([5, 10, 20, 50, 100])\n- item1 = sample([\"খেলনা গাড়ী\", \"একশ্যন ফিগাৰ\", \"ৰঙৰ বই\", \"পাজল\", \"বোর্ড গেম\"])\n- item2 = sample([\"চিক্টিৰ\", \"চেন্ডি বৰ\", \"ট্ৰেডিং কাৰ্ড\", \"পেন্সিল\", \"ৰবাৰ\"])\n- cur = sample(currencies_sym)\n- $n = range(1, 10)\n- m_txt, m_val = range_str(2, 15, 1, numbers)\n- $k = range(2, 10)\n- $p1 = range(1, 10)\n- $p2 = range(1, 10)\n\n#conditions:\n- n * int(bill) > m_val * p1 + k * p2\n\n#answer: n * int(bill) - (m_val * p1 + k * p2)",
     "count": 100
+  },
+  {
+    "id": 53,
+    "question_annotated": "{name1,পিয়ৰ্চন} এটা {game,বলিং} খেলত {n1,278} পইন্ট স্কৰ কৰিলে। {name2,নিকিতা} স্কৰ কৰিলে {n2,11} পইন্ট বেছি {frac_txt,আধা} যিমান {name1,পিয়ৰ্চন} ৰ। {name1,পিয়ৰ্চন} আৰু {name2,নিকিতা} ৰ মুঠ কিমান পইন্ট আছিল?\n\n#init:\n- name1, name2 = sample(names, 2)\n- game = sample([\"বলিং\", \"ডাৰ্টছ\", \"আৰ্চাৰি\", \"বাস্কেটবল\", \"টেণিচ\"])\n- $n1 = range(200, 500)\n- $n2 = range(5, 50)\n- frac_txt, frac_val = sample(fraction_alnum)\n\n#conditions:\n- is_int(frac_val * n1)\n\n#answer: n1 + int(frac_val * n1 + n2)",
+    "count": 100
+  },
+  {
+    "id": 54,
+    "question_annotated": "{name,ডক্সা}ৱে এটা সম্পূৰ্ণ {fruit,আপেল} ক {total,18} টুকুৰাত কটিয়াই দিলে। তেওঁ {n1,3} টুকুৰা খাইছিল, তেওঁৰ {sibling1,বোন} তেওঁতকৈ {n2,2} টুকুৰা বেছি খাইছিল, আৰু তেওঁৰ {sibling2,ভাই} তেওঁৰ {sibling1,বোন} তকৈ {n3,3} টুকুৰা বেছি খাইছিল। তেওঁলোক সকলোৱে কিমান টুকুৰা {fruit,আপেল} খালে?\n\n#init:\n- name = sample(names_female)\n- fruit = sample([\"কমলা\", \"পাৰ\", \"পীচ\", \"আম\", \"কিউই\"])\n- sibling1, sibling2 = sample([\"ভাই\", \"বোন\", \"চাচা-ভাই\", \"বন্ধু\"], 2)\n- $total = range(6, 33)\n- $n1 = range(2, 15)\n- $n2 = range(2, 13)\n- $n3 = range(2, 14)\n\n#conditions:\n- n1 + (n1 + n2) + (n1 + n2 + n3) <= total\n\n#answer: n1 + (n1 + n2) + (n1 + n2 + n3)",
+    "count": 100
+  },
+  {
+    "id": 55,
+    "question_annotated": "{name,এলিজ} লেখা শিখছে এবং নিজেকে জানা পর্যন্ত {alphabets_txt,বর্ণমালা} পুনরায় লিখতে থাকতে সিদ্ধান্ত নিল। সে পুরোটা {n1_txt,দুই বার} লিখল, একবার এর {frac_txt,অর্ধেক} লিখল, তারপর সে যা ইতিমধ্যেই লিখেছে তা পুনরায় লিখল। মোট কতগুলো অক্ষর {name,এলিজ} লিখেছে?\n\n#init:\n- name = sample(names_female)\n- alphabets_txt, alphabets_val = sample([(\"বর্ণমালা\", 26), (\"হিরাগানা (৪৮ টি অক্ষর সহ)\", 48), (\"ফার্সি বর্ণমালা (৩২ টি অক্ষর সহ)\", 32), (\"আরবি আবজাদ (২৮ টি অক্ষর সহ)\", 28)])\n- n1_txt, n1_val = sample([(\"দুই বার\", 2), (\"তিন বার\", 3), (\"চার বার\", 4), (\"পাঁচ বার\", 5), (\"ছয় বার\", 6), (\"সাত বার\", 7), (\"আট বার\", 8), (\"নয় বার\", 9), (\"দশ বার\", 10), (\"এগারো বার\", 11)])\n- frac_txt, frac_val = sample(fraction_alnum)\n\n#conditions:\n- is_int(alphabets_val * frac_val)\n\n#answer: 2 * (alphabets_val * n1_val + alphabets_val * frac_val)",
+    "count": 100
+  },
+  {
+    "id": 56,
+    "question_annotated": "এক {container,গ্লাছ} {liquid,দুধ} হৈছে {vol,8} {unit,অন্স} {liquid,দুধ}। {name,জন} {num,2} {container_plural,গ্লাছ} {liquid,দুধ} খায়। যদি {liquid,দুধ}ৰ প্ৰতি {unit,অন্স}ত {cal,3} কেলৰি থাকে, তেন্তে তেওঁ কিমান কেলৰি খাইছিল?\n\n#init:\n- name = sample(names_male)\n- container, container_plural = sample([(\"গ্লাছ\",\"গ্লাছ\"), (\"কাপ\",\"কাপ\"), (\"বটল\",\"বটল\"), (\"কাৰ্টন\",\"কাৰ্টন\")])\n- liquid = sample([\"জুচ\", \"চোডা\", \"চিৰিং পানী\", \"চাহ\", \"লেমনেড\"])\n- unit = sample([\"অন্স\", \"mL\", \"cc\", \"oz\"])\n- $vol = range(6, 16)\n- $num = range(2, 6)\n- $cal = range(2, 10)\n\n\n#answer: vol * num * cal",
+    "count": 100
+  },
+  {
+    "id": 57,
+    "question_annotated": "{name1,বেন} এর {n1,4} টি {color1,নীল} রং এর টিউব এবং {n2,3} টি {color2,হালধীয়া} রং এর টিউব আছে। {name2,জাছপার} এর {name1,বেন} এর তুলনায় {color1,নীল} রং এর টিউব {frac1_txt,আধা} গুণ, এবং {name1,বেন} এর তুলনায় {color2,হালধীয়া} রং এর টিউব {mult1_txt,তিন} গুণ। {name2,জাছপার} এর মোট কতটি রং এর টিউব আছে?\n\n#init:\n- name1, name2 = sample(names_male, 2)\n- color1, color2 = sample(colors, 2)\n- $n1 = range(2, 20)\n- $n2 = range(2, 20)\n- frac1_txt, frac1_val = sample(fraction_alnum)\n- mult1_txt, mult1_val = range_str(2,6,1,numbers)\n\n#conditions:\n- is_int(n1 * frac1_val)\n- is_int(n2 * mult1_val)\n\n#answer: int(n1 * frac1_val + n2 * mult1_val)",
+    "count": 100
+  },
+  {
+    "id": 58,
+    "question_annotated": "একজন {worker,গ্নোম} প্রতিদিন {tool1,তাহার নগ্ন হাত} দিয়ে {base,12} {unit,কিলোগ্রাম} খনিজ আহরণ করতে পারে। সে একটি {tool2,ব্রোঞ্জ পিকএক্স} দিয়ে {mult1_txt,দুই গুণ} বেশি এবং একটি {tool3,ইস্পাত পিকএক্স} দিয়ে {tool2,ব্রোঞ্জ পিকএক্স} এর চেয়ে {mult2,50}% বেশি খনিজ আহরণ করতে পারে। {days,30} দিনের মাসে {tool3,ইস্পাত পিকএক্স} সহ {n,40} জন {worker,গ্নোম} কত {unit,কিলোগ্রাম} খনিজ আহরণ করতে পারে?\n\n#init:\n- worker = sample([\"খনি শ্রমিক\", \"গবলিন\", \"গ্নোম\", \"ট্রল\"])\n- tool1 = sample([\"নগ্ন হাত\", \"সাধারণ ফাউল\", \"কাঠের পিকএক্স\"])\n- unit = sample([\"কিলোগ্রাম\", \"কেজি\"])\n- tool2 = sample([\"নিকেল পিকএক্স\", \"ব্রোঞ্জ পিকএক্স\", \"রূপার পিকএক্স\"])\n- tool3 = sample([\"ব্রোঞ্জ পিকএক্স\", \"ইস্পাত পিকএক্স\", \"হীরার পিকএক্স\", \"মিথ্রিল পিকএক্স\", \"টাইটানিয়াম পিকএক্স\"])\n- $base = range(5, 20)\n- mult1_txt, mult1_val = sample(multi_times)\n- $mult2 = range(30, 80, 5)\n- $n = range(20, 50)\n- $days = range(28, 32)\n\n#conditions:\n- is_int(mult2/100*base*mult1_val)\n- int(base * mult1_val * (1 + mult2/100) * n * days) < 15000\n\n#answer: int(base * mult1_val * (1 + mult2/100) * n * days)",
+    "count": 100
   }
 ]

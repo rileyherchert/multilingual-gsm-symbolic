@@ -233,5 +233,35 @@
     "id": 52,
     "question_annotated": "{name,Kreyq}nin {n,2} ədəd {cur,$}{bill,20} banknotu var. O {m_txt,altı} ədəd {item1,su püskürtən} alır, hər biri {cur}{p1,2}. O həmçinin {k,3} paket {item2,su balonu} alır, hər biri {cur}{p2,3}. O nə qədər pulu qalıb?\n\n#init:\n- name = sample(names_male)\n- $bill = sample([5, 10, 20, 50, 100])\n- item1 = sample([\"oyun maşını\", \"aksiya fiquru\", \"rəsm kitabı\", \"yığma oyuncaq\", \"lövhə oyunu\"])\n- item2 = sample([\"yapışqan\", \"şirniyyat çubuğu\", \"kolleksiya kartı\", \"qələm\", \"silgi\"])\n- cur = sample(currencies_sym)\n- $n = range(1, 10)\n- m_txt, m_val = range_str(2, 15, 1, numbers)\n- $k = range(2, 10)\n- $p1 = range(1, 10)\n- $p2 = range(1, 10)\n\n#conditions:\n- n * int(bill) > m_val * p1 + k * p2\n\n#answer: n * int(bill) - (m_val * p1 + k * p2)",
     "count": 100
+  },
+  {
+    "id": 53,
+    "question_annotated": "{name1,Pierson} bir {game,bolinq} oyununda {n1,278} xal topladı. {name2,Nikita}, {name1,Pierson}-in topladığı xalların {frac_txt,yarım}ından {n2,11} xal çox topladı. {name1,Pierson} və {name2,Nikita} cəmi neçə xal topladı?\n\n#init:\n- name1, name2 = sample(names, 2)\n- game = sample([\"bolinq\", \"dart\", \"ox atma\", \"basketbol\", \"tennis\"])\n- $n1 = range(200, 500)\n- $n2 = range(5, 50)\n- frac_txt, frac_val = sample(fraction_alnum)\n\n#conditions:\n- is_int(frac_val * n1)\n\n#answer: n1 + int(frac_val * n1 + n2)",
+    "count": 100
+  },
+  {
+    "id": 54,
+    "question_annotated": "{name,Doxa} bütün {fruit,alma}-ni {total,18} parçaya böldü. O {n1,3} dilim yedi, onun {sibling1,bacı}-sı ondan {n2,2} dilim çox yedi, və onun {sibling2,qardaş}-ı onun {sibling1,bacı}-sından {n3,3} dilim çox yedi. Onlar hamısı {fruit,alma}-nın neçə dilimini yedilər?\n\n#init:\n- name = sample(names_female)\n- fruit = sample([\"portuqal\", \"armud\", \"şaftalı\", \"manqo\", \"kivi\"])\n- sibling1, sibling2 = sample([\"qardaş\", \"bacı\", \"qohum\", \"dost\"], 2)\n- $total = range(6, 33)\n- $n1 = range(2, 15)\n- $n2 = range(2, 13)\n- $n3 = range(2, 14)\n\n#conditions:\n- n1 + (n1 + n2) + (n1 + n2 + n3) <= total\n\n#answer: n1 + (n1 + n2) + (n1 + n2 + n3)",
+    "count": 100
+  },
+  {
+    "id": 55,
+    "question_annotated": "{name,Elise} yazmağı öyrənir və {alphabets_txt,əlifba}-nı bilməyənə qədər yenidən yazmağı qərara alır. O, onu tam {n1_txt,iki dəfə} yazır, bir dəfə {frac_txt,yarı}-nı yazır, sonra artıq yazdığı hər şeyi yenidən yazır. {name,Elise} cəmi neçə hərf yazıb?\n\n#init:\n- name = sample(names_female)\n- alphabets_txt, alphabets_val = sample([(\"əlifba\", 26), (\"hiragana (48 hərflə)\", 48), (\"fars əlifbası (32 hərflə)\", 32), (\"ərəb əlifbası (28 hərflə)\", 28)])\n- n1_txt, n1_val = sample([(\"iki dəfə\", 2), (\"üç dəfə\", 3), (\"dörd dəfə\", 4), (\"beş dəfə\", 5), (\"altı dəfə\", 6), (\"yeddi dəfə\", 7), (\"səkkiz dəfə\", 8), (\"doqquz dəfə\", 9), (\"on dəfə\", 10), (\"on bir dəfə\", 11)])\n- frac_txt, frac_val = sample(fraction_alnum)\n\n#conditions:\n- is_int(alphabets_val * frac_val)\n\n#answer: 2 * (alphabets_val * n1_val + alphabets_val * frac_val)",
+    "count": 100
+  },
+  {
+    "id": 56,
+    "question_annotated": "Bir {container,stəkan} {liquid,süd} {vol,8} {unit,ons} {liquid,süd} təşkil edir. {name,Əli} {num,2} {container_plural,stəkanlar} {liquid,süd} içir. Əgər {liquid,süd} hər {unit,ons} başına {cal,3} kaloriya varsa, o, neçə kaloriya qəbul etdi?\n\n#init:\n- name = sample(names_male)\n- container, container_plural = sample([(\"stəkan\",\"stəkanlar\"), (\"fincan\",\"fincanlar\"), (\"şüşə\",\"şüşələr\"), (\"qutu\",\"qutular\")])\n- liquid = sample([\"şirə\", \"soda\", \"qazlı su\", \"çay\", \"limonad\"])\n- unit = sample([\"ons\", \"mL\", \"cc\", \"oz\"])\n- $vol = range(6, 16)\n- $num = range(2, 6)\n- $cal = range(2, 10)\n\n\n#answer: vol * num * cal",
+    "count": 100
+  },
+  {
+    "id": 57,
+    "question_annotated": "{name1,Ben}in {n1,4} ədəd {color1,mavi} boya borusu və {n2,3} ədəd {color2,sarı} boya borusu var. {name2,Jasper}in {color1,mavi} boya borularının sayı {name1,Ben}-in {frac1_txt,yarım} qədərdir, {color2,sarı} boya borularının sayı isə {name1,Ben}-in {mult1_txt,üç} qatı qədərdir. {name2,Jasper}in neçə boya borusu var?\n\n#init:\n- name1, name2 = sample(names_male, 2)\n- color1, color2 = sample(colors, 2)\n- $n1 = range(2, 20)\n- $n2 = range(2, 20)\n- frac1_txt, frac1_val = sample(fraction_alnum)\n- mult1_txt, mult1_val = range_str(2,6,1,numbers)\n\n#conditions:\n- is_int(n1 * frac1_val)\n- is_int(n2 * mult1_val)\n\n#answer: int(n1 * frac1_val + n2 * mult1_val)",
+    "count": 100
+  },
+  {
+    "id": 58,
+    "question_annotated": "Bir {worker,gnom} {tool1,çıplaq əlləri} ilə gündə {base,12} {unit,kiloqram} filiz çıxara bilər. O, {tool2,bronz qazma} ilə {mult1_txt,iki dəfə} çox çıxara bilər və {tool3,polad qazma} ilə {tool2,bronz qazma} ilə müqayisədə {mult2,50}% daha çox çıxara bilər. {days,30} günlük ayda {n,40} {worker,gnom}lar {tool3,polad qazma}ları ilə neçə {unit,kiloqram} filiz çıxara bilər?\n\n#init:\n- worker = sample([\"mədənçi\", \"qoblin\", \"gnom\", \"troll\"])\n- tool1 = sample([\"çıplaq əllər\", \"sadə kürək\", \"ağac qazma\"])\n- unit = sample([\"kiloqram\", \"kq\"])\n- tool2 = sample([\"nikel qazma\", \"bronz qazma\", \"gümüş qazma\"])\n- tool3 = sample([\"bronz qazma\", \"polad qazma\", \"almaz qazma\", \"mithril qazma\", \"titan qazma\"])\n- $base = range(5, 20)\n- mult1_txt, mult1_val = sample(multi_times)\n- $mult2 = range(30, 80, 5)\n- $n = range(20, 50)\n- $days = range(28, 32)\n\n#conditions:\n- is_int(mult2/100*base*mult1_val)\n- int(base * mult1_val * (1 + mult2/100) * n * days) < 15000\n\n#answer: int(base * mult1_val * (1 + mult2/100) * n * days)",
+    "count": 100
   }
 ]
