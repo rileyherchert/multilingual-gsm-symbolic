@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "question_annotated": "Ein mjørkabanki kemur inn av havinum fyri at leggja eina bý undir mjørka. Tað tekur {t,10} minuttir at leggja hvørjar {d,3} km av býnum undir mjørka. Um býurin er {y,42} km breiður frá havnalagnum til hitt innlendska markið, hvussu nógvar minuttir fer tað so at taka fyri mjørkabankan at leggja allan býin undir mjørka?\n\n#init:\n- $t = range(2, 500)\n- $d = range(2, 100)\n- $y=range(2, 100)\n\n#conditions:\n- is_int(y/d)\n\n#answer: y//d*t",
+    "count": 100
+  },
+  {
+    "id": 2,
+    "question_annotated": "{name,Anders} kastar ein seks-síðaðan terning. Hvussu nógv prosentstig meira sannlíkt er tað, at hann kastar eitt tal størri enn {target,3}, enn at hann kastar tvey {z,jøvn} tal á rað?\n\n#init:\n- name=sample(names_male)\n- sides_txt, sides_val = sample([(\"fire-sidet\", 4), (\"seks-sidet\", 6), (\"8-sidet\", 8), (\"10-sidet\", 10), (\"12-sidet\", 12), (\"14-sidet\", 14), (\"16-sidet\", 16), (\"18-sidet\", 18), (\"20-sidet\", 20), (\"22-sidet\", 22), (\"24-sidet\", 24), (\"26-sidet\", 26), (\"28-sidet\", 28), (\"30-sidet\", 30), (\"32-sidet\", 32), (\"34-sidet\", 34), (\"36-sidet\", 36), (\"38-sidet\", 38), (\"40-sidet\", 40), (\"42-sidet\", 42), (\"44-sidet\", 44), (\"46-sidet\", 46), (\"48-sidet\", 48), (\"50-sidet\", 50), (\"52-sidet\", 52), (\"54-sidet\", 54), (\"56-sidet\", 56), (\"58-sidet\", 58), (\"60-sidet\", 60), (\"62-sidet\", 62), (\"64-sidet\", 64), (\"66-sidet\", 66), (\"68-sidet\", 68), (\"70-sidet\", 70), (\"72-sidet\", 72), (\"74-sidet\", 74), (\"76-sidet\", 76), (\"78-sidet\", 78), (\"80-sidet\", 80), (\"82-sidet\", 82), (\"84-sidet\", 84), (\"86-sidet\", 86), (\"88-sidet\", 88), (\"90-sidet\", 90), (\"92-sidet\", 92), (\"94-sidet\", 94), (\"96-sidet\", 96), (\"98-sidet\", 98), (\"100-sidet\", 100)])\n- $target = range(1, 100)\n- z = sample([\"jøvn\", \"ójøvn\"])\n\n#conditions: \n- target < sides_val\n- divides(sides_val-target, target)\n- is_int((sides_val-target)/sides_val * 100)\n- int((sides_val-target)/sides_val * 100) > 25\n\n#answer: int((sides_val-target)/sides_val * 100) - 25",
+    "count": 100
+  },
+  {
+    "id": 3,
+    "question_annotated": "Ein {g,flokkur} við {n, 50} næmingum hevur ymisk frítíðarítriv. {n_1,10} dáma at {h_1, baka}, {n_2,5} dáma at spæla {h_2,fótbólt}, og hini dáma annaðhvørt at {h_3,spæla telduspøl} ella at {h_4,spæla tónleik}. Hvussu nógv dáma at {h_3,spæla telduspøl}, um talið, sum dámar at {h_4,spæla tónleik}, er tvær ferðir so stórt sum talið av teimum, sum dáma at spæla {h_2, fótbólt}?\n\n#init:\n- g = sample([\"bólkur\", \"flokkur\"])\n- h_2 = sample(sports)\n- h_1, h_3, h_4 = sample(['lesa', 'mála', 'ganga túr', 'dansa', 'baka', 'spæla telduspøl', 'spæla tónleik'], 3)\n- $n = range(5, 200)\n- $n_1 = range(2, 200)\n- $n_2 = range(2, 200)\n\n#conditions:\n- n_1 < n\n- n_2 < n\n- n - (n_1 + n_2) - (2 * n_2) > 0\n\n#answer: int(n - (n_1 + n_2) - (2 * n_2))",
+    "count": 100
+  },
+  {
+    "id": 4,
+    "question_annotated": "{name,Sara} ger poppkorn sum ein snarl. Tá ið {p,pannan} við maiskjørnunum verður heit, byrja kjørnini at poppa skjótari. {n,20} poppa tey fyrstu {s,30} sekundini av tilgerðini, síðani {k_2_txt, tre} ferðir tað talið tey næstu {s,30} sekundini. Kjørnini økjast til {k_3_txt,fýra} ferðir upprunaligu popphraðina tey næstu {s,30} sekundini, men tey seinastu {s,30} sekundini minkar popphraðin niður í helvtina av hraðanum tey fyrru {s,30} sekundini. Eftir at {name,Sara} hevur tikið {p,pannuna} av hitanum, poppar ein fjórðingur av talinum av kjørnum, sum poppaðu tey seinastu {s,30} sekundini av tilgerðini orsakað av hitanum, sum er eftir. Hvussu nógv poppkorn hevur {name,Sara} at eta?\n\n\n#init:\n- name = sample(names)\n- p = sample(['pannan', 'grýtuna'])\n- $n = range(10, 101, 10)\n- $s = range(10, 31, 2)\n- k_2_txt, k_2_val = range_str(2, 5, 1, numbers)\n- k_3_txt, k_3_val = range_str(3, 8, 1, numbers)\n\n#conditions:\n- k_3_val > k_2_val\n- divides(k_3_val * n, 8)\n\n#answer: n + (k_2_val * n + k_3_val * n) + (k_3_val * n // 2) + (k_3_val * n // 8)",
+    "count": 100
+  },
+  {
+    "id": 5,
+    "question_annotated": "{name,Lisbeth} ger {drink,kaffi} við sukri í lutfallinum {m,7}:{n,13}, har sukur verður mátað í teskeiðum og vatn í desilitrar. Um hon brúkti tilsamans {x,120} teskeiðir av sukri og desilitrar av vatni, rokna talið av teskeiðum av sukri, hon brúkti.\n\n#init:\n- name = sample(names_female)\n- drink = sample(['kaffi', 'te'])\n- $m = range(7, 101, 3)\n- $n = range(4, 61, 3)\n- $x = range(5, 500, 5)\n\n#conditions: \n- divides(x, m+n)\n\n#answer: ((m*x)//(m+n))",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "question_annotated": "{name,Martin} hevur {x,10} {area,hektarar} av {fruit,ananas}plantagu. Tað eru {k,100} {fruit_plural,ananasir} fyri hvønn {area_singular,hektara}. {name,Martin} kann heysta sínar {fruit_plural,ananasir} triðja hvønn {unit,mánað}. Hvussu nógvar {fruit_plural,ananasir} kann {name,Martin} heysta innan fyri eitt ár?\n\n#init:\n- name = sample(names_male)\n- fruit, fruit_plural = sample(fruits)\n- area = sample(['hektarar', 'fermetrar'])\n- $x = range(5, 100, 5)\n- $k = range(2, 101)\n- $n = sample([1, 2, 3, 4, 6, 12])\n\n#answer: x * k * (12//n)",
+    "count": 100
+  },
+  {
+    "id": 7,
+    "question_annotated": "Ein bóndi keypir fóður til sínar {animals,ross}. Hann keypir fleiri ymisk sløg av {o1,hoyggj}, {o2,havri}, {o3,gularótum} og {o4,sukurbitum}. Av tí at {o4,sukurbitar} eru ein sjáldsom góðgæti, keypir hann bara {n4_txt,to} {w4,1}-{unit,kilo} eskjur til allan fjósið. Hann vil bara hava nóg mikið av {o3,gularótum} til at geva {animals_definite,rossunum}, meðan grønmetið er feskt, so hann keypir {n3_txt,fýra} {w3,12}-{unit,kilo} posar. {o1,hoyggj} er høvuðsrætturin í kostinum hjá {animals_definite,rossunum}, so hann keypir {n1_txt,tveytifýra} {w1,75}-{unit,kilo} ballur. {o2,havri} er ein grundvøra at bæta upp í {o1,hoyggj} við, so hann keypir {n2_txt,tjúgu} {w2,65}-{unit,kilo} sekkir. Um garðsbilur hansara kann bera {total,2250} {unit,kilo} í senn, hvussu nógvar túrar skal bóndin brúka fyri at flyta alt fóðrið?\n\n#init:\n- animals, animals_definite = sample([('heste', 'hestene'), ('køer', 'køerne'), ('får', 'fårene'), ('grise', 'grisene'), ('alpakkaer', 'alpakkaerne')])\n- unit = sample(weights_med)\n- o1, o2 = sample([\"hoyggj\", \"majs\", \"havri\", \"epli\", \"hveiti\"], 2)\n- o3 = sample([\"gularøtur\", \"reyðrøtur\", \"gúrkur\"])\n- o4 = sample([\"sukurbitar\", \"vatnmelón\"])\n- n4_txt, n4_val = range_str(2, 7, 2, numbers)\n- n3_txt, n3_val = range_str(4, 11, 2, numbers)\n- n2_txt, n2_val = range_str(15, 21, 1, numbers)\n- n1_txt, n1_val = range_str(30, 43, 2, numbers)\n- $w4 = range(1, 4)\n- $w3 = range(8, 13, 2)\n- $w2 = range(45, 70, 5)\n- $w1 = range(55, 80, 5)\n- $total = range(1500, 2300, 150)\n\n#conditions:\n- w4*n4_val < w3*n3_val < w2*n2_val < w1 * n1_val\n- divides(n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4, total)\n\n#answer: (n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4)//total",
+    "count": 100
+  },
+  {
+    "id": 8,
+    "question_annotated": "Ein sirkuslistamaður kann jonglera við {n, 16} bóltum. {frac_1_txt,helvtin} av bóltunum eru {ball_type, golf}bóltar, og {frac_2_txt,helvtin} av {ball_type, golf}bóltunum eru {color, blá}. Hvussu nógvir {color, blá}ir {ball_type, golf}bóltar eru har?\n\n#init:\n- ball_type = sample([\"golf\", \"tennis\"])\n- color = sample(colors)\n- $frac_1_txt, frac_1_val = sample(fraction_alnum)\n- $frac_2_txt, frac_2_val = sample(fraction_alnum)\n- $n = range(16, 100, 2)\n\n#conditions:\n- is_int(n * frac_1_val)\n- is_int(n * frac_1_val * frac_2_val)\n\n#answer: int(n * frac_1_val * frac_2_val)",
+    "count": 100
+  },
+  {
+    "id": 9,
+    "question_annotated": "Tá {navn, Sofie} ansar eftir {familie,systurson}i sínum, finnur hon ymisk leikføri fram til hansara. Posin við byggiklossum inniheldur {x,31} klossar. Kurvin við bleytum djórum hevur {y,8} bleyt djór í sær. Turnurin við stablaringum hevur {z,9} litfagrar ringar á sær. {navn, Sofie} keypti fyri stuttum eitt rør við lopibóltum, sum fær samlaða talið av leikførum til {familie,systurson}in upp á {total,62}. Hvussu nógvir lopibóltar vóru í rørinum?\n\n#init:\n- navn = sample(names_female)\n- familie = sample([\"systurson\", \"frændi\", \"beiggi\"])\n- $x = range(31, 75)\n- $y = range(8, 50)\n- $z = range(9, 35)\n- $total = range(60, 250)\n\n#conditions:\n- (total-(x+y+z)) > 0\n\n#answer: (total-(x+y+z))",
+    "count": 100
+  },
+  {
+    "id": 10,
+    "question_annotated": "Fyri at ringja úr eini {dev,telefonkiosk} skalt tú gjalda {frac1,0.25} {currency,krónur} fyri hvønn minutt av samrøðuni. Eftir {t,16} minuttir fellur prísurin til {frac2,0.2} {currency,krónur} fyri hvønn minutt. Hvussu nógv hevði ein {total,36}-minutta samrøða kostað?\n\n#init:\n- dev = sample(['phone booth', 'hotel room phone'])\n- currency = sample(currencies_sym)\n- $frac1 = sample(fraction_decimals)\n- $frac2 = sample(fraction_decimals)\n- $t = range(10, 50)\n- $total = range(36, 100)\n\n#conditions:\n- is_int(frac1 * t)\n- is_int((total-t) * frac2)\n- frac2 < frac1\n- t < total\n\n#answer: int((frac1 * t) + frac2*(total-t))",
+    "count": 100
+  },
+  {
+    "id": 11,
+    "question_annotated": "{name, Peter} ynskir at gera ísterningar í ymiskum støddum við {n,32} {unit,grammum} av vatni. Hann kann gera stórar ísterningar, sum brúka {w1,4} {unit,gramm} fyri hvønn terning, miðalstórar ísterningar, sum brúka {w2,2} {unit,gramm} og smáar ísterningar, sum brúka {w3,1/2} {unit,gramm}. Um hann ger {n1,3} stórar ísterningar, {n2,7} miðalstórar ísterningar og {n3,8} smáar ísterningar, hvussu nógv {unit,gramm} av vatni hevur hann eftir?\n\n#init:\n- name = sample(names_male)\n- unit = sample(weights_sm)\n- $w1 = range(4, 10)\n- $w2 = range(2, 10)\n- $w3 = sample(fractions)\n- $n1 = range(3, 10)\n- $n2 = range(7, 13)\n- $n3 = sample([8, 14, 24, 15])\n- $n = range(32, 240, 4)\n\n#conditions:\n- w3 < w2 < w1\n- is_int(n3 * w3)\n- n - (n1*w1) - (n2*w2) - int(n3*w3) > 0\n\n#answer: (n - (n1*w1) - (n2*w2) - int(n3*w3))",
+    "count": 100
+  },
+  {
+    "id": 12,
+    "question_annotated": "{name, Kristoffer} leggur {obj,egg} á nakrar {surface_plural,bakkar}. Hvør {surface,bakki} rúmar {x,24} {obj,egg}. Um hann hevur {n,64} {obj,egg} og {k,2} {surface_plural,bakkar}, hvussu nógv {obj,egg} fer hann ikki at kunna leggja á ein bakka?\n\n#init:\n- name = sample(names_male)\n- obj = sample([\"egg\", \"olivur\", \"mandlur\", \"kakur\", \"keks\", \"bananar\"])\n- surface, surface_plural = sample([(\"fat\", \"føt\"), (\"bakki\", \"bakkar\"), (\"kurv\", \"kurvar\"), (\"skál\", \"skálar\")])\n- $x = range(20, 51)\n- $k = range(2, 30)\n- $n = range(60, 350, 2)\n\n#conditions:\n- k * x < n\n\n#answer: n - k*x",
+    "count": 100
+  },
+  {
+    "id": 13,
+    "question_annotated": "{name,Marie} er ein íðin urtagarðskvinna. {time,Í gjár} fekk hon {x,18} nýggjar pottaplantur frá sínum yndisplanteskúla. Hon hevur longu {r,2} pottaplantur á hvørjum av teimum {w,40} vindeygakørmunum í sínum stóra landstaði. Hon hevur avgjørt, at hon vil geva {n,1} av pottaplantunum frá hvørjum karmi til vinir og familju. Hvussu nógvar pottaplantur fer {name,Marie} at hava eftir?\n\n#init:\n- name = sample(names_female)\n- time = sample([\"Síðstu viku\", \"Fyri tveimum døgum síðani\", \"Í gjárkvøldið\"])\n- $x = range(18, 50)\n- $r = range(2, 13)\n- $w = range(40, 70)\n- $n = range(1, 8)\n\n#conditions:\n- w * r + x - w*n > 0\n\n#answer: w * r + x - w*n",
+    "count": 100
+  },
+  {
+    "id": 14,
+    "question_annotated": "{n1,Jakob} og {n2,Jens} hava {t,30} minuttir at ganga til {loc1,skúlan} saman. Tað tekur teimum {t1,6} minuttir at koma til hornið, har {loc2,bókasavnið} er. Tað tekur teimum {t2,13} minuttir afturat at koma til {loc3, sløkkiliðsstøðina}. Hvussu nógv tíð hava tey eftir til at røkka skúlanum uttan at koma ov seint?\n\n#init:\n- n1, n2 = sample(names, 2)\n- loc1, loc2, loc3 = sample(['skúlan', 'handilsmiðstøðina', 'bókasavnið', 'parkina', 'venjingarmiðstøðina', 'bankan', 'sløkkiliðsstøðina'], 3)\n- $t1 = range(6, 30)\n- $t2 = range(10, 70)\n- $t = range(30, 140)\n\n#conditions:\n- not divides(t1, 5)\n- not divides(t2, 5)\n- not divides(t, 5)\n- t > t1 + t2\n\n#answer: t - t1 - t2",
+    "count": 100
+  },
+  {
+    "id": 15,
+    "question_annotated": "Hundurin hjá {name1, Julie} hevur {n1, 8} valpar, og {k1,3} av teimum hava blettir. Hundurin hjá {name2, Bo} hevur {n2,12} valpar, og {k2,4} av teimum hava blettir. Hvør nógv prosent av øllum valpunum hava blettir?\n\n#init:\n- name1, name2 = sample(names, 2)\n- $n1 = range(5, 16)\n- $n2 = range(4, 20)\n- $k1 = range(2, 12)\n- $k2 = range(2, 12)\n\n#conditions:\n- k1 < n1\n- k2 < n2\n- divides(n1 + n2, k1 + k2)\n- is_int(100 * (k1+k2) / (n1+n2))\n\n#answer: int(100 * (k1+k2) / (n1+n2))",
+    "count": 100
+  },
+  {
+    "id": 16,
+    "question_annotated": "{name, Kristian} selur {food,hunangskøkur} og {fruit,epal}tertu til eina innsavning. {d1,Leygardag}in seldi hann {n1,10} eskjur av {food,hunangskøkum} og {m1,4} færri eskjur av {fruit,epal}tertu enn {d2,sunnudag}in. {d2,Sunnudag}in seldi hann aftrat {n2,5} eskjur fleiri av {food,hunangskøkum} enn {d1,leygardag}in og {m2,15} eskjur av {fruit,epal}tertu. Um {food,hunangskøkur} kosta {cn,6} {cur,krónur} og {fruit,epal}tertur kosta {cm,15} {cur,krónur}, hvussu nógv forvann {name,Kristian} upp á tveir dagar?\n\n#init:\n- name = sample(names_male)\n- fruit, fruit_plural = sample(fruits)\n- cur = sample(currencies_sym)\n- food = sample([ \"hunangskøkur\", \"brownies\", \"kanilsniglar\", \"wienerbreyð\",])\n- d1, d2 = sample_sequential(weekdays, 2)\n- $n1 = range(21, 30)\n- $n2 = range(11, 15)\n- $m1 = range(2, 20)\n- $m2 = range(15, 30)\n- $cn = range(7, 13)\n- $cm = range(20, 33)\n\n#conditions:\n- m1 < m2\n\n#answer: (2*n1+n2)*cn + (2*m2-m1)*cm",
+    "count": 100
+  },
+  {
+    "id": 18,
+    "question_annotated": "{name,Rasmus} fór at keypa sær nakrar skúlalutir. Hann keypti {n1,4} {obj1,pennar}, sum kostaðu {c1,1.5} {cur,krónur} hvør, {n2,2} {obj2,skrivibøkur}, sum kostaðu {c2,4} {cur,krónur} hvør, og eitt ark av pappíri, sum kostaði {c3,20} {cur,krónur}. Hvussu nógv brúkti {name,Rasmus} tilsamans?\n\n#init:\n- name = sample(names_male)\n- obj1, obj2 = sample([\"skrivibøkur\", \"blýantar\", \"litblýantar\", \"tussjar\", \"linjalir\", \"mappur\"], 2)\n- cur = sample(currencies_sym)\n- $n1 = range(4, 25, 2)\n- $c1 = arange(1.5, 11.5, 0.25)\n- $n2 = range(2, 15, 2)\n- $c2 = arange(4, 19.5, 0.25)\n- $c3 = range(10, 25)\n\n#conditions:\n- is_int(n1 * c1)\n- is_int(n2 * c2)\n#answer: int(n1*c1 + n2*c2 + c3)",
+    "count": 100
+  },
+  {
+    "id": 19,
+    "question_annotated": "Í eini spurnarkapping við {n,60} spurningum eru {p1,40}% av spurningunum {s1,lættir} og restin er javnt býtt sum {s2,miðal} og {s3,torførir} spurningar. Um {name,Alma} er vís í at fáa {r1,75}% av teimum {s1,lættir} spurningunum rættar og {frac_txt,hálvan part} av teimum {s2,miðal} og {s3,torførir} spurningunum rætt, hvussu nógv stig er hon vís í at fáa?\n\n#init:\n- s1, s2, s3 = sample([\"søga\", \"landalæra\", \"lívfrøði\", \"evnafrøði\", \"alisfrøði\", \"búskapur\", \"bókmentir\", \"algebra\", \"rúmfrøði\"], 3)\n- name = sample(names_female)\n- $frac_txt, frac_val = sample(fraction_alnum)\n- $p1 = range(5, 71, 5)\n- $r1 = range(5, 101, 5)\n- $n = range(10, 151, 10)\n\n#conditions:\n- is_int(n * (p1/100))\n- is_int(n * (p1/100) * (r1/100))\n- is_int(n*(1-(p1/100))*frac_val)\n\n#answer: ensure_int(n * (p1/100) * (r1/100)) + ensure_int(n*(1-(p1/100))*frac_val)",
+    "count": 100
+  },
+  {
+    "id": 20,
+    "question_annotated": "{name,Jónas} plokkar {n1,4} {fruit_plural,bananir} {d1,mikudag}in. So plokkar hann {n2,6} {fruit_plural,bananir} {d2,hósdag}in. {d3,fríggjadag}in plokkar hann {mult_txt,tríggjar ferðir} so nógvar {fruit_plural,bananir}, sum hann gjørdi {d1,mikudag}in. Hvussu nógvar {fruit_plural,bananir} hevur {name,Jónas}?\n\n#init:\n- name = sample(names_male)\n- d1, d2, d3 = sample_sequential(weekdays, 3)\n- fruit, fruit_plural = sample(fruits)\n- $n1 = range(30, 400)\n- $n2 = range(50, 400)\n- mult_txt, mult_val = sample(multi_times)\n\n#answer: n1 + n2 + mult_val * n1",
+    "count": 100
+  },
+  {
+    "id": 21,
+    "question_annotated": "{name,Søren} hyggur sjónvarp eftir at hann er liðugur við heimaarbeiðið. {d1,mánadag} og {d2,týsdag} hugdi hann at einum {h1,1}-tíma parti av sínum yndisshowi. {d3,mikudag} hugdi hann at nøkrum pørtum av einum {m1,30}-minutta showi. {d4,hósdag} varð hann tíðliga liðugur við heimaarbeiðið og hugdi at einum {h2,1}-tíma parti og einum {m2,30}-minutta showi. {d5,fríggjadag} fekk hann loyvi at vera leingi uppi, so hann hugdi at {n2_txt,tveir} {h3,1}-tíma partar. Um hann tilsamans hugdi {total,7} tímar sjónvarp, hvussu nógvar {m1,30}-minutta partar hugdi hann at {d3,mikudag}?\n\n#init:\n- name = sample(names_male)\n- d1, d2, d3, d4, d5 = sample_sequential(weekdays, 5)\n- $total = range(7, 33)\n- $h1 = range(1, 7)\n- $h3 = range(1, 6)\n- $m1 = range(5, 61, 5)\n- $m2 = range(5, 61, 5)\n- $h2 = range(1, 7)\n- n2_txt, n2_val = range_str(2, 5, 1, numbers)\n\n#conditions: \n- divides(m1, 15)\n- divides(m2, 15)\n- divides(total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60, m1)\n- (total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1 > 0\n- (total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1 < 8 \n\n#answer: int((total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1)",
+    "count": 100
+  },
+  {
+    "id": 22,
+    "question_annotated": "{name,Laura} gjørdi seg klára til eina {event,døgurðaveitslu} í húsinum hjá sær, har hon hevði ætlað at borðreiða við {food,grýturætti}. Hon legði til merkis, at hon var gingin undan plast {obj,skeiðum}, so hon keypti ein nýggjan pakka við {obj,skeiðum}. Seinni keypti maður hennara eisini ein pakka við {n1_txt,fimm} nýggjum {obj,skeiðum} og gav teimum til {name,Laura}. Meðan {name,Laura} gjørdi {food,grýturætt}, brúkti hon {n2_txt,trettan} {obj,skeiðir} til at smakka upp á sín {food,grýturætt}. Seinni, tá ið hon fór at dekka borðið, hevði hon tilsamans {total,12} {obj,skeiðir}. Hvussu nógvar {obj,skeiðir} vóru í pakkanum, sum {name,Laura} keypti?\n\n#init:\n- name = sample(names_female)\n- event = sample([\"døgurðaveitsla\", \"føðingardagsveitsla\", \"samkoma\", \"baby shower\", \"spælikvøld\"])\n- food = sample([\"steiktur kyllingur\", \"grillaður laksur\", \"oksagrýturættur\", \"vegetar lasagna\", \"fyltar piparfruktir\", \"creme brulee\"])\n- obj = sample([\"skeiðir\", \"gafflar\", \"tallerkar\"])\n- n1_txt, n1_val = range_str(5, 20, 1, numbers)\n- n2_txt, n2_val = range_str(3, 10, 1, numbers)\n- $total = range(12, 40)\n\n#conditions:\n- total+n2_val-n1_val > 0\n\n#answer: total+n2_val-n1_val",
+    "count": 100
+  },
+  {
+    "id": 23,
+    "question_annotated": "{name,Martha} bindur vetrarklæði til síni {count,3} ommubørn. Tey eru {children,trillingar}, so tey hava øll somu stødd. Hon vil gera eina {c1,húgvu}, eitt {c2,turriklæði}, ein {c3,troyggju}, {c4,vøttir} og {c5,hosur} til hvørt teirra. Tað krevur {n1,2} garnnøst at gera eina {c1,húgvu}, {n2,4} fyri eitt {c2,turriklæði}, {n3,12} fyri eina {c3,troyggju}, {n4,1} fyri eitt par av {c4} og {n5,2} fyri eitt par av {c5}. Hvussu nógv garnnøst skal hon keypa?\n\n#init:\n- name = sample(names_female)\n- c1, c2, c3 = sample([\"troyggja\", \"bundin troyggja\", \"húgva\", \"poncho\"],3)\n- c4, c5 = sample([ \"hanskar\",\"vøttir\", \"hosur\",  \"beinvarmarar\"], 2)\n- n1, n2, n3, n4, n5 = sample(range_list(3, 19), 5) \n- children, count = sample([(\"tvíburar\",2), (\"trillingar\",3), (\"fýrlingar\", 4),  (\"fimmburar\", 5)])\n\n#answer: count*(n1+n2+n3+n4+n5)",
+    "count": 100
+  },
+  {
+    "id": 24,
+    "question_annotated": "Sambært upplýsingunum um næringarinnihald hevur ein posi av {food,flísum} {cal,250} kaloriur fyri hvønn skamt. Um ein {size,300} {unit,gram} posi hevur {n,5} skamtar, hvussu nógv {unit,gram} kanst tú eta, um títt dagliga kalorimál er {total,2000} og tú longu hevur fingið tær {spent,1800} kaloriur?\n\n#init:\n- food = sample([\"popcorn\", \"góðgæti\",  \"smákøkur\"])\n- unit = sample([\"gram\", \"g\"])\n- $cal = range(150, 500, 25)\n- $size = range(100, 400, 25)\n- $n = range(4, 8)\n- $total = range(1900, 2500, 5)\n- $spent = range(600, 1900, 25)\n\n#conditions:\n- spent < total\n- is_int( 5 * (total - spent) / cal)\n- divides(size, n)\n- divides(size//n, (total-spent)/cal)\n\n#answer: size//n * (total-spent)/cal",
+    "count": 100
+  },
+  {
+    "id": 25,
+    "question_annotated": "Í flokkinum hjá {lærer,Hansen} við {total,30} næmingum eru {p1,20}% av flokkinum {gruppe1,fótbóltsspælarar}. Av teimum næmingunum, sum eru eftir, eru {p2,25}% {gruppe2,cheerleaders} ella {gruppe3,partur av orkestrinum}. Hesir 3 bólkarnir av næmingum skulu fara tíðliga úr skúlanum í dag fyri at ferðast til {event, ein útidyst}. Hvussu nógvir næmingar fara tíðliga úr skúlanum?\n\n#init:\n- lærer = sample(['Hansen', 'Jensen', 'Susanne', 'Lærke'])\n- gruppe1 = sample(['fótbóltsspælarar', 'basketbóltsleikarar', 'volleybóltsleikarar', 'svømmarar'])\n- gruppe2, gruppe3 = sample(['dansarar', 'kórsangarar', 'cheerleaders'],  2)\n- event = sample(['ein útidyst', 'ein kapping', 'ein kapping', 'ein framførsla', 'eitt stevni'])\n- $total = range(20, 150)\n- $p1 = range(10, 50)\n- $p2 = range(15, 45)\n\n#conditions:\n- p1 < 100\n- p2 < 100\n- is_int(total * p1 / 100)\n- is_int((total - total * p1 / 100) * p2 / 100)\n\n#answer: int(total * p1 / 100 + (total - total * p1 / 100) * p2 / 100)",
+    "count": 100
+  },
+  {
+    "id": 26,
+    "question_annotated": "{name1,Ein maður} etur {n1,5} {food,sandwichar} um {time_unit,dag}in, {name2,kona hansara} etur {n2,4} {food,sandwichar} um {time_unit,dag}in og {relation,sonur} teirra etur {n3,2} {food,sandwichar} um {time_unit,dag}in. Hvussu nógvar {food,sandwichar} etur henda familjan upp á eina {time_period,viku}?\n\n#init:\n- name1 = sample([\"Ein faðir\", \"Ein abbi\", \"Ein pápabeiggi\"])\n- name2 = sample([\"kona hansara\", \"partnari hansara\", \"hjúnafelagi hansara\"])\n- relation = sample([\"dóttir\", \"sonur\", \"ommubarn\"])\n- food = sample([\"pizzur\", \"burritoir\", \"tacos\", \"sushi-rullur\", \"hamburgarar\"])\n- time_unit = sample([\"dag\"])\n- time_period = sample([\"viku\", \"mánað\"])\n- $n1 = range(2, 9)\n- $n2 = range(2, 9)\n- $n3 = range(2, 9)\n\n#answer: (n1 + n2 + n3) * (7 if time_period == \"week\" else 30)",
+    "count": 100
+  },
+  {
+    "id": 27,
+    "question_annotated": "{name,Jørgen} fær {n,80} teldupostar um dagin. {p,20}% av hesum teldupostunum krevja ikki nakað svar. Hann svarar teimum, sum eru eftir. Hvussu nógvar teldupostar svarar {name,Jørgen} upp á í einari {d,5}-daga arbeiðsviku?\n\n#init:\n- name = sample(names_male)\n- $n = range(50, 200)\n- $p = range(5, 40)\n- $d = range(3, 7)\n\n#conditions:\n- is_int(n * p / 100)\n- is_int(n * (100 - p) / 100)\n\n#answer: d * (n * (100 - p) / 100)",
+    "count": 100
+  },
+  {
+    "id": 28,
+    "question_annotated": "{facility_article, eitt} {facility, sjúkrahús} hevur pláss fyri {total, 1000} {item_plural, seingjum}, har {frac, 1/5} er upptikið. Vegna {event, koronuútbrotinum} verða {daily, 50} sjúklingar innlagdir á {facility_definite, sjúkrahúsið} hvønn dag. Rokna samlaða talið av leysum {item_plural, seingjum} á {facility_definite, sjúkrahúsinum} eftir {period_txt,two} vikur.\n\n#init:\n- facility, facility_article, facility_definite = sample([(\"sjúkrahús\", \"eitt\", \"sjúkrahúsið\"), (\"klinikk\", \"ein\", \"klinikkin\"), (\"heilsumiðstøð\", \"eitt\", \"heilsumiðstøðin\"), (\"røktarheim\", \"eitt\", \"røktarheimið\")])\n- item, item_plural = sample([(\"seing\",\"seingir\"), (\"rúm\",\"rúm\"), (\"deild\",\"deildir\")])\n- event = sample([\"koronuútbrotinum\", \"influensatíðini\", \"einari náttúruvanlukku\", \"einari stórari vanlukku\", \"farsóttini\"])\n- $total = range(500, 2000, 100)\n- $frac = sample(fractions)\n- $daily = range(20, 100, 5)\n- period_txt, period_val = range_str(2, 5, 1, numbers)\n\n#conditions:\n- is_int(total * frac)\n- total * frac + daily * period_val * 7 < total\n\n#answer: total - (total * frac + daily * period_val * 7)",
+    "count": 100
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "question_annotated": "Ein tåkebank rullar inn frå havet for å dekkje ein by. Det tek {t,10} minutt å dekkje kvart {d,3} kilometer av byen. Dersom byen er {y,42} kilometer på tvers frå kysten til den motsett innlandsranden, kor mange minutt vil det ta før tåkebanken har dekt heile byen?\n\n#init:\n- $t = range(2, 500)\n- $d = range(2, 100)\n- $y=range(2, 100)\n\n#conditions:\n- is_int(y/d)\n\n#answer: y//d*t",
+    "count": 100
+  },
+  {
+    "id": 3,
+    "question_annotated": "Ein {g, klasse} på {n, 50} elevar har ulike hobbyar. {n_1, 10} likar å {h_1, bake}, {n_2, 5} likar å spela {h_2, basketball}, og resten likar anten å {h_3, spela videospel} eller {h_4, spela musikk}. Kor mange likar å {h_3, spela videospel} om talet som likar å {h_4, spela musikk} er dobbelt så stort som talet som føretrekkjer å spela {h_2, basketball}?\n\n#init:\n- g = sample([\"gruppe\", \"klasse\"])\n- h_2 = sample(sports)\n- h_1, h_3, h_4 = sample(['lese', 'måle', 'gå på tur', 'dansa', 'bake', 'spela videospel', 'spela musikk'], 3)\n- $n = range(5, 200)\n- $n_1 = range(2, 200)\n- $n_2 = range(2, 200)\n\n#conditions:\n- n_1 < n\n- n_2 < n\n- n - (n_1 + n_2) - (2 * n_2) > 0\n\n#answer: int(n - (n_1 + n_2) - (2 * n_2))",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "question_annotated": "{name,John} har {x,10} {area,hektar} med {fruit,ananas}mark. Det er {k,100} {fruit,ananas} per {area,hektar}. {name, John} kan hausta {fruit,ananas}ane sine kvart {n,3} månad. Kor mange {fruit,ananas} kan {name,John} hausta innan eit år?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- area = sample(['hectare', 'square meter'])\n- $x = range(5, 100, 5)\n- $k = range(2, 101)\n- $n = sample([1, 2, 3, 4, 6, 12])\n\n#answer: x * k * (12//n)",
+    "count": 100
+  },
+  {
+    "id": 14,
+    "question_annotated": "{n1,John} og {n2,Jack} har {t,30} minutt på seg til å gå til {loc1,skulen} saman. Det tek dei {t1,6} minutt å komme til hjørnet der {loc2,biblioteket} ligg. Det tek dei {t2,13} minutt til å komme til {loc3, brannstasjonen}. Kor lang tid har dei att til å komme seg til {loc1,skulen} utan å komme for seint?\n\n#init:\n- n1, n2 = sample(names, 2)\n- loc1, loc2, loc3 = sample(['school', 'cinema', 'mall', 'library', 'park', 'gym', 'bank'], 3)\n- $t1 = range(6, 30)\n- $t2 = range(10, 70)\n- $t = range(30, 140)\n\n#conditions:\n- not divides(t1, 5)\n- not divides(t2, 5)\n- not divides(t, 5)\n- t > t1 + t2\n\n#answer: t - t1 - t2",
+    "count": 100
+  },
+  {
+    "id": 15,
+    "question_annotated": "{name1, Jennifer} sin hund har {n1, 8} valpar, {k1,3} av dei har prikkar. {name2, Brandon} sin hund har {n2,12} valpar, {k2,4} av dei har prikkar. Kva prosentandel av alle valpane har prikkar?\n\n#init:\n- name1, name2 = sample(names, 2)\n- $n1 = range(4, 16)\n- $n2 = range(4, 20)\n- $k1 = range(2, 12)\n- $k2 = range(2, 12)\n\n#conditions:\n- k1 < n1\n- k2 < n2\n- divides(n1 + n2, k1 + k2)\n- is_int(100 * (k1+k2) / (n1+n2))\n\n#answer: int(100 * (k1+k2) / (n1+n2))",
+    "count": 100
+  },
+  {
+    "id": 19,
+    "question_annotated": "I ei {n,60}-spørsmåls prøve, er {p1,40}% av spørsmåla {s1,lette}, og resten er like delt som {s2,middels} og {s3,vanskelige} spørsmål. Dersom {name,Aries} er sikker på å få {r1,75}% av {s1,lette} spørsmåla, og {frac_txt,halvparten} av {s2,middels} og {s3,vanskelige} spørsmåla rett, kor mange poeng er ho sikker på å få?\n\n#init:\n- s1, s2, s3 = sample([\"historie\", \"geografi\", \"biologi\", \"kjemi\", \"fysikk\", \"økonomi\", \"litteratur\", \"algebra\", \"geometri\" ], 3)\n- name = sample(names_female)\n- frac_txt, frac_val = sample(fraction_alnum)\n- $p1 = range(5, 71, 5)\n- $r1 = range(5, 101, 5)\n- $n = range(10, 151, 10)\n\n#conditions:\n- is_int(n * (p1/100))\n- is_int(n * (p1/100) * (r1/100))\n- is_int(n*(1-(p1/100))*frac_val)\n\n#answer: int(n * (p1/100) * (r1/100)) + int(n*(1-(p1/100))*frac_val)",
+    "count": 100
+  },
+  {
+    "id": 21,
+    "question_annotated": "{name,Frankie} ser på TV etter at han har gjort lekserne sine kvelden. På {d1,mandag} og {d2,tysdag}, så han på ein {h1,1}-timars episode av favorittshowet sitt kvelden. På {d3,onsdag}, så han på nokre episodar av ein {m1,30}-minuttars show. På {d4,torsdag}, gjorde han lekserne tidleg og såg på ein {h2,1}-timars episode og eit {m2,30}-minuttars show. På {d5,fredag}, fekk han vere opp sein, så han såg på {n2_txt,to} {h3,1}-timars episodar. Dersom han såg på {total,7} timar med TV totalt, kor mange {m1,30}-minuttars episodar såg han på {d3,onsdag}?\n\n#init:\n- name = sample(names_male)\n- d1, d2, d3, d4, d5 = sample_sequential(weekdays, 5)\n- $total = range(7, 33)\n- $h1 = range(1, 7)\n- $h3 = range(1, 6)\n- $m1 = range(5, 61, 5)\n- $m2 = range(5, 61, 5)\n- $h2 = range(1, 7)\n- n2_txt, n2_val = range_str(2, 5, 1, numbers)\n\n#conditions: \n- divides(m1, 15)\n- divides(m2, 15)\n- divides(total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60, m1)\n- (total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1 > 0\n- (total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1 < 8 \n\n#answer: int((total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1)",
+    "count": 100
+  }
+]

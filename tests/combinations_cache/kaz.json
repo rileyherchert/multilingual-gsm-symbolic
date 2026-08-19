@@ -1,0 +1,197 @@
+[
+  {
+    "id": 0,
+    "question_annotated": "{n, Бенни} {x,10}-футтық {big_fish,акула} көрді, оған {k,2} дана {y,6}-дюймдік ремора жабысып тұр. {big_fish,акула} денесінің ұзындығының қанша пайызы реморалардың жалпы ұзындығына тең?\n\n#init:\n- n = sample(names)\n- big_fish = sample([\"дельфин\", \"кит\", \"акула\"])\n- $x = range(10, 500, 10)\n- $k = range(2, 10)\n- $y = range(2, 100)\n\n#conditions:\n- k * y < x * 12\n- divides(k*y,12)\n- divides(x * 12, k*y)\n- divides(100, x * 12 / (k*y))\n\n#answer: int((k * y)/ (x * 12) * 100)",
+    "count": 100
+  },
+  {
+    "id": 1,
+    "question_annotated": "Тұман бұлттары мұхиттан қаланы жабуға келе жатыр. Қаланың әр {d,3} мильін жабуға {t,10} минут кетеді. Егер қаланың мұхит жағалауынан қарама-қарсы құрлық жағына дейінгі аралығы {y,42} миль болса, тұман бұлттың бүкіл қаланы жабуына неше минут кетеді?\n\n#init:\n- $t = range(2, 500)\n- $d = range(2, 100)\n- $y=range(2, 100)\n\n#conditions:\n- is_int(y/d)\n\n#answer: y//d*t",
+    "count": 100
+  },
+  {
+    "id": 2,
+    "question_annotated": "{name,Жерри} {sides_txt,алты қырлы} сәл тастап жатыр. Оның {target,3}-тен үлкен сан тастау ықтималдығы, екі рет қатар {z,жұп} сан тастау ықтималдығына қарағанда (пайыздық нүктелермен өрнектелгенде) нешеге артық?\n\n#init:\n- name=sample(names_male)\n- sides_txt, sides_val = sample([(\"4 қырлы\", 4), (\"алты қырлы\", 6), (\"8 қырлы\", 8), (\"10 қырлы\", 10), (\"12 қырлы\", 12), (\"14 қырлы\", 14), (\"16 қырлы\", 16), (\"18 қырлы\", 18), (\"20 қырлы\", 20), (\"22 қырлы\", 22), (\"24 қырлы\", 24), (\"26 қырлы\", 26), (\"28 қырлы\", 28), (\"30 қырлы\", 30), (\"32 қырлы\", 32), (\"34 қырлы\", 34), (\"36 қырлы\", 36), (\"38 қырлы\", 38), (\"40 қырлы\", 40), (\"42 қырлы\", 42), (\"44 қырлы\", 44), (\"46 қырлы\", 46), (\"48 қырлы\", 48), (\"50 қырлы\", 50), (\"52 қырлы\", 52), (\"54 қырлы\", 54), (\"56 қырлы\", 56), (\"58 қырлы\", 58), (\"60 қырлы\", 60), (\"62 қырлы\", 62), (\"64 қырлы\", 64), (\"66 қырлы\", 66), (\"68 қырлы\", 68), (\"70 қырлы\", 70), (\"72 қырлы\", 72), (\"74 қырлы\", 74), (\"76 қырлы\", 76), (\"78 қырлы\", 78), (\"80 қырлы\", 80), (\"82 қырлы\", 82), (\"84 қырлы\", 84), (\"86 қырлы\", 86), (\"88 қырлы\", 88), (\"90 қырлы\", 90), (\"92 қырлы\", 92), (\"94 қырлы\", 94), (\"96 қырлы\", 96), (\"98 қырлы\", 98), (\"100 қырлы\", 100)])\n- $target = range(1, 100)\n- z = sample([\"жұп\", \"тақ\"])\n\n#conditions: \n- target < sides_val\n- divides(sides_val-target, target)\n- is_int((sides_val-target)/sides_val * 100)\n-  int((sides_val-target)/sides_val * 100) > 25\n\n#answer: int((sides_val-target)/sides_val * 100) - 25",
+    "count": 100
+  },
+  {
+    "id": 3,
+    "question_annotated": "{n, 50} оқушыдан тұратын {g,сыныптың} әртүрлі хоббиі бар. {n_1, 10} {h_1, нан пісіру} ұнатады, {n_2, 5} {h_2, баскетбол} ойнауды ұнатады, ал қалғандары {h_3, видео ойындар ойнау} немесе {h_4, музыка ойнау} ұнатады. {h_3, видео ойындар ойнау} ұнататындар саны қанша, егер {h_4, музыка ойнау} ұнататындар саны {h_2, баскетбол} ойнауды ұнататындар санынан екі есе көп болса?\n\n#init:\n- g = sample([\"топ\", \"сынып\"])\n- h_2 = sample(sports)\n- h_1, h_3, h_4 = sample(['оқу', 'сурет салу', 'жүру', 'билеу', 'нан пісіру', 'видео ойындар ойнау', 'музыка ойнау'], 3)\n- $n = range(5, 200)\n- $n_1 = range(2, 200)\n- $n_2 = range(2, 200)\n\n#conditions:\n- n_1 < n\n- n_2 < n\n- n - (n_1 + n_2) - (2 * n_2) > 0\n\n#answer: int(n - (n_1 + n_2) - (2 * n_2))",
+    "count": 100
+  },
+  {
+    "id": 4,
+    "question_annotated": "{name,Гарретт} жұмырға попкорн қуырып жатыр. {p, қазан}дағы дәндер қызып, дәндер тезірек жарыла бастайды. {n,20} дән алғашқы {s, 30} секундта жарылады, кейін келесі {s, 30} секундта осы мөлшерден {k_2_txt,үш} есе көп. Келесі {s, 30} секундта дәндердің жарылу жылдамдығы алғашқы жылдамдықтың {k_3_txt,төрт} есесіне дейін өседі, бірақ соңғы {s, 30} секундта жарылу жылдамдығы алдыңғы {s, 30} секундтағы жылдамдықтың жартысына дейін баяулайды. {name,Гарретт} {p, қазан}ды оттан алғаннан кейін, соңғы {s, 30} секундта жарылған дәндердің төрттен бір бөлігі қалған жылудан да жарылады. {name,Гарретт} неше дана попкорн жейді?\n\n\n#init:\n- name = sample(names)\n- p = sample(['қазан', 'қазанша', 'таба'])\n- $n = range(10, 101, 10)\n- $s = range(10, 31, 2)\n- k_2_txt, k_2_val = range_str(2, 5, 1, numbers)\n- k_3_txt, k_3_val = range_str(3, 8, 1, numbers)\n\n#conditions:\n- k_3_val > k_2_val\n- divides(k_3_val * n, 8)\n\n#answer: n + (k_2_val * n + k_3_val * n) + (k_3_val * n // 2) + (k_3_val * n // 8)",
+    "count": 100
+  },
+  {
+    "id": 5,
+    "question_annotated": "{name,Кэти} {drink,кофе} жасау үшін шекердің шай қасықтары мен су стақандарын {m,7}:{n,13} қатынасында қолданады. Егер ол барлығы {x,120} шай қасық шекер мен су стақанын қолданса, ол қолданған шай қасық шекер санын есептеңіз.\n\n#init:\n- name = sample(names_female)\n- drink = sample(['кофе', 'шай'])\n- $m = range(7, 101, 3)\n- $n = range(4, 61, 3)\n- $x = range(5, 500, 5)\n\n#conditions: \n- divides(x, m+n)\n\n#answer: ((m*x)//(m+n))",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "question_annotated": "{name,Джон} {x,10} {area,гектар} {fruit,ананас} алқабы бар. Әр {area,гектар}да {k,100} {fruit,ананас}тар бар. {name, Джон} әр {n,3} айда өз {fruit,ананас}тарын жинай алады. {name,Джон} жыл ішінде қанша {fruit,ананас} жинай алады?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- area = sample(['гектар', 'квадрат ярд', 'шаршы метр'])\n- $x = range(5, 100, 5)\n- $k = range(2, 101)\n- $n = sample([1, 2, 3, 4, 6, 12])\n\n#answer: x * k * (12//n)",
+    "count": 100
+  },
+  {
+    "id": 7,
+    "question_annotated": "Фермер {animals,жылқылар} үшін жем-шөп сатып алып жатыр. Ол түрлі {treat1, шөп}, {treat2, сұлы}, {treat3, сәбіз} және {rare_treat, қант кесектері} сатып алады. {rare_treat, қант кесектері} сирек тәтті болғандықтан, ол бүкіл қораға арнап тек {n4_txt,екі} {w4,1}-{unit,фунт} қорап сатып алады. Ол {treat3, сәбіз} тек көкөністер жаңа болған кезде {animals,жылқылар} тамақтандыруға жеткілікті болсын деп қалайды, сондықтан ол {n3_txt,төрт} {w3,12}-{unit,фунт} қап сатып алады. {treat1, шөп} оның {animals,жылқылар} негізгі азығы болғандықтан, ол {n1_txt,қырық екі} {w1,75}-{unit,фунт} пачка сатып алады. {treat2, сұлы} {treat1, шөп} толықтырушы негізгі азық болғандықтан, ол {n2_txt,жиырма} {w2, 65}-{unit,фунт} меш сатып алады. Егер оның ферма көлігі бір уақытта {total,2250} {unit,фунт} көтерсе, фермерге барлық жем-шөпті тасымалдау үшін неше рет қажет?\n\n#init:\n- animals = sample(['жылқылар', 'ірі қара', 'қой', 'шошқа', 'альпакалар'])\n- unit = sample(weights_med)\n- treat1, treat2 = sample([\"шөп\", \"жүгері\", \"сұлы\", \"алма\", \"бидай\"], 2)\n- treat3 = sample([\"сәбіз\", \"қызылша\", \"қияр\"])\n- rare_treat = sample([\"қант кесектері\", \"қарбыз қабығы\", \"пеперминт\"])\n- n4_txt, n4_val = range_str(2, 7, 2, numbers)\n- n3_txt, n3_val = range_str(4, 11, 2, numbers)\n- n2_txt, n2_val = range_str(15, 21, 1, numbers)\n- n1_txt, n1_val = range_str(30, 43, 2, numbers)\n- $w4 = range(1, 4)\n- $w3 = range(8, 13, 2)\n- $w2 = range(45, 70, 5)\n- $w1 = range(55, 80, 5)\n- $total = range(1500, 2300, 150)\n\n#conditions:\n- w4*n4_val < w3*n3_val < w2*n2_val < w1 * n1_val\n- divides(n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4, total)\n\n#answer: (n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4)//total",
+    "count": 100
+  },
+  {
+    "id": 8,
+    "question_annotated": "Бір сиқыршы {n, 16} шарды шарлап ойнай алады. Шарлардың {frac_1_txt, жарты} {ball_type, гольф} шарлары, ал {ball_type, гольф} шарларының {frac_2_txt, жарты} {color, көк} түсті. Қанша {color, көк} {ball_type, гольф} шары бар?\n\n#init:\n- ball_type = sample([\"гольф\", \"теннис\"])\n- color = sample(colors)\n- frac_1_txt, frac_1_val = sample(fraction_alnum)\n- frac_2_txt, frac_2_val = sample(fraction_alnum)\n- $n = range(16, 100, 2)\n\n#conditions:\n- is_int(n * frac_1_val)\n- is_int(n * frac_1_val * frac_2_val)\n\n#answer:  int(n * frac_1_val * frac_2_val)",
+    "count": 100
+  },
+  {
+    "id": 9,
+    "question_annotated": "{name, Софи} {family,жиен} бақылап отырғанда, ол оған түрлі ойыншықтарды шығарады. Құрылыс блоктары қапшығында {x,31} блок бар. Жұмсақ ойыншықтар жәшігінде {y,8} ойыншық бар. Сақиналар мұнарасында {z,9} түрлі-түсті сақина бар. {name, Софи} соңғы уақытта допшалар түбірін сатып алды, бұл оның {family,жиен} үшін ойыншықтарының жалпы санын {total,62}-ге жеткізді. Түбірде неше допша болды?\n\n#init:\n- name = sample(names_female)\n- family = sample([\"жиен\", \"кузен\", \"іні\"])\n- $x = range(31, 75)\n- $y = range(8, 50)\n- $z = range(9, 35)\n- $total = range(60, 250)\n\n#conditions:\n- total - (x + y + z) >= 20 \n- total - (x + y + z) < 100\n\n#answer: total - (x + y + z)",
+    "count": 100
+  },
+  {
+    "id": 10,
+    "question_annotated": "{dev,ақылы телефон} арқылы қоңырау шалу үшін, әр минуты үшін {currency,$}{frac1,0.25} төлеу керек. {t,16} минуттан кейін баға минутына {currency,$}{frac2,0.2} дейін төмендейді. {total,36} минуттық қоңырау қанша тұрады?\n\n#init:\n- dev = sample(['телефон будкасы', 'қонақүй бөлмесінің телефоны'])\n- currency = sample(currencies_sym)\n- $frac1 = sample(fraction_decimals)\n- $frac2 = sample(fraction_decimals)\n- $t = range(10, 50)\n- $total = range(36, 100)\n\n#conditions:\n- is_int(frac1 * t)\n- is_int((total-t) * frac2)\n- frac2 < frac1\n- t < total\n\n#answer: int((frac1 * t) + frac2*(total-t))",
+    "count": 100
+  },
+  {
+    "id": 11,
+    "question_annotated": "{name, петр} {n,32} {unit, унция} сумен әртүрлі өлшемді мұз кесектерін жасағысы келеді. Ол әр кесеге {w1,4} {unit, унция} су жұмсайтын алып кесектер, {w2,2} {unit, унция} су жұмсайтын орташа кесектер және {w3,1/2} {unit, унция} су жұмсайтын кішкентай кесектер жасай алады. Егер ол {n1,3} алып кесек, {n2,7} орташа кесек және {n3,8} кішкентай кесек жасаса, қолында қанша {unit, унция} су қалады?\n\n#init:\n- name = sample(names_male)\n- unit = sample(weights_sm)\n- $w1 = range(4, 10)\n- $w2 = range(2, 10)\n- $w3 = sample(fractions)\n- $n1 = range(3, 10)\n- $n2 = range(7, 13)\n- $n3 = sample([8, 14, 24, 15])\n- $n = range(32, 240, 4)\n\n#conditions:\n- w3 < w2 < w1\n- is_int(n3 * w3)\n- n - (n1*w1) - (n2*w2) - int(n3*w3) > 0\n\n#answer: (n - (n1*w1) - (n2*w2) - int(n3*w3))",
+    "count": 100
+  },
+  {
+    "id": 12,
+    "question_annotated": "{name, Jaime} бірнеше {surface, поднос}қа {obj, жұмыртқа} салады.\n\nӘрбір {surface, поднос} {x,24} {obj, жұмыртқа} сыйады.\n\nЕгер оның {n,64} {obj, жұмыртқа}сы және {k,2} {surface, поднос}ы болса, {surface, поднос}қа қоя алмайтын {obj, жұмыртқа} саны нешеу?\n\n#init:\n- name = sample(names_male)\n- obj = sample([\"зәйтүн\", \"бадам\", \"печенье\", \"крекер\", \"банан\"])\n- surface = sample([\"табақ\", \"үстел\", \"ыдыс\", \"поднос\", \"себет\"])\n- $x = range(20, 51)\n- $k = range(2, 30)\n- $n = range(60, 350, 2)\n\n#conditions:\n- k * x < n\n\n#answer: n - k*x",
+    "count": 100
+  },
+  {
+    "id": 13,
+    "question_annotated": "{name,Мэри} құмар бағбан. {time, Кеше}, ол сүйікті өсімдік питомнигінен {x,18} жаңа қазандағы өсімдік алды. Оның үлкен ауыл үйінің {w,40} терезе жиектерінің әрқайсысында {r,2} қазандағы өсімдік бар. Жомарт сезініп, ол ертең достары мен туыстарына әр жиектен {n,1} қазандағы өсімдік беруге шешім қабылдады. {name,Мэри} неше қазандағы өсімдікпен қалады?\n\n#init:\n- name = sample(names_female)\n- time = sample([\"Өткен апта\", \"Екі күн бұрын\", \"Кеше түні\"])\n- $x = range(18, 50)\n- $r = range(2, 13)\n- $w = range(40, 70)\n- $n = range(1, 8)\n\n#conditions:\n- w * r + x - w*n > 0\n\n#answer:\nw * r + x - w*n",
+    "count": 100
+  },
+  {
+    "id": 14,
+    "question_annotated": "{n1,жон} мен {n2,жек} бірге {loc1,мектеп} дейін жаяу жүру үшін {t,30} минуттары бар. Оларға {loc2,кітапхана} бар бұрышына жету үшін {t1,6} минут кетеді. Оларға {loc3,өрт сөндіру бекеті} дейін жету үшін тағы да {t2,13} минут кетеді. Олар {loc1,мектеп} дейін кешігіп қалмай жету үшін тағы қанша уақыттары бар?\n\n#init:\n- n1, n2 = sample(names, 2)\n- loc1, loc2, loc3 = sample(['мектеп', 'кино', 'сауда орталығы', 'кітапхана', 'саябақ', 'спортзал', 'банк'], 3)\n- $t1 = range(6, 30)\n- $t2 = range(10, 70)\n- $t = range(30, 140)\n\n#conditions:\n- not divides(t1, 5)\n- not divides(t2, 5)\n- not divides(t, 5)\n- t > t1 + t2\n\n#answer: t - t1 - t2",
+    "count": 100
+  },
+  {
+    "id": 15,
+    "question_annotated": "{name1, дженнифер} итінің {n1, 8} ит балапаны бар, оның ішінде {k1,3} дағысы бар. {name2, брэндон} итінің {n2,12} ит балапаны бар, оның ішінде {k2,4} дағысы бар. Барлық ит балаларының қанша пайызы дағысы бар?\n\n#init:\n- name1, name2 = sample(names, 2)\n- $n1 = range(4, 16)\n- $n2 = range(4, 20)\n- $k1 = range(2, 12)\n- $k2 = range(2, 12)\n\n#conditions:\n- k1 < n1\n- k2 < n2\n- divides(n1 + n2, k1 + k2)\n- is_int(100 * (k1+k2) / (n1+n2))\n\n#answer: int(100 * (k1+k2) / (n1+n2))",
+    "count": 100
+  },
+  {
+    "id": 16,
+    "question_annotated": "{name, айбек} қайырымдылық жинау үшін {food, имбирлі нан} және {fruit, алма} пирогын сатуда. {d1, сенбіде} ол {n1, 10} қорап {food, имбирлі нан} және {d2, жексенбіде}гіден {m1, 4} қорап аз {fruit, алма} пирогын сатты. {d2, жексенбіде} ол {d1, сенбіде}гіден {n2, 5} қорап көп {food, имбирлі нан} және {m2, 15} қорап {fruit, алма} пирогын сатты. Егер {food, имбирлі нан} {cur, ₸}{cn, 6} тұрса және {fruit, алма} пирогы {cur, ₸}{cm, 15} тұрса, {name, айбек} екі күнде қанша тапты?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- cur = sample(currencies_sym)\n- food = sample([\"имбирлі нан\", \"печенье\", \"шоколадты торт\", \"маффин\", \"капкейк\"])\n- d1, d2 = sample_sequential(weekdays, 2)\n- $n1 = range(21, 30)\n- $n2 = range(11, 15)\n- $m1 = range(4, 20)\n- $m2 = range(15, 30)\n- $cn = range(7, 13)\n- $cm = range(20, 33)\n\n#conditions:\n- m1 < m2\n\n#answer: (2*n1+n2)*cn + (2*m2-m1)*cm",
+    "count": 100
+  },
+  {
+    "id": 17,
+    "question_annotated": "{name,Әже} күн сайын сүйікті серуен жолымен {n,3} {unit,миля} жүреді, оның ішінде {m,2} {unit,миля} жағажайда және {k,1} {unit,миля} жол бойымен. Жол бойымен {name,Әже} жағажайдағыдан {mult_txt,екі есе} жылдам жүреді. Егер оның жүруінің {t,40} минуты жағажайда өтсе, ол бүкіл {n,3}-{unit, миля} жолды жүріп өтуге неше минут жұмсайды?\n\n#init:\n- name = sample(names_female)\n- unit = sample(length_lg)\n- mult_txt, mult_val = sample(multi_times)\n- $n = range(3, 60)\n- $m = range(2, 20)\n- $k = range(1, 20)\n- $t = range(40, 70)\n#conditions:\n- m + k == n\n- m < t\n- mult_val *m < t\n- divides(t, m)\n- is_int(k / (mult_val*m/t))\n#answer: t+(k/(mult_val*m/t))",
+    "count": 100
+  },
+  {
+    "id": 18,
+    "question_annotated": "{name,Рафаэль} мектеп бұйымдарын сатып алуға барды. Ол {n1,4} {obj1,қаламсап} сатып алды, әрқайсысы {cur,$}{c1,1.5} тұрды, {n2,2} {obj2,дәптер} сатып алды, әрқайсысы {cur,$}{c2,4} тұрды, және {cur,$}{c3,20} тұратын бір пачка қағаз сатып алды. {name,Рафаэль} барлығына қанша жұмсады?\n\n#init:\n- name = sample(names_male)\n- obj1, obj2 = sample([\"дәптер\", \"қарындаш\", \"өшіргіш\", \"бояу қарындаш\", \"түрлі-түсті қарындаш\", \"маркер\", \"сызғыш\", \"папка\"], 2)\n- cur = sample(currencies_sym)\n- $n1 = range(4, 25, 2)\n- $c1 = arange(1.5, 11.5, 0.25)\n- $n2 = range(2, 15, 2)\n- $c2 = arange(4, 19.5, 0.25)\n- $c3 = range(10, 25)\n\n#conditions:\n- is_int(n1 * c1)\n- is_int(n2 * c2)\n#answer: int(n1*c1 + n2*c2 + c3)",
+    "count": 100
+  },
+  {
+    "id": 19,
+    "question_annotated": "{n,60} сұрақтық викторинада, сұрақтардың {p1,40}% {s1,оңай} болып табылады, ал қалғандары тең бөлініп {s2,орташа} және {s3,қиын} сұрақтар болып бөлінеді. Егер {name,Ариес} {s1,оңай} сұрақтардың {r1,75}% -ін анық алса, және {frac_txt,жарты} {s2,орташа} және {s3,қиын} сұрақтарды дұрыс шешсе, ол неше ұпай алатынына сенімді?\n\n#init:\n- s1, s2, s3 = sample([\"тарих\", \"география\", \"биология\", \"химия\", \"физика\", \"экономика\", \"әдебиет\", \"алгебра\", \"геометрия\" ], 3)\n- name = sample(names_female)\n- frac_txt, frac_val = sample(fraction_alnum)\n- $p1 = range(5, 71, 5)\n- $r1 = range(5, 101, 5)\n- $n = range(10, 151, 10)\n\n#conditions:\n- is_int(n * (p1/100))\n- is_int(n * (p1/100) * (r1/100))\n- is_int(n*(1-(p1/100))*frac_val)\n\n#answer: ensure_int(n * (p1/100) * (r1/100)) + ensure_int(n*(1-(p1/100))*frac_val)",
+    "count": 100
+  },
+  {
+    "id": 20,
+    "question_annotated": "{name,Джон} {d1,Сәрсенбі} күні {n1,4} {fruit,банан} теріп алады. Содан кейін ол {d2,Бейсенбі} күні {n2,6} {fruit,банан} теріп алады. {d3,Жұма} күні, ол {d1,Сәрсенбі} күні терген {fruit,банан} санынан {mult_txt,үш} есе көп теріп алады. {name,Джон} неше {fruit,банан} бар?\n\n#init:\n- name = sample(names_male)\n- d1, d2, d3 = sample_sequential(weekdays, 3)\n- fruit = sample(fruits)\n- $n1 = range(30, 400)\n- $n2 = range(50, 400)\n- mult_txt, mult_val = range_str(2,6,1,numbers)\n\n#answer: n1 + n2 + mult_val * n1",
+    "count": 100
+  },
+  {
+    "id": 21,
+    "question_annotated": "{name,Фрэнки} күн сайын үй тапсырмасын орындаған соң теледидар көреді. {d1,дүйсенбі} және {d2,сейсенбі} күндері ол әр түнде сүйікті бағдарламасының {h1,1}-сағаттық бір эпизодын көрді. {d3,сәрсенбі} күні ол {m1,30}-минуттық бағдарламаның бірнеше эпизодын көрді. {d4,бейсенбі} күні ол үй тапсырмасын ерте бітіріп, {h2,1}-сағаттық бір эпизод пен {m2,30}-минуттық бағдарламаны көрді. {d5,жұма} күні ол кешке дейін ояу болуға рұқсат алды, сондықтан ол {n2_txt,екі} дана {h3,1}-сағаттық эпизод көрді. Егер ол барлығы {total,7} сағат теледидар көрсе, {d3,сәрсенбі} күні ол қанша {m1,30}-минуттық эпизод көрді?\n\n#init:\n- name = sample(names_male)\n- d1, d2, d3, d4, d5 = sample_sequential(weekdays, 5)\n- $total = range(7, 33)\n- $h1 = range(1, 7)\n- $h3 = range(1, 6)\n- $m1 = range(5, 61, 5)\n- $m2 = range(5, 61, 5)\n- $h2 = range(1, 7)\n- n2_txt, n2_val = range_str(2, 5, 1, numbers)\n\n#conditions: \n- divides(m1, 15)\n- divides(m2, 15)\n- divides(total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60, m1)\n- (total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1 > 0\n- (total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1 < 8 \n\n#answer: int((total * 60 - 2* h1 * 60 - h2 * 60 - m2 - n2_val* h3 * 60)/m1)",
+    "count": 100
+  },
+  {
+    "id": 22,
+    "question_annotated": "{name,Джулия} өз үйінде {event,кешкі ас} үшін дайындалып жатты, мұнда ол {food,қуырдақ} ұсынуды жоспарлаған. Ол пластик {obj,қасық} таусылғанын байқады, сондықтан ол жаңа {obj,қасық} пачкасын сатып алды. Кейін, оның күйеуі де {n1,5} жаңа {obj,қасық} пачкасын сатып алып, оны {name,Джулия}ға берді. {name,Джулия} {food,қуырдақ} дайындап жатқанда, ол {n2_txt,үш} {obj,қасық} қолданып, өз {food,қуырдақ}ын дәм татты. Кейін, ол үстел жинауға барғанда, оның барлығы {total,12} {obj,қасық} болды. {name,Джулия} сатып алған пачкада қанша {obj,қасық} болды?\n\n#init:\n- name = sample(names_female)\n- event = sample([\"түскі ас кеші\", \"туған күн кеші\", \"жалпы ас кеші\", \"сәби кеші\", \"ойын кеші\"])\n- food = sample([\"пісірілген тауық\", \"грильдеген лосось\", \"сиыр еті қуырдақ\", \"көкөніс лазанья\", \"толтырылған бұрыш\", \"креветка\", \"крем брюле\"])\n- obj = sample([\"қасық\", \"айыр\", \"табақ\"])\n- $n1 = range(5, 20)\n- n2_txt, n2_val = range_str(3, 10, 1, numbers)\n- $total = range(12, 40)\n\n#conditions:\n- total+n2_val-n1 > 0\n\n#answer: total+n2_val-n1",
+    "count": 100
+  },
+  {
+    "id": 23,
+    "question_annotated": "{name,Марта} өзінің {count,3} немерелеріне қыс киімі тоқып жатыр. Олар {children,үш егіз}, сондықтан олардың барлығының өлшемі бірдей. Ол әрқайсысына {c1,сәлде}, {c2,шарф}, {c3,свитер}, {c4,қолғап} және {c5,шұлық} жасағысы келеді. {c1,сәлде} жасауға {n1,2} ирек жүн кетеді, {c2,шарф} үшін {n2,4}, {c3,свитер} үшін {n3,12}, {c4,қолғап} жұбына {n4,1}, және {c5,шұлық} жұбына {n5,2}. Ол қанша ирек жүн сатып алуы керек?\n\n#init:\n- name = sample(names_female)\n- c1, c2, c3 = sample([\"свитер\", \"шәлі\", \"сәлде\", \"кардиган\", \"пончо\", \"жилет\", \"бас киім\", \"тунник\"],3)\n- c4, c5 = sample([ \"қолғап\", \"балалық аяқ киім\", \"шұлық\", \"аяқ жылытқыш\", \"қолқап\"], 2)\n- n1, n2, n3, n4, n5 = sample(range_list(3, 19), 5)\n- children, count = sample([(\"егіздер\",2), (\"үш егіз\",3), (\"төрт егіз\", 4),  (\"бес егіз\", 5)])\n\n#answer: count*(n1+n2+n3+n4+n5)",
+    "count": 100
+  },
+  {
+    "id": 24,
+    "question_annotated": "Құрамы бойынша, {food,чипс} пакетінің әр порциясында {cal,250} калория бар. Егер {size,300} {unit,грамм} пакетінде {n,5} порция болса, сіздің күндік калория мақсатыңыз {total,2000} және сіз бұрын {spent,1800} калория тұтынған болсаңыз, қанша {unit,грамм} жей аласыз?\n\n#init:\n- food = sample([\"попкорн\", \"нан\", \"печенье\"])\n- unit = sample([\"грамм\", \"унция\", \"унция\"])\n- $cal = range(150, 500, 25)\n- $size = range(100, 400, 25)\n- $n = range(4, 8)\n- $total = range(1900, 2500, 5)\n- $spent = range(600, 1900, 25)\n\n#conditions:\n- spent < total\n- is_int( 5 * (total - spent) / cal)\n- divides(size, n)\n- divides(size//n, (total-spent)/cal)\n\n#answer: size//n * Fraction((total-spent)/cal)",
+    "count": 100
+  },
+  {
+    "id": 25,
+    "question_annotated": "{teacher,ропер мырза} мұғалімінің {total,30} оқушысы бар сыныбында, сыныптың {p1,20}% {group1,футболшылар}. Қалған сыныптан оқушылардың {p2,25}% {group2,көркемдікшілер} немесе {group3,оркестр} мүшелері. Бұл 3 топ оқушы бүгін ерте кетіп, қала сыртындағы {event,ойын}ға баруы керек. Ерте кететін оқушылар қанша?\n\n#init:\n- teacher = sample(['джонсон ханым', 'смит мырза', 'ли доктор', 'гарсия ханым'])\n- group1 = sample(['футболшылар', 'баскетболшылар', 'волейболшылар', 'жүзушілер'])\n- group2, group3 = sample(['бишілер', 'хор мүшелері', 'дебатшылар', 'робототехникашылар'],  2)\n- event = sample(['бәсеке', 'турнир', 'көрсетілім', 'жарыс'])\n- $total = range(20, 150)\n- $p1 = range(10, 50)\n- $p2 = range(15, 45)\n\n#conditions:\n- p1 < 100\n- p2 < 100\n- is_int(total * p1 / 100)\n- is_int((total - total * p1 / 100) * p2 / 100)\n\n#answer: int(total * p1 / 100 + (total - total * p1 / 100) * p2 / 100)",
+    "count": 100
+  },
+  {
+    "id": 26,
+    "question_annotated": "{name1,Бір адам} {n1,5} {food,сандвич} {time_unit,күн} сайын жейді, {name2,оның әйелі} {n2,4} {food,сандвич} {time_unit,күн} сайын жейді, және олардың {relation,ұлы} {n3,2} {food,сандвич} {time_unit,күн} сайын жейді. Бұл отбасы бір {time_period,апта} ішінде неше {food,сандвич} жейді{placeholder_txt,?}\n\n#init:\n- name1 = sample([\"Бір әке\", \"Бір ата\", \"Бір аға\"])\n- name2 = sample([\"оның әйелі\", \"оның серігі\", \"оның жары\"])\n- relation = sample([\"қызы\", \"ұлы\", \"немересі\"])\n- food = sample([\"пицца\", \"буррито\", \"тако\", \"суши\", \"гамбургер\"])\n- time_unit = sample([\"күн\"])\n- time_period = sample([\"week\", \"month\"])\n- placeholder_txt = \"? Айда 30 күн бар деп есептеңіз.\" if time_period == \"month\" else \"?\"\n- $n1 = range(2, 9)\n- $n2 = range(2, 9)\n- $n3 = range(2, 9)\n\n#answer: (n1 + n2 + n3) * (7 if time_period == \"week\" else 30)",
+    "count": 100
+  },
+  {
+    "id": 27,
+    "question_annotated": "{name,Джеймс} күні {n,80} хат алады. {p,20}% хаттар жауап беруді қажет етпейді. Ол қалғандарына жауап береді. {name,Джеймс} {d,5} күндік жұмыс аптасында неше хатқа жауап береді?\n\n#init:\n- name = sample(names)\n- $n = range(50, 200)\n- $p = range(5, 40)\n- $d = range(3, 7)\n\n#conditions:\n- is_int(n * p / 100)\n- is_int(n * (100 - p) / 100)\n\n#answer: d * (n * (100 - p) / 100)",
+    "count": 100
+  },
+  {
+    "id": 28,
+    "question_annotated": "{facility,аурухана} сыйымдылығы {total,1000} {item,төсек}тер және оның {frac,1/5} бөлігі зандалған. {event,коронавирус жұқпасы} себебінен, әр күні {daily,50} науқас {facility,аурухана} қабылданады. {facility,аурухана} ішіндегі {period,2} аптадан кейінгі бос {item,төсек}тер санын есептеңіз.\n\n#init:\n- facility = sample([\"аурухана\", \"клиника\", \"медициналық орталық\", \"күту орталығы\"])\n- item = sample([\"төсек\", \"бөлме\", \"палата\"])\n- event = sample([\"грипп маусымы\", \"табиғи апат\", \"үлкен апат\", \"пандемия\"])\n- $total = range(500, 2000, 100)\n- $frac = sample(fractions)\n- $daily = range(20, 100, 5)\n- $period = range(2, 5)\n\n#conditions:\n- is_int(total * frac)\n- total * frac + daily * period * 7 < total\n\n#answer: total - (total * frac + daily * period * 7)",
+    "count": 100
+  },
+  {
+    "id": 29,
+    "question_annotated": "{name1,Бретт} {age1,14} жаста. {years_txt,төрт} жылдан кейін оның {relation_type,сіңлі} {name2,Анжела} қазіргі {name1,Бретт} жасынан {mult_txt,үш есе} көп болады. {name2,Анжела} қазір неше жаста?\n\n#init:\n- name1 = sample(names_male)\n- name2 = sample(names_female)\n- relation_type = sample(['сіңлі', 'кузен'])\n- $age1 = range(8, 25)\n- years_txt, years_val = range_str(2, 10, 1, numbers)\n- mult_txt, mult_val = sample(multi_times)\n\n#conditions:\n- age1 * mult_val - years_val > 0\n\n#answer: age1 * mult_val - years_val",
+    "count": 100
+  },
+  {
+    "id": 31,
+    "question_annotated": "{name1,Мия} мен {name2,Эмма} қазіргі уақытта жасындағы айырмашылығы {age_diff,16} жыл. Егер {name1,Мия}, {name2,Эмма}нан жасы кіші болып, {age1,40} жаста болса, олардың жасының орташа мәні қандай?\n\n#init:\n- name1, name2 = sample(names, 2)\n- $age_diff = range(5, 30)\n- $age1 = range(15, 75)\n\n#conditions:\n- is_int((2*age1 + age_diff) / 2)\n\n#answer: (2*age1 + age_diff) // 2",
+    "count": 100
+  },
+  {
+    "id": 32,
+    "question_annotated": "{name, круз ханым} өз ${budget, 400000} бюджетінен аспайтын {property_type, үй} іздеп жүр. Ол сату бағасы ${price, 350000} болатын мүлікті көрді. Сонымен қатар, сатып алушы сату бағасының {brokerage_fee, 5}% құрайтын брокерлік алымды, және сату бағасының {transfer_fee, 12}% құрайтын аударым ақысын төлеуі керек. {property_type, үй} жалпы бағасы {name, круз ханым} бюджетінен қанша артық?\n\n#init:\n- name = sample(['смит ханым', 'джонсон ханым', 'пател дәрігер', 'ли ханым'])\n- property_type = sample(['үй', 'пәтер', 'кондо', 'қала үйі'])\n- $budget = range(300000, 500000, 10000)\n- $price = range(250000, 450000, 10000)\n- $brokerage_fee = range(3, 8)\n- $transfer_fee = range(10, 15)\n\n#conditions:\n- brokerage_fee < 100\n- transfer_fee < 100\n- price < budget\n- price + price*brokerage_fee/100 + price*transfer_fee/100 > budget + 1\n- is_int(price * brokerage_fee / 100)\n- is_int(price * transfer_fee / 100)\n\n#answer: int(price + price*brokerage_fee/100 + price*transfer_fee/100 - budget)",
+    "count": 100
+  },
+  {
+    "id": 33,
+    "question_annotated": "{name1,Карол} және {name2,Дженнифер} {city,Лос-Анджелес} қаласынан туған апа-сіңлілер және олар {celebrity_type,жұлдыздардан} қолтаңба жинауды жақсы көреді. Мектептен алынған {vacation_type,жазғы демалыс} кезінде қарындасылар әр күні кешке қолтаңба жинаумен өткізеді. {n1_txt,бес} аптадан кейін {name1,Карол} мен {name2,Дженнифер} қолтаңба кітаптарын салыстырады, әр қарындасының жинаған қолтаңбалар санын санап шығады. {name1,Карол} кітабында {s1,20} қолтаңбасы бар, ал {name2,Дженнифер}де {s2,44} қолтаңба бар. Қарындасыларда тағы да {n2_txt,үш} апта {vacation_type,жазғы демалыс} бар және олар демалыс соңына дейін бірге {goal,100} қолтаңба жинауды шешеді. Мақсатқа жету үшін қарындасыларға неше қолтаңба жинау керек?\n\n#init:\n- name1, name2 = sample(names_female, 2)\n- city = sample(cities)\n- celebrity_type = sample([\"фильм жұлдыздары\", \"спортшылар\", \"музыканттар\", \"саясаткерлер\", \"авторлар\"])\n- vacation_type = sample([\"қысқы демалыс\", \"көктемгі демалыс\", \"жазғы демалыс\", \"күзгі демалыс\"])\n- n1_txt, n1_val = range_str(3, 8, 1, numbers)\n- n2_txt, n2_val = range_str(2, 5, 1, numbers)\n- $s1 = range(15, 40)\n- $s2 = range(30, 60)\n- $goal = range(90, 150, 5)\n\n#conditions:\n- s1 + s2 < goal\n\n#answer: goal - (s1 + s2)",
+    "count": 100
+  },
+  {
+    "id": 34,
+    "question_annotated": "{title,азамат} {name,Tan} {property,үй} ${price,400000} сатты. Ол сатылым бағасының {fee1_percent,3}% құрайтын {fee1_name,аударым} ақысын төледі және сатылым бағасының {fee2_percent,5}% құрайтын {fee2_name,брокерлік} ақысын да төледі. Егер ол {property,үй} қалған несиесі үшін ${loan,250000} төледі, {title,азамат} {name,Tan}'тың {property,үй} сатудан түскен таза табысы қанша?\n\n#init:\n- title = sample(['азамат', 'профессор', 'доктор'])\n- name = sample(['Смит', 'Джонсон', 'Уильямс', 'Браун', 'Джонс', 'Гарсия', 'Миллер', 'Дэвис', 'Родригес', 'Мартинес'])\n- property = sample(['үй', 'пәтер', 'кондо', 'вилла', 'коттедж'])\n- fee1_name = sample(['аударым', 'тіркеу', 'юридикалық'])\n- fee2_name = sample(['брокерлік', 'агенттік', 'риелторлық'])\n- $price = range(200000, 1000000, 10000)\n- $fee1_percent = range(1, 5)\n- $fee2_percent = range(2, 7)\n- $loan = range(100000, 700000, 10000)\n\n#conditions:\n- price > loan\n- price - (price * (fee1_percent + fee2_percent) / 100 + loan) > 1\n\n#answer: price - (price * (fee1_percent + fee2_percent) / 100 + loan)",
+    "count": 100
+  },
+  {
+    "id": 35,
+    "question_annotated": "{name,Джон} {event,оқу сапары} үшін ақша жинап жатыр. Ол {organization,мектеп} көмек сұрап жүгінді, олар {event,оқу сапары} шығынының {fraction_txt,жарты} бөлігін жабуға шешім қабылдады. Егер оның {cur,₸}{current,50} болса және {event,оқу сапары} {cur,₸}{total,300} тұрса, {name,Джон} қанша ақша жетпейді?\n\n#init:\n- name = sample(names_male)\n- event = sample([\"оқу сапары\", \"экскурсия\", \"спорттық турнир\", \"конференция\", \"музыкалық фестиваль\", \"ғылыми жәрмеңке\"])\n- cur = sample(currencies_sym)\n- organization = sample([\"мектеп\", \"қоғамдық орталық\", \"жергілікті қайырымдылық қоры\", \"жастар клубы\", \"ата-аналар қауымдастығы\"])\n- fraction_txt, fraction_val = sample(fraction_alnum)\n- $current = range(10, 200, 5)\n- $total = range(200, 1000, 10)\n\n#conditions:\n- total > current\n- total - (total * fraction_val + current) > 0\n- is_int(total * fraction_val)\n- is_int(total - (total * fraction_val + current))\n\n#answer: total - (total * fraction_val + current)",
+    "count": 100
+  },
+  {
+    "id": 36,
+    "question_annotated": "{name,Тоула} {shop,пекарня}ға барды және әртүрлі {item,тоқаштар} сатып алды. Ол {n1,3} ондаған {item1,донаттар} сатып алды, олардың бағасы бір ондағанға ${p1,68}, {n2,2} ондаған {item2,мини-капкейктер} сатып алды, олардың бағасы бір ондағанға ${p2,80}, және {n3,6} ондаған {item3,мини-чизкейктер} сатып алды, олардың бағасы бір ондағанға ${p3,55}. Жалпы құны қанша болды?\n\n#init:\n- name = sample(names_female)\n- shop = sample([\"пекарня\", \"кондитерлік\", \"тәтті дүкен\", \"кафе\"])\n- item = sample([\"тоқаштар\", \"нан өнімдері\", \"десерттер\", \"тәттілер\"])\n- item1 = sample([\"донаттар\", \"круассандар\", \"эклерлер\", \"датские\"])\n- item2 = sample([\"мини-капкейктер\", \"макарондар\", \"печенье\", \"тарттар\"])\n- item3 = sample([\"мини-чизкейктер\", \"брауни\", \"маффиндер\", \"скондар\"])\n- $n1 = range(1, 10)\n- $n2 = range(4, 10)\n- $n3 = range(2, 10)\n- $p1 = range(11, 21)\n- $p2 = range(73, 90)\n- $p3 = range(112, 120)\n\n#answer: n1 * p1 + n2 * p2 + n3 * p3",
+    "count": 100
+  },
+  {
+    "id": 37,
+    "question_annotated": "{item,нан} {n,24} {unit,бөлік}тен тұрады. Егер {name1,Эбби} күніне {x,2} {unit,бөлік} жесе, ал {name2,Джosh} {mult_txt,екі есе} көп жесе, {item,нан} неше күнге жетеді?\n\n#init:\n- item = sample([\"пицца\", \"торт\", \"пирог\", \"лазанья\"])\n- unit = sample([\"бөлік\", \"порция\", \"үлес\"])\n- name1, name2 = sample(names, 2)\n- $n = range(12, 76, 3)\n- $x = range(2, 13)\n- mult_txt, mult_val = sample(multi_times)\n\n#conditions:\n- divides(n, x + x*mult_val)\n\n#answer: n // (x + x*mult_val)",
+    "count": 100
+  },
+  {
+    "id": 38,
+    "question_annotated": "{item1,нан} бір данасы {shop,нан дүкенінде} {currency}{price1,2} тұрады. {item2,багел}дер әрқайсысы {currency}{price2,1} тұрады. {n1,3} дана {item1,нан} {n2,2} {item2,багел}ден қаншаға қымбат?\n\n#init:\n- item1 = sample([\"нан\", \"қышқыл нан\"])\n- item2 = sample([\"багел\", \"маффин\", \"круассан\", \"печенье\"])\n- shop = sample([\"нан дүкені\", \"кафе\", \"дүкен\", \"базар\"])\n- currency = sample(currencies_sym)\n- $price1 = range(2, 10)\n- $price2 = range(1, 5)\n- $n1 = range(2, 10)\n- $n2 = range(2, 10)\n\n#conditions:\n- n1 * price1 > n2 * price2\n\n#answer: n1 * price1 - n2 * price2",
+    "count": 100
+  },
+  {
+    "id": 39,
+    "question_annotated": "{job,тазалаушы} {n,80} {room,сынып} бар {building,мектеп}ді тазалауы керек. Олардың оны бітіруге {d,5} күні бар. Әр {room,сынып} үшін оларға {t,15} минут кетеді. Егер олар күніне {h,8} сағат жұмыс істесе, олардың күнінің орташа есеппен қанша пайызы {room,сынып} тазалауға жұмсалады?\n\n#init:\n- job = sample([\"тазалаушы\", \"тазалаушы\", \"техник\"])\n- building = sample([\"кеңсе ғимараты\", \"аурухана\", \"университет\",])\n- room = sample([\"бөлме\", \"қабат\"])\n- $n = range(50, 221, 5)\n- $d = range(3, 12)\n- $t = range(10, 46, 5)\n- $h = range(6, 17)\n\n#conditions:\n- divides(n, d)\n- divides(60, t)\n- (n/d) * t < h * 60\n- is_int( 10 * (n/d) * t / (h * 60))\n- is_int(100 * (n/d) * t / (h * 60))\n\n#answer: int(100 * (n/d) * t / (h * 60))",
+    "count": 100
+  }
+]

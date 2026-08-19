@@ -1,0 +1,87 @@
+[
+  {
+    "id": 0,
+    "question_annotated": "{n, Benny} amonaki {big_fish,nkɛ} ya {x,10} mɔngɔ na {k,2} {y,6} pɛsɛ mbɛkɛ ezalaki na yango. Pɛsɛntɛ nini ya loya ya nzoto ya {big_fish} ezali loya ya mbɛkɛ wana ezali pɛpɛ?\n\n#init:\n- n = sample(names)\n- big_fish = sample([\"dolphin\", \"mbɛkɛ ya mɛmbɛ\", \"nkɛ\"])\n- $x = range(10, 500, 10)\n- $k = range(2, 10)\n- $y = range(2, 100)\n\n#conditions:\n- k * y < x * 12\n- divides(k*y,12)\n- divides(x * 12, k*y)\n- divides(100, x * 12 / (k*y))\n\n#answer: int((k * y)/ (x * 12) * 100)",
+    "count": 100
+  },
+  {
+    "id": 1,
+    "question_annotated": "Ngwama ezali koya na ngomba kotalisa mabota. Ezali kosala {t,10} miniti kotalisa na {d,3} maili ya mabota. Soki mabota ezali {y,42} maili na maboko, koya na ngomba tii na mabala ya kati, miniti ebele esengeli mpe ngwama ekotalisa mabota nyonso?\n\n#init:\n- $t = range(2, 500)\n- $d = range(2, 100)\n- $y=range(2, 100)\n\n#conditions:\n- is_int(y/d)\n\n#answer: y//d*t",
+    "count": 100
+  },
+  {
+    "id": 2,
+    "question_annotated": "{name,Jerry} azali kokola {sides_txt,na makolo 6} ngunzu. Esengo mingi nini (ekutami na points ya pourcentage) ete ye akola namba ekomeli {target,3} na nini ye akola namba mibale {z,mokonzi} na mbala mibale na mbala?\n\n#init:\n- name=sample(names_male)\n- sides_txt, sides_val = sample([(\"na makolo 4\", 4), (\"na makolo 6\", 6), (\"na makolo 8\", 8), (\"na makolo 10\", 10), (\"na makolo 12\", 12), (\"na makolo 14\", 14), (\"na makolo 16\", 16), (\"na makolo 18\", 18), (\"na makolo 20\", 20), (\"na makolo 22\", 22), (\"na makolo 24\", 24), (\"na makolo 26\", 26), (\"na makolo 28\", 28), (\"na makolo 30\", 30), (\"na makolo 32\", 32), (\"na makolo 34\", 34), (\"na makolo 36\", 36), (\"na makolo 38\", 38), (\"na makolo 40\", 40), (\"na makolo 42\", 42), (\"na makolo 44\", 44), (\"na makolo 46\", 46), (\"na makolo 48\", 48), (\"na makolo 50\", 50), (\"na makolo 52\", 52), (\"na makolo 54\", 54), (\"na makolo 56\", 56), (\"na makolo 58\", 58), (\"na makolo 60\", 60), (\"na makolo 62\", 62), (\"na makolo 64\", 64), (\"na makolo 66\", 66), (\"na makolo 68\", 68), (\"na makolo 70\", 70), (\"na makolo 72\", 72), (\"na makolo 74\", 74), (\"na makolo 76\", 76), (\"na makolo 78\", 78), (\"na makolo 80\", 80), (\"na makolo 82\", 82), (\"na makolo 84\", 84), (\"na makolo 86\", 86), (\"na makolo 88\", 88), (\"na makolo 90\", 90), (\"na makolo 92\", 92), (\"na makolo 94\", 94), (\"na makolo 96\", 96), (\"na makolo 98\", 98), (\"na makolo 100\", 100)])\n- $target = range(1, 100)\n- z = sample([\"mokonzi\", \"moningi\"])\n\n#conditions: \n- target < sides_val\n- divides(sides_val-target, target)\n- is_int((sides_val-target)/sides_val * 100)\n-  int((sides_val-target)/sides_val * 100) > 25\n\n#answer: int((sides_val-target)/sides_val * 100) - 25",
+    "count": 100
+  },
+  {
+    "id": 3,
+    "question_annotated": "{g,class} ya {n, 50} bakɔlɔ ezali na masolo mingi. {n_1, 10} batondi na {h_1, kobake}, {n_2,5} batondi na {h_2, basket}, mpe bato mosusu batondi na {h_3, kobanda video games} to {h_4, kobanda muziki}. Bato mingi nini batondi na {h_3, kobanda video games} soki bato oyo batondi na {h_4, kobanda muziki} ezali mibale ya bato oyo batondi na {h_2, basket}?\n\n#init:\n- g = sample([\"groupe\", \"class\"])\n- h_2 = sample(sports)\n- h_1, h_3, h_4 = sample(['kolenga', 'kobimisa', 'koyinda', 'kokoba', 'kobake', 'kobanda video games', 'kobanda muziki'], 3)\n- $n = range(5, 200)\n- $n_1 = range(2, 200)\n- $n_2 = range(2, 200)\n\n#conditions:\n- n_1 < n\n- n_2 < n\n- n - (n_1 + n_2) - (2 * n_2) > 0\n\n#answer: int(n - (n_1 + n_2) - (2 * n_2))",
+    "count": 100
+  },
+  {
+    "id": 4,
+    "question_annotated": "{name,Garrett} azali kokosola popcorn mpo na kolia. Mpe {p, sika} ya masanga esili kokoya, masanga ezali kokosola na kango. {n,20} ezali kokosola na nsima ya {s, 30} sekunde ya kokoya, bongo {k_2_txt, misato} na mabele ya yango na {s, 30} sekunde oyo euti. Masanga ezali kokoya mpamba {k_3_txt, minei} na mabele ya rate ya kokoya ya liboso na {s, 30} sekunde euti, kasi na {s, 30} sekunde ya nsima, kokosola ezali kokende na moke na moilingi ya rate ya {s, 30} sekunde oyo euti. Mpe {name,Garrett} atoli {p, sika} na mboka ya moto, na mabele ya minei ya nombre ya masanga oyo ekosolaki na {s, 30} sekunde ya nsima ya kokoya, ezali kokosola mpe na moto ya nsima. Bongo {name,Garrett} azali na nini mpo na kolia popcorn?\n\n\n#init:\n- name = sample(names)\n- p = sample(['sika', 'poto', 'sika'])\n- $n = range(10, 101, 10)\n- $s = range(10, 31, 2)\n- k_2_txt, k_2_val = range_str(2, 5, 1, numbers)\n- k_3_txt, k_3_val = range_str(3, 8, 1, numbers)\n\n#conditions:\n- k_3_val > k_2_val\n- divides(k_3_val * n, 8)\n\n#answer: n + (k_2_val * n + k_3_val * n) + (k_3_val * n // 2) + (k_3_val * n // 8)",
+    "count": 100
+  },
+  {
+    "id": 5,
+    "question_annotated": "{name,Katy} azali kosalisa {drink,café} na misipo ya sukari mpe mafula ya mai na lipanda ya {m,7}:{n,13}. Soki asalaki total {x,120} misipo ya sukari mpe mafula ya mai, bókanisi mbala ya misipo ya sukari asalaki.\n\n#init:\n- name = sample(names_female)\n- drink = sample(['café', 'thé'])\n- $m = range(7, 101, 3)\n- $n = range(4, 61, 3)\n- $x = range(5, 500, 5)\n\n#conditions: \n- divides(x, m+n)\n\n#answer: ((m*x)//(m+n))",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "question_annotated": "{name,Jean} azali na {x,10} {area,hektare} ya {fruit,anana} esika. Mpe {k,100} {fruit,anana} na {area,hektare}. {name,Jean} akoki koyanisa {fruit,anana} na ye na {n,3} nzomi. Nini mabele {fruit,anana} {name,Jean} akoki koyanisa na mwaka?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- area = sample(['hektare', 'yardi ya mibale', 'meteri ya mibale'])\n- $x = range(5, 100, 5)\n- $k = range(2, 101)\n- $n = sample([1, 2, 3, 4, 6, 12])\n\n#answer: x * k * (12//n)",
+    "count": 100
+  },
+  {
+    "id": 7,
+    "question_annotated": "Mutili azali kobenga mabele ya {animals,maloba}. Azali kosalela {treat1, makila}, {treat2, mbongo}, {treat3, masango} mpe {rare_treat, makoko ya sukari}. Kasi {rare_treat, makoko ya sukari} ezali treat ya moko, azali kosalela {n4_txt, mibale} {w4, 1}-{unit, libula} boîtes ya yango na ndako ya maloba yango nyoso. Azali na mposa ya {treat3, masango} nini kosala {animals, maloba} na ntango mbala ezali mpepe, azali kosalela {n3_txt, mínei} {w3, 12}-{unit, libula} mapo. {treat1, Makila} ezali mabele ya moko ya {animals, maloba}, azali kosalela {n1_txt, libwá na mibale} {w1, 75}-{unit, libula} mapo. {treat2, Mbongo} ezali mabele ya kosalela {treat1, makila}, azali kosalela {n2_txt, zomi na zomi} {w2, 65}-{unit, libula} mapo. Soki kamioni ya mabele ya ye azali kokota {total, 2250} {unit, libula} na ntango moko, mibeko nini mutili aponi kosala transport mabele nyoso?\n\n#init:\n- animals = sample(['maloba', 'ngombe', 'mpate', 'ngulu', 'alipaka'])\n- unit = sample(weights_med)\n- treat1, treat2 = sample(['makila', 'masango', 'mbongo', 'ma-apula', 'mbongo ya nganda'], 2)\n- treat3 = sample(['masango', 'mbéti', 'mayembe'])\n- rare_treat = sample(['makoko ya sukari', 'mbungu ya melon', 'peppermints'])\n- n4_txt, n4_val = range_str(2, 7, 2, numbers)\n- n3_txt, n3_val = range_str(4, 11, 2, numbers)\n- n2_txt, n2_val = range_str(15, 21, 1, numbers)\n- n1_txt, n1_val = range_str(30, 43, 2, numbers)\n- $w4 = range(1, 4)\n- $w3 = range(8, 13, 2)\n- $w2 = range(45, 70, 5)\n- $w1 = range(55, 80, 5)\n- $total = range(1500, 2300, 150)\n\n#conditions:\n- w4*n4_val < w3*n3_val < w2*n2_val < w1 * n1_val\n- divides(n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4, total)\n\n#answer: (n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4)//total",
+    "count": 100
+  },
+  {
+    "id": 8,
+    "question_annotated": "Motamboli akoki kotambola {n, 16} bilɛlɛ. {frac_1_txt,esika moko} ya bilɛlɛ ezali {ball_type, golfe} bilɛlɛ, mpe {frac_2_txt,esika moko} ya {ball_type,golfe} bilɛlɛ ezali {color, mabɛlɛ}. Bilɛlɛ {color, mabɛlɛ} {ball_type,golfe} ezali nini?\n\n#init:\n- ball_type = sample([\"golfe\", \"tenisi\"])\n- color = sample(colors)\n- frac_1_txt, frac_1_val = sample(fraction_alnum)\n- frac_2_txt, frac_2_val = sample(fraction_alnum)\n- $n = range(16, 100, 2)\n\n#conditions:\n- is_int(n * frac_1_val)\n- is_int(n * frac_1_val * frac_2_val)\n\n#answer:  int(n * frac_1_val * frac_2_val)",
+    "count": 100
+  },
+  {
+    "id": 9,
+    "question_annotated": "Soki {name, Sophie} azali kobatela {family, mwana ya ndeko}, abimisa mibeko mingi na ye. Kati ya bibende bya kosalisa ezali na {x,31} bibende. Boya ya bibende bya nyama ezali na {y,8} bibende bya nyama. Mazoto ya maboko ya kokita ezali na {z,9} maboko ya minene. {name, Sophie} akomisa tube ya bibende bya kobombola, ebikisa kati ya mibeko na ye na {family, mwana ya ndeko} na {total,62}. Nini mibale ya bibende bya kobombola ezalaki na tube?\n\n#init:\n- name = sample(names_female)\n- family = sample([\"mwana ya ndeko\", \"ndeko\", \"ndeko mobali\"])\n- $x = range(31, 75)\n- $y = range(8, 50)\n- $z = range(9, 35)\n- $total = range(60, 250)\n\n#conditions:\n- total - (x + y + z) >= 20 \n- total - (x + y + z) < 100\n\n#answer: total - (x + y + z)",
+    "count": 100
+  },
+  {
+    "id": 10,
+    "question_annotated": "Mpo na kosala mpeka na {dev,telefoni ya mbala}, ofandi {currency,$}{frac1,0.25} mpo na minute na minute ya mpeka na yo. Bongo na nsima ya {t,16} minute, mbala yango ekende na {currency,$}{frac2,0.2} kaka minute. Ezali kosalela nini mpeka ya {total,36} minute?\n\n#init:\n- dev = sample(['boite telefoni', 'telefoni ya hotel'])\n- currency = sample(currencies_sym)\n- $frac1 = sample(fraction_decimals)\n- $frac2 = sample(fraction_decimals)\n- $t = range(10, 50)\n- $total = range(36, 100)\n\n#conditions:\n- is_int(frac1 * t)\n- is_int((total-t) * frac2)\n- frac2 < frac1\n- t < total\n\n#answer: int((frac1 * t) + frac2*(total-t))",
+    "count": 100
+  },
+  {
+    "id": 11,
+    "question_annotated": "{name, Peter} azali kolinga kosala makoko ya mabele ya makasi moko na moko na {n,32} {unit,ounce} ya mai. Azali koki kosala makoko ya minene oyo ezali koseka {w1,4} {unit,ounce} na moko, makoko ya kati oyo ezali koseka {w2,2} {unit,ounce}, mpe makoko ya manene oyo ezali koseka {w3,1/2} {unit,ounce}. Soki asali {n1,3} makoko ya minene, {n2,7} makoko ya kati, mpe {n3,8} makoko ya manene, ngai na {unit,ounce} ya mai esalemi?\n\n#init:\n- name = sample(names_male)\n- unit = sample(weights_sm)\n- $w1 = range(4, 10)\n- $w2 = range(2, 10)\n- $w3 = sample(fractions)\n- $n1 = range(3, 10)\n- $n2 = range(7, 13)\n- $n3 = sample([8, 14, 24, 15])\n- $n = range(32, 240, 4)\n\n#conditions:\n- w3 < w2 < w1\n- is_int(n3 * w3)\n- n - (n1*w1) - (n2*w2) - int(n3*w3) > 0\n\n#answer: (n - (n1*w1) - (n2*w2) - int(n3*w3))",
+    "count": 100
+  },
+  {
+    "id": 12,
+    "question_annotated": "{name, Jaime} azali kotia {obj,mayi} na {surface,sokole} mosusu. {surface,sokole} moko moko ezali kokotisa {x,24} {obj,mayi}.\nSoki azali na {n,64} {obj,mayi} mpe {k,2} {surface,sokole}, mingi nini {obj,mayi} azali kokoka te kotia na {surface,sokole}?\n\n#init:\n- name = sample(names_male)\n- obj = sample([\"olivi\", \"amande\", \"biskiti\", \"krakela\", \"ndombe\"])\n- surface = sample([\"boloko\", \"tebule\", \"bololo\", \"sokole\", \"koko\"])\n- $x = range(20, 51)\n- $k = range(2, 30)\n- $n = range(60, 350, 2)\n\n#conditions:\n- k * x < n\n\n#answer: n - k*x",
+    "count": 100
+  },
+  {
+    "id": 13,
+    "question_annotated": "{name,Mary} azali mosali ya malamu ya mbuma. {time, Mibale}, abengisaki {x,18} mbuma mibele na kati ya mbuma oyo alingaki. Azali na {r,2} mbuma na kati ya kila {w,40} maboko ya ndako ya ye ya mboka ya monene. Azali na motema ya malamu, alobaki ete azongisaka {n,1} ya mbuma na kati ya kila moto na bato ya ye na lobi. Mbuma mingi nini {name} azongisaka?\n\n#init:\n- name = sample(names_female)\n- time = sample([\"Lisolo ya likolo\", \"Mibale ya mikolo\", \"Mibale ya mbinga\"])\n- $x = range(18, 50)\n- $r = range(2, 13)\n- $w = range(40, 70)\n- $n = range(1, 8)\n\n#conditions:\n- w * r + x - w*n > 0\n\n#answer: w * r + x - w*n",
+    "count": 100
+  },
+  {
+    "id": 14,
+    "question_annotated": "{n1,John} mpe {n2,Jack} bana {t,30} minuta ya kobenda na {loc1,esekola} mpe mpe. Ezali kosala {t1,6} minuta koya na liziba oyo {loc2,bilibili} ezali. Ezali kosala {t2,13} minuta mosusu koya na {loc3, poste ya moto}. Bazali na ngonga nini mosusu koya na {loc1,esekola} soki batyaka te na koya na ngonga?\n\n#init:\n- n1, n2 = sample(names, 2)\n- loc1, loc2, loc3 = sample(['esekola', 'sinema', 'centre commercial', 'bilibili', 'parki', 'salle de sport', 'banki'], 3)\n- $t1 = range(6, 30)\n- $t2 = range(10, 70)\n- $t = range(30, 140)\n\n#conditions:\n- not divides(t1, 5)\n- not divides(t2, 5)\n- not divides(t, 5)\n- t > t1 + t2\n\n#answer: t - t1 - t2",
+    "count": 100
+  },
+  {
+    "id": 15,
+    "question_annotated": "Mbwa ya {name1, Jennifer} eza na {n1, 8} bana ya mbwa, {k1,3} oyo ezali na mabanga. Mbwa ya {name2, Brandon} eza na {n2,12} bana ya mbwa, {k2,4} oyo ezali na mabanga. Esengo ya bana ya mbwa nyonso oyo ezali na mabanga ezali nini?\n\n#init:\n- name1, name2 = sample(names, 2)\n- $n1 = range(4, 16)\n- $n2 = range(4, 20)\n- $k1 = range(2, 12)\n- $k2 = range(2, 12)\n\n#conditions:\n- k1 < n1\n- k2 < n2\n- divides(n1 + n2, k1 + k2)\n- is_int(100 * (k1+k2) / (n1+n2))\n\n#answer: int(100 * (k1+k2) / (n1+n2))",
+    "count": 100
+  },
+  {
+    "id": 16,
+    "question_annotated": "{name, moko} azali kokóta {food, bikoko} mpe tata ya {fruit, mapu} mpo na mbongo ya misala. Na {d1, lomposo}, akóta {n1, 10} bikopo ya {food, bikoko} mpe {m1, 4} bikopo ya tata ya {fruit, mapu} na nsima ya {d2, lingonga}. Na {d2, lingonga}, akóta {n2, 5} bikopo mingi ya {food, bikoko} na {d1, lomposo} mpe {m2, 15} bikopo ya tata ya {fruit, mapu}. Soki {food, bikoko} ezali kokoleka {cur, $}{cn, 6} mpe tata ya {fruit, mapu} ezali kokoleka {cur, $}{cm, 15}, {name, moko} akobima na mbongo mingi nini mpo na mikolo mibale?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- cur = sample(currencies_sym)\n- food = sample([\"bikoko\", \"bikoko\", \"bikoko ya choco\", \"muffin\", \"cupcake\"])\n- d1, d2 = sample_sequential(weekdays, 2)\n- $n1 = range(21, 30)\n- $n2 = range(11, 15)\n- $m1 = range(4, 20)\n- $m2 = range(15, 30)\n- $cn = range(7, 13)\n- $cm = range(20, 33)\n\n#conditions:\n- m1 < m2\n\n#answer: (2*n1+n2)*cn + (2*m2-m1)*cm",
+    "count": 100
+  }
+]

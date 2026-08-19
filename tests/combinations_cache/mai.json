@@ -1,0 +1,47 @@
+[
+  {
+    "id": 0,
+    "question_annotated": "{n, बेंनी} ने एक {x,10}-फुट {big_fish,शार्क} को देखा जिसमें {k,2} {y,6}-इंच की रेमोरा उसके साथ चिपकी हुई थी। रेमोरा की कुल लंबाई, {big_fish,शार्क} की शरीर लंबाई का कितना प्रतिशत है?\n\n#init:\n- n = sample(names)\n- big_fish = sample([\"डॉल्फिन\", \"व्हेल\", \"शार्क\"])\n- $x = range(10, 500, 10)\n- $k = range(2, 10)\n- $y = range(2, 100)\n\n#conditions:\n- k * y < x * 12\n- divides(k*y,12)\n- divides(x * 12, k*y)\n- divides(100, x * 12 / (k*y))\n\n#answer: int((k * y)/ (x * 12) * 100)",
+    "count": 100
+  },
+  {
+    "id": 1,
+    "question_annotated": "कोहरे का एक बैंक समुद्र से आकर शहर को ढकता है। शहर के हर {d,3} मील को ढकने में {t,10} मिनट लगते हैं। यदि शहर समुद्र तट से विपरीत भूमि की सीमा तक {y,42} मील चौड़ा है, तो पूरे शहर को ढकने में कोहरे के बैंक को कितने मिनट लगेंगे?\n\n#init:\n- $t = range(2, 500)\n- $d = range(2, 100)\n- $y=range(2, 100)\n\n#conditions:\n- is_int(y/d)\n\n#answer: y//d*t",
+    "count": 100
+  },
+  {
+    "id": 2,
+    "question_annotated": "{name,जेरी} एकटा {sides_txt,छह-पक्षीय} पासा उलटबैत छैक। एहि बात के कतेक अधिक संभावना अछि (प्रतिशत बिंदुमे व्यक्त करैत) कि ओ {target,3} सँ बेसी संख्या उलटबैत अछि, अपेक्षाकृत ओ दुईटा {z,सम} संख्या लगातार उलटबैत अछि?\n\n#init:\n- name=sample(names_male)\n- sides_txt, sides_val = sample([(\"4-sided\", 4), (\"six-sided\", 6), (\"8-sided\", 8), (\"10-sided\", 10), (\"12-sided\", 12), (\"14-sided\", 14), (\"16-sided\", 16), (\"18-sided\", 18), (\"20-sided\", 20), (\"22-sided\", 22), (\"24-sided\", 24), (\"26-sided\", 26), (\"28-sided\", 28), (\"30-sided\", 30), (\"32-sided\", 32), (\"34-sided\", 34), (\"36-sided\", 36), (\"38-sided\", 38), (\"40-sided\", 40), (\"42-sided\", 42), (\"44-sided\", 44), (\"46-sided\", 46), (\"48-sided\", 48), (\"50-sided\", 50), (\"52-sided\", 52), (\"54-sided\", 54), (\"56-sided\", 56), (\"58-sided\", 58), (\"60-sided\", 60), (\"62-sided\", 62), (\"64-sided\", 64), (\"66-sided\", 66), (\"68-sided\", 68), (\"70-sided\", 70), (\"72-sided\", 72), (\"74-sided\", 74), (\"76-sided\", 76), (\"78-sided\", 78), (\"80-sided\", 80), (\"82-sided\", 82), (\"84-sided\", 84), (\"86-sided\", 86), (\"88-sided\", 88), (\"90-sided\", 90), (\"92-sided\", 92), (\"94-sided\", 94), (\"96-sided\", 96), (\"98-sided\", 98), (\"100-sided\", 100)])\n- $target = range(1, 100)\n- z = sample([\"even\", \"odd\"])\n\n#conditions: \n- target < sides_val\n- divides(sides_val-target, target)\n- is_int((sides_val-target)/sides_val * 100)\n-  int((sides_val-target)/sides_val * 100) > 25\n\n#answer: int((sides_val-target)/sides_val * 100) - 25",
+    "count": 100
+  },
+  {
+    "id": 3,
+    "question_annotated": "{n, 50} विद्यार्थी के एक {g, वर्ग} में विभिन्न शौक छै। {n_1, 10} लोग {h_1, बेक करब} पसंद करैत छै, {n_2,5} लोग {h_2, बास्केटबॉल} खेलब पसंद करैत छै, आर बाकी लोग या तँ {h_3, वीडियो गेम खेलब} या {h_4, संगीत बजब} पसंद करैत छै। {h_3, वीडियो गेम खेलब} पसंद करैत कते लोग अछि जँ {h_4, संगीत बजब} पसंद करैत संख्या {h_2, बास्केटबॉल} खेलब पसंद करैत संख्या के दुगुना अछि?\n\n#init:\n- g = sample([\"समूह\", \"वर्ग\"])\n- h_2 = sample(sports)\n- h_1, h_3, h_4 = sample(['पढ़ब', 'चित्र बनब', 'टहलब', 'नचब', 'बेक करब', 'वीडियो गेम खेलब', 'संगीत बजब'], 3)\n- $n = range(5, 200)\n- $n_1 = range(2, 200)\n- $n_2 = range(2, 200)\n\n#conditions:\n- n_1 < n\n- n_2 < n\n- n - (n_1 + n_2) - (2 * n_2) > 0\n\n#answer: int(n - (n_1 + n_2) - (2 * n_2))",
+    "count": 100
+  },
+  {
+    "id": 4,
+    "question_annotated": "{name,गरेट} एगो स्नैक के लेल पोपकॉर्न फोड़ रहल अछि। जब {p, कड़ाही} मे दाना गर्म होबय लागै, त दाना तेजी सँ फटय लागै। {n,20} दाना पकानक पहिल {s, 30} सेकंड मे फटै, तहिना आगु {s, 30} सेकंड मे ओही मात्रा के {k_2_txt,तीन} गुना। अगिल {s, 30} सेकंड मे दाना फटय के दर शुरुआती दर के {k_3_txt,चार} गुना बढ़ि जाय, परन्तु आखिरी {s, 30} सेकंड मे, फटय के दर पिछल {s, 30} सेकंड के आधा भऽ जाय। जब {name,गरेट} {p, कड़ाही} के गर्मी सँ हटाबै, त पकानक आखिरी {s, 30} सेकंड मे जे दाना फटल छल, ओकरा चौथाई हिस्सा अवशिष्ट गर्मी सँ सेहो फटि जाय। {name,गरेट} के कतेक पोपकॉर्न के टुकड़ा खाबय पड़त?\n\n\n#init:\n- name = sample(names)\n- p = sample(['pan', 'pot', 'skillet'])\n- $n = range(10, 101, 10)\n- $s = range(10, 31, 2)\n- k_2_txt, k_2_val = range_str(2, 5, 1, numbers)\n- k_3_txt, k_3_val = range_str(3, 8, 1, numbers)\n\n#conditions:\n- k_3_val > k_2_val\n- divides(k_3_val * n, 8)\n\n#answer: n + (k_2_val * n + k_3_val * n) + (k_3_val * n // 2) + (k_3_val * n // 8)",
+    "count": 100
+  },
+  {
+    "id": 5,
+    "question_annotated": "{name,कत्या} {drink,कॉफी} बनाबै लेल चनी के चमच आ पानी के कप के अनुपात {m,7}:{n,13} मँ प्रयोग करै छै। जरू ओकरा कुल {x,120} चनी के चमच आ पानी के कप प्रयोग कएलकै, तँ निकालू कि ओकरा कतेक चनी के चमच प्रयोग कएलकै।\n\n#init:\n- name = sample(names_female)\n- drink = sample(['कॉफी', 'चाय'])\n- $m = range(7, 101, 3)\n- $n = range(4, 61, 3)\n- $x = range(5, 500, 5)\n\n#conditions: \n- divides(x, m+n)\n\n#answer: ((m*x)//(m+n))",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "question_annotated": "{name,जोन} के पास {x,10} {area,हेक्टेयर} का {fruit,अनानास} खेत है। प्रति {area,हेक्टेयर} {k,100} {fruit,अनानास} होते हैं। {name, जोन} अपने {fruit,अनानास} हर {n,3} महीने में काट सकता है। एक वर्ष में {name,जोन} कितने {fruit,अनानास} काट सकता है?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- area = sample(['हेक्टेयर', 'वर्ग गज', 'वर्ग मीटर'])\n- $x = range(5, 100, 5)\n- $k = range(2, 101)\n- $n = sample([1, 2, 3, 4, 6, 12])\n\n#answer: x * k * (12//n)",
+    "count": 100
+  },
+  {
+    "id": 7,
+    "question_annotated": "एक किसान अपन {animals,घोड़ा} खा चारा खरीद रहल अछि। ओ {treat1,घास}, {treat2,जौ}, {treat3,गाजर} आ {rare_treat,चीनी के टुकड़ा} के विविधता खरीदलक। कियेकि {rare_treat,चीनी के टुकड़ा} एकटा दुर्लभ सुखद अछि, ओ संपूर्ण ताल के लेल ओकरा सँ {n4_txt,दू} {w4,1}-{unit,पाउंड} के बक्सा खरीदलक। ओ तखन {treat3,गाजर} के {animals,घोड़ा} के लेल पर्याप्त चाहैत अछि जखन सब्जी सभ ताजा रहैत अछि, तइसँ ओ {n3_txt,चार} {w3,12}-{unit, पाउंड} के थैली खरीदलक। {treat1,घास} अपन {animals,घोड़ा} के मुख्य आहार अछि, तइसँ ओ {n1_txt,बयालीस} {w1,75}-{unit,पाउंड} के पैक खरीदलक। {treat2, जौ} {treat1, घास} के पूरक लेल मुख्य खाद्य अछि, तइसँ ओ {n2_txt,बीस} {w2, 65}-{unit,पाउंड} के बोरी खरीदलक। जर ओकर खेत के ट्रक एक बेर मे {total,2250} {unit,पाउंड}s उठा सकैत अछि, तखन संपूर्ण चारा ढोबे लेल किसान के कतेक यात्रा करब पड़त?\n\n#init:\n- animals = sample(['घोड़ा', 'गाय', 'भेड़', 'सूअर', 'अलपाका'])\n- unit = sample(weights_med)\n- treat1, treat2 = sample([\"घास\", \"मक्का\", \"जौ\", \"सेब\", \"गेहूं\"], 2)\n- treat3 = sample([\"गाजर\", \"बीट\", \"खीरा\"])\n- rare_treat = sample([\"चीनी के टुकड़ा\", \"तरबूज के छिलका\", \"पुदीना के मिठाई\"])\n- n4_txt, n4_val = range_str(2, 7, 2, numbers)\n- n3_txt, n3_val = range_str(4, 11, 2, numbers)\n- n2_txt, n2_val = range_str(15, 21, 1, numbers)\n- n1_txt, n1_val = range_str(30, 43, 2, numbers)\n- $w4 = range(1, 4)\n- $w3 = range(8, 13, 2)\n- $w2 = range(45, 70, 5)\n- $w1 = range(55, 80, 5)\n- $total = range(1500, 2300, 150)\n\n#conditions:\n- w4*n4_val < w3*n3_val < w2*n2_val < w1 * n1_val\n- divides(n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4, total)\n\n#answer: (n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4)//total",
+    "count": 100
+  },
+  {
+    "id": 8,
+    "question_annotated": "एक जुगलर {n, 16} गेंदें फेंक सकता है। {frac_1_txt,half} गेंदों में से {ball_type, गोलफ} गेंदें हैं, और {frac_2_txt,half} {ball_type,golf} गेंदें {color, नीला} हैं। कितनी {color, नीला} {ball_type,golf} गेंदें हैं?\n\n#init:\n- ball_type = sample([\"गोलफ\", \"टेनिस\"])\n- color = sample(colors)\n- frac_1_txt, frac_1_val = sample(fraction_alnum)\n- frac_2_txt, frac_2_val = sample(fraction_alnum)\n- $n = range(16, 100, 2)\n\n#conditions:\n- is_int(n * frac_1_val)\n- is_int(n * frac_1_val * frac_2_val)\n\n#answer:  int(n * frac_1_val * frac_2_val)",
+    "count": 100
+  }
+]

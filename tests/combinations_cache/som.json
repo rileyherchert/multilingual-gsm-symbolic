@@ -1,0 +1,57 @@
+[
+  {
+    "id": 0,
+    "question_annotated": "{n, Benny} wuxuu arkay {x,10}-cag {big_fish,xiddig} oo leh {k,2} {y,6}-inch remoras ku xiran. Waa boqolkiisa intee dhererka jirka {big_fish,xiddig} ah dhererka guud ee remoraha?\n\n#init:\n- n = sample(names)\n- big_fish = sample([\"delfiin\", \"balin\", \"xiddig\"])\n- $x = range(10, 500, 10)\n- $k = range(2, 10)\n- $y = range(2, 100)\n\n#conditions:\n- k * y < x * 12\n- divides(k*y,12)\n- divides(x * 12, k*y)\n- divides(100, x * 12 / (k*y))\n\n#answer: int((k * y)/ (x * 12) * 100)",
+    "count": 100
+  },
+  {
+    "id": 1,
+    "question_annotated": "Daruur madoow ayaa ka soo qulqulaysa badweynta si ay u qabsato magaalada. Waxay qaadataa {t,10} daqiiqo si loo qabsado {d,3} mayl kasta oo ka mid ah magaalada. Haddii magaaladu ay tahay {y,42} mayl laga bilaabo xeebta badweynta ilaa geeska kale ee gudaha, inta daqiiqo ayay qaadanaysaa in daruuruhu ay qabsadaan magaalada oo dhan?\n\n#init:\n- $t = range(2, 500)\n- $d = range(2, 100)\n- $y=range(2, 100)\n\n#conditions:\n- is_int(y/d)\n\n#answer: y//d*t",
+    "count": 100
+  },
+  {
+    "id": 2,
+    "question_annotated": "{name,Jerry} wuxuu tuurayaa dharbaaxo {sides_txt,lixeed}. Waa maxay farqiga (oo loo qeexay dhibco boqolley) ee u dhexeeya inuu tuuro tiro ka weyn {target,3} iyo inuu tuuro laba {z,jeeg} ah oo isku xigta?\n\n#init:\n- name=sample(names_male)\n- sides_txt, sides_val = sample([(\"4-gees\", 4), (\"lixeed\", 6), (\"8-gees\", 8), (\"10-gees\", 10), (\"12-gees\", 12), (\"14-gees\", 14), (\"16-gees\", 16), (\"18-gees\", 18), (\"20-gees\", 20), (\"22-gees\", 22), (\"24-gees\", 24), (\"26-gees\", 26), (\"28-gees\", 28), (\"30-gees\", 30), (\"32-gees\", 32), (\"34-gees\", 34), (\"36-gees\", 36), (\"38-gees\", 38), (\"40-gees\", 40), (\"42-gees\", 42), (\"44-gees\", 44), (\"46-gees\", 46), (\"48-gees\", 48), (\"50-gees\", 50), (\"52-gees\", 52), (\"54-gees\", 54), (\"56-gees\", 56), (\"58-gees\", 58), (\"60-gees\", 60), (\"62-gees\", 62), (\"64-gees\", 64), (\"66-gees\", 66), (\"68-gees\", 68), (\"70-gees\", 70), (\"72-gees\", 72), (\"74-gees\", 74), (\"76-gees\", 76), (\"78-gees\", 78), (\"80-gees\", 80), (\"82-gees\", 82), (\"84-gees\", 84), (\"86-gees\", 86), (\"88-gees\", 88), (\"90-gees\", 90), (\"92-gees\", 92), (\"94-gees\", 94), (\"96-gees\", 96), (\"98-gees\", 98), (\"100-gees\", 100)])\n- $target = range(1, 100)\n- z = sample([\"jeeg\", \"lihi\"])\n\n#conditions: \n- target < sides_val\n- divides(sides_val-target, target)\n- is_int((sides_val-target)/sides_val * 100)\n-  int((sides_val-target)/sides_val * 100) > 25\n\n#answer: int((sides_val-target)/sides_val * 100) - 25",
+    "count": 100
+  },
+  {
+    "id": 3,
+    "question_annotated": "{g, fasal} oo ka kooban {n, 50} arday waxay leeyihiin hawlo kala duwan. {n_1, 10} waxay jecel yihiin {h_1, cunto karin}, {n_2, 5} waxay jecel yihiin ciyaarta {h_2, kubbadda cagta}, kuwa kalena waxay jecel yihiin {h_3, ciyaaraha fiidiyowga} ama {h_4, muusig}. Intee ayaa jecel {h_3, ciyaaraha fiidiyowga} haddii tirada kuwa jecel {h_4, muusig} ay tahay laba jeer tirada kuwa jecel ciyaarta {h_2, kubbadda cagta}?\n\n#init:\n- g = sample([\"koox\", \"fasal\"])\n- h_2 = sample(sports)\n- h_1, h_3, h_4 = sample(['akhris', 'miir', 'socod dheer', 'cabin', 'cunto karin', 'ciyaaraha fiidiyowga', 'muusig'], 3)\n- $n = range(5, 200)\n- $n_1 = range(2, 200)\n- $n_2 = range(2, 200)\n\n#conditions:\n- n_1 < n\n- n_2 < n\n- n - (n_1 + n_2) - (2 * n_2) > 0\n\n#answer: int(n - (n_1 + n_2) - (2 * n_2))",
+    "count": 100
+  },
+  {
+    "id": 4,
+    "question_annotated": "{name,Garrett} wuxuu shidanayaa popkorn ah cunto fudud. Marka {p, baan}da unugyada kululaato, unugyadu waxay u bilaabaan inay si degdeg ah u shidaan. {n,20} ayaa shidaa muddada ugu horreysa ee {s, 30} ilbiriqsi ee karinta, kadibna {k_2_txt,saddex} jeer intaas oo kale muddada {s, 30} ilbiriqsi ee xigta. Unugyadu waxay kordhaan ilaa {k_3_txt,afar} jeer xawaaraha shididaa ee hore muddada {s, 30} ilbiriqsi ee xigta, laakiin muddada {s, 30} ilbiriqsi ee ugu dambeysa, shididaa waxay yaraataa ilaa kala badh xawaaraha muddadii {s, 30} ilbiriqsi ee hore. Kadib markii {name,Garrett} uu ka qaado {p, baan}da kulaylka, afar-meelood kow ah tirada unugyada ee shidaayay muddadii {s, 30} ilbiriqsi ee ugu dambeysa ee karinta sidoo kale way shidaan kulaylka hadhaaga ah. Waa intee qaybo popkorn ah oo {name,Garrett} u baahan yahay inuu cunto?\n\n\n#init:\n- name = sample(names)\n- p = sample(['baan', 'qaswo', 'fardo'])\n- $n = range(10, 101, 10)\n- $s = range(10, 31, 2)\n- k_2_txt, k_2_val = range_str(2, 5, 1, numbers)\n- k_3_txt, k_3_val = range_str(3, 8, 1, numbers)\n\n#conditions:\n- k_3_val > k_2_val\n- divides(k_3_val * n, 8)\n\n#answer: n + (k_2_val * n + k_3_val * n) + (k_3_val * n // 2) + (k_3_val * n // 8)",
+    "count": 100
+  },
+  {
+    "id": 5,
+    "question_annotated": "{name,Katy} waa sameeysaa {drink,qaxwo} iyadoo isticmaalaysa qaadooyin sonkor iyo koobab biyo ah xiriirka ah {m,7}:{n,13}. Haddii ay isticmaashay guud ahaan {x,120} qaadooyin sonkor iyo koobab biyo ah, xisaabi tirada qaadooyinka sonkorta ee ay isticmaashay.\n\n#init:\n- name = sample(names_female)\n- drink = sample(['qaxwo', 'shaah'])\n- $m = range(7, 101, 3)\n- $n = range(4, 61, 3)\n- $x = range(5, 500, 5)\n\n#conditions: \n- divides(x, m+n)\n\n#answer: ((m*x)//(m+n))",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "question_annotated": "{name,John} wuxuu leeyahay {x,10} {area,hektar} beer {fruit,ananas}. Waxaa jira {k,100} {fruit,ananas} kasta oo {area,hektar}. {name, John} wuxuu karinaa inuu goosto {fruit,ananas}kiisa mar kasta oo {n,3} bilood. Intee {fruit,ananas} ayaa {name,John} karinaya inuu goosto hal sano gudihiis?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- area = sample(['hektar', 'yard labajibaaran', 'mitir labajibaaran'])\n- $x = range(5, 100, 5)\n- $k = range(2, 101)\n- $n = sample([1, 2, 3, 4, 6, 12])\n\n#answer: x * k * (12//n)",
+    "count": 100
+  },
+  {
+    "id": 7,
+    "question_annotated": "Beeraley ayaa iibinaya cunto u qeybinaya {animals,farasin}. Wuxuu iibiyaa noocyo kala duwan oo {treat1, heey}, {treat2, rooti}, {treat3, karooto} iyo {rare_treat, kubbadaha sonkorta}. Maadaama {rare_treat, kubbadaha sonkorta} ay yihiin macmacaan gaar ah, wuxuu iibiyaa kaliya {n4_txt, laba} {w4,1}-{unit, libin} sanduuqyo ka mid ah iyaga oo u qeybinaya xero guud. Wuxuu rabaa kaliya {treat3, karooto} ku filan si uu u quudiyo {animals, farasin} inta khudaarta ay cusub yihiin, sidaas darteed wuxuu iibiyaa {n3_txt, afar} {w3,12}-{unit, libin} bacaha. {treat1, heey} waa cuntada ugu weyn ee {animals, farasin}diisa, sidaas darteed wuxuu iibiyaa {n1_txt, kow iyo afartan} {w1,75}-{unit, libin} baakadaha. {treat2, rooti} waa cunto aasaasi ah oo ku darsata {treat1, heey}, sidaas darteed wuxuu iibiyaa {n2_txt, laba iyo labaatan} {w2, 65}-{unit, libin} sacadaha. Haddii gaadiidkiisa beeraha uu qaadi karo {total,2250} {unit, libin} mar kasta, wuxuu u baahan yahay beeraley inta safar si uu u qaado dhammaan cuntada?\n\n#init:\n- animals = sample(['farasin', 'lo', 'idaha', 'xoolaha', 'alpacas'])\n- unit = sample(weights_med)\n- treat1, treat2 = sample([\"heey\", \"masaaro\", \"rooti\", \"tufaax\", \"qamadi\"], 2)\n- treat3 = sample([\"karooto\", \"beets\", \"qabqab\"])\n- rare_treat = sample([\"kubbadaha sonkorta\", \"dharka karkaha\", \"peppermints\"])\n- n4_txt, n4_val = range_str(2, 7, 2, numbers)\n- n3_txt, n3_val = range_str(4, 11, 2, numbers)\n- n2_txt, n2_val = range_str(15, 21, 1, numbers)\n- n1_txt, n1_val = range_str(30, 43, 2, numbers)\n- $w4 = range(1, 4)\n- $w3 = range(8, 13, 2)\n- $w2 = range(45, 70, 5)\n- $w1 = range(55, 80, 5)\n- $total = range(1500, 2300, 150)\n\n#conditions:\n- w4*n4_val < w3*n3_val < w2*n2_val < w1 * n1_val\n- divides(n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4, total)\n\n#answer: (n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4)//total",
+    "count": 100
+  },
+  {
+    "id": 8,
+    "question_annotated": "Jikaysta wuxuu jikayn karaa {n, 16} kubbadood. {frac_1_txt, kala bar} kubbadda waa {ball_type, golf} kubbad, iyo {frac_2_txt, kala bar} kubbadda {ball_type,golf} waa {color, buluug}. Waa intee {color, buluug} {ball_type,golf} kubbad oo jira?\n\n#init:\n- ball_type = sample([\"golf\", \"tenis\"])\n- color = sample(colors)\n- frac_1_txt, frac_1_val = sample(fraction_alnum)\n- frac_2_txt, frac_2_val = sample(fraction_alnum)\n- $n = range(16, 100, 2)\n\n#conditions:\n- is_int(n * frac_1_val)\n- is_int(n * frac_1_val * frac_2_val)\n\n#answer:  int(n * frac_1_val * frac_2_val)",
+    "count": 100
+  },
+  {
+    "id": 9,
+    "question_annotated": "Marka {name, Maryan} ay eegto {family, wiil adeer}, waxay soo saartaa noocyo kala duwan oo ciyaar ah u. Baakadda ciyaaraha dhismaha waxaa ku jira {x,31} qaybo. Sanduuqa ciyaaraha xoolaha waxaa ku jira {y,8} ciyaar. Munaaradda wareegyada la isku daro waxaa saaran {z,9} wareegyo midab leh. {name, Maryan} dhowaan waxay iibsatay tuubo kubbadaha soo booda, iyadoo keenaysa tirada guud ee ciyaaraha u {family, wiil adeer} ilaa {total,62}. Intee in le'eg ayaa kubbadaha soo booda ku jiray tuubada?\n\n#init:\n- name = sample(names_female)\n- family = sample([\"wiil adeer\", \"qaraabo\", \"walaal\"])\n- $x = range(31, 75)\n- $y = range(8, 50)\n- $z = range(9, 35)\n- $total = range(60, 250)\n\n#conditions:\n- total - (x + y + z) >= 20 \n- total - (x + y + z) < 100\n\n#answer: total - (x + y + z)",
+    "count": 100
+  },
+  {
+    "id": 10,
+    "question_annotated": "Si aad u sameyso wacitaan ka {dev,telefon lacag bixi}, waa inaad bixisaa {currency,$}{frac1,0.25} kasta oo daqiiqad ah oo wacitaankaaga ah. Kadib {t,16} daqiiqadood, qiimahaas wuu hoos u dhacayaa ilaa {currency,$}{frac2,0.2} kasta oo daqiiqad ah. Waa maxay kharashka wacitaan {total,36}-daqiiqad ah?\n\n#init:\n- dev = sample(['goob wacitaan', 'telefon qol hotel'])\n- currency = sample(currencies_sym)\n- $frac1 = sample(fraction_decimals)\n- $frac2 = sample(fraction_decimals)\n- $t = range(10, 50)\n- $total = range(36, 100)\n\n#conditions:\n- is_int(frac1 * t)\n- is_int((total-t) * frac2)\n- frac2 < frac1\n- t < total\n\n#answer: int((frac1 * t) + frac2*(total-t))",
+    "count": 100
+  }
+]

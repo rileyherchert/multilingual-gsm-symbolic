@@ -1,0 +1,47 @@
+[
+  {
+    "id": 0,
+    "question_annotated": "{n, benijs} redzēja {x,10}-pēdu {big_fish,haizivs} ar {k,2} {y,6}-collu remorām, kas bija tam piestiprinātas. Kāda procentuālā daļa no {big_fish,haizivs} ķermeņa garuma ir remoru kopgarums?\n\n#init:\n- n = sample(names)\n- big_fish = sample([\"delfīns\", \"vaals\", \"haizivs\"])\n- $x = range(10, 500, 10)\n- $k = range(2, 10)\n- $y = range(2, 100)\n\n#conditions:\n- k * y < x * 12\n- divides(k*y,12)\n- divides(x * 12, k*y)\n- divides(100, x * 12 / (k*y))\n\n#answer: int((k * y)/ (x * 12) * 100)",
+    "count": 100
+  },
+  {
+    "id": 1,
+    "question_annotated": "Miglas masa nāk no okeāna, lai pārklātu pilsētu. Tas prasa {t,10} minūtes, lai pārklātu ik pēc {d,3} jūdzēm pilsētā. Ja pilsēta ir {y,42} jūdzes plata no piekrastes līdz pretējai iekšzemes malai, cik minūšu prasīs miglas masai pārklāt visu pilsētu?\n\n#init:\n- $t = range(2, 500)\n- $d = range(2, 100)\n- $y=range(2, 100)\n\n#conditions:\n- is_int(y/d)\n\n#answer: y//d*t",
+    "count": 100
+  },
+  {
+    "id": 2,
+    "question_annotated": "{name,Jerijs} met {sides_txt,sešskaldņu} kauliņu. Cik daudz lielāka ir varbūtība (izteikta procentuālajos punktos), ka viņš izmet skaitli, kas ir lielāks par {target,3}, nekā ka viņš izmet divus {z,pāra} skaitļus pēc kārtas?\n\n#init:\n- name=sample(names_male)\n- sides_txt, sides_val = sample([(\"4-skaldņu\", 4), (\"sešskaldņu\", 6), (\"8-skaldņu\", 8), (\"10-skaldņu\", 10), (\"12-skaldņu\", 12), (\"14-skaldņu\", 14), (\"16-skaldņu\", 16), (\"18-skaldņu\", 18), (\"20-skaldņu\", 20), (\"22-skaldņu\", 22), (\"24-skaldņu\", 24), (\"26-skaldņu\", 26), (\"28-skaldņu\", 28), (\"30-skaldņu\", 30), (\"32-skaldņu\", 32), (\"34-skaldņu\", 34), (\"36-skaldņu\", 36), (\"38-skaldņu\", 38), (\"40-skaldņu\", 40), (\"42-skaldņu\", 42), (\"44-skaldņu\", 44), (\"46-skaldņu\", 46), (\"48-skaldņu\", 48), (\"50-skaldņu\", 50), (\"52-skaldņu\", 52), (\"54-skaldņu\", 54), (\"56-skaldņu\", 56), (\"58-skaldņu\", 58), (\"60-skaldņu\", 60), (\"62-skaldņu\", 62), (\"64-skaldņu\", 64), (\"66-skaldņu\", 66), (\"68-skaldņu\", 68), (\"70-skaldņu\", 70), (\"72-skaldņu\", 72), (\"74-skaldņu\", 74), (\"76-skaldņu\", 76), (\"78-skaldņu\", 78), (\"80-skaldņu\", 80), (\"82-skaldņu\", 82), (\"84-skaldņu\", 84), (\"86-skaldņu\", 86), (\"88-skaldņu\", 88), (\"90-skaldņu\", 90), (\"92-skaldņu\", 92), (\"94-skaldņu\", 94), (\"96-skaldņu\", 96), (\"98-skaldņu\", 98), (\"100-skaldņu\", 100)])\n- $target = range(1, 100)\n- z = sample([\"pāra\", \"nepāra\"])\n\n#conditions: \n- target < sides_val\n- divides(sides_val-target, target)\n- is_int((sides_val-target)/sides_val * 100)\n-  int((sides_val-target)/sides_val * 100) > 25\n\n#answer: int((sides_val-target)/sides_val * 100) - 25",
+    "count": 100
+  },
+  {
+    "id": 3,
+    "question_annotated": "A {g,klase} ar {n, 50} studentiem ir dažādi hobiji. {n_1, 10} patīk {h_1, cept}, {n_2,5} patīk spēlēt {h_2,basketbolu}, un pārējiem patīk vai nu {h_3,spēlēt video spēles} vai {h_4,spēlēt mūziku}. Cik daudz patīk {h_3,spēlēt video spēles}, ja to skaits, kuriem patīk {h_4,spēlēt mūziku}, ir divreiz lielāks nekā to, kuri dod priekšroku spēlēt {h_2, basketbolu}?\n\n#init:\n- g = sample([\"grupa\", \"klase\"])\n- h_2 = sample(sports)\n- h_1, h_3, h_4 = sample(['lasīt', 'gleznot', 'pārgājienā iet', 'dejot', 'cept', 'spēlēt video spēles', 'spēlēt mūziku'], 3)\n- $n = range(5, 200)\n- $n_1 = range(2, 200)\n- $n_2 = range(2, 200)\n\n#conditions:\n- n_1 < n\n- n_2 < n\n- n - (n_1 + n_2) - (2 * n_2) > 0\n\n#answer: int(n - (n_1 + n_2) - (2 * n_2))",
+    "count": 100
+  },
+  {
+    "id": 4,
+    "question_annotated": "{name,Garrets} cep popkornu kā uzkodu. Kad {p, pande} ar graudiem karsējas, graudi sāk pārties ātrāk. {n,20} pārtiek pirmajās {s, 30} gatavošanas sekundēs, tad {k_2_txt, trīs} reizes tik daudz nākamajās {s, 30} sekundēs. Graudu pārtēšanas ātrums palielinās līdz {k_3_txt, četras} reizes sākotnējam ātrumam nākamajās {s, 30} sekundēs, bet pēdējās {s, 30} sekundēs pārtēšana palēninās līdz pusei no iepriekšējo {s, 30} sekunžu ātruma. Kad {name,Garrets} noņem {p, pande} no uguns, ceturtdaļa no graudiem, kas pārtika pēdējās {s, 30} sekunžu gatavošanas laikā, pārtiek arī no atlikušā siltuma. Cik popkorna gabaliņu {name,Garrets} ir jāapēd?\n\n\n#init:\n- name = sample(names)\n- p = sample(['pande', 'katls', 'cepampanne'])\n- $n = range(10, 101, 10)\n- $s = range(10, 31, 2)\n- k_2_txt, k_2_val = range_str(2, 5, 1, numbers)\n- k_3_txt, k_3_val = range_str(3, 8, 1, numbers)\n\n#conditions:\n- k_3_val > k_2_val\n- divides(k_3_val * n, 8)\n\n#answer: n + (k_2_val * n + k_3_val * n) + (k_3_val * n // 2) + (k_3_val * n // 8)",
+    "count": 100
+  },
+  {
+    "id": 5,
+    "question_annotated": "{name,Katy} pagatavo {drink,kafija}, izmantojot cukura tējkarotes un ūdens tases attiecībā {m,7}:{n,13}. Ja kopā tika izmantotas {x,120} tējkarotes cukura un ūdens tases, aprēķiniet, cik tējkarotes cukura tika izmantotas.\n\n#init:\n- name = sample(names_female)\n- drink = sample(['kafija', 'tēja'])\n- $m = range(7, 101, 3)\n- $n = range(4, 61, 3)\n- $x = range(5, 500, 5)\n\n#conditions: \n- divides(x, m+n)\n\n#answer: ((m*x)//(m+n))",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "question_annotated": "{name,Jānis} ir {x,10} {area,hektārs} liels {fruit,ananāss} lauks. Uz vienu {area,hektārs} ir {k,100} {fruit,ananāss}. {name, Jānis} var novākt savus {fruit,ananāss} ik {n,3} mēnešus. Cik {fruit,ananāss} var {name,Jānis} novākt gada laikā?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- area = sample(['hektārs', 'kvadrātzards', 'kvadrātmetrs'])\n- $x = range(5, 100, 5)\n- $k = range(2, 101)\n- $n = sample([1, 2, 3, 4, 6, 12])\n\n#answer: x * k * (12//n)",
+    "count": 100
+  },
+  {
+    "id": 7,
+    "question_annotated": "Saimnieks pērk barību saviem {animals,zirgi}. Viņš pērk dažādu {treat1, siens}, {treat2, auzas}, {treat3, burkāni} un {rare_treat, cukura gabaliņi}. Tā kā {rare_treat, cukura gabaliņi} ir rets gardums, viņš pērk tikai {n4_txt, divi} {w4,1}-{unit, funts} kastes no tiem visai stallim. Viņš vēlas pietiekami daudz {treat3, burkāni}, lai barotu {animals, zirgi}, kamēr dārzeņi ir svaigi, tāpēc viņš pērk {n3_txt, četri} {w3,12}-{unit, funts} maisus. {treat1, siens} ir galvenā {animals, zirgi} uztura sastāvdaļa, tāpēc viņš pērk {n1_txt, četrdesmit divi} {w1,75}-{unit, funts} pakas. {treat2, auzas} ir pamata papildinājums {treat1, siens}, tāpēc viņš pērk {n2_txt, divdesmit} {w2, 65}-{unit, funts} maisus. Ja viņa lauku kravas auto var nest {total,2250} {unit, funts}s vienā reizē, cik reizes saimniekam jāveic, lai pārvadātu visu barību?\n\n#init:\n- animals = sample(['zirgi', 'govis', 'aitas', 'cūkas', 'alpakas'])\n- unit = sample(weights_med)\n- treat1, treat2 = sample([\"siens\", \"kukurūza\", \"auzas\", \"āboli\", \"kvieši\"], 2)\n- treat3 = sample([\"burkāni\", \"bietes\", \"gurķi\"])\n- rare_treat = sample([\"cukura gabaliņi\", \"arbūzu miza\", \"piparmētras\"])\n- n4_txt, n4_val = range_str(2, 7, 2, numbers)\n- n3_txt, n3_val = range_str(4, 11, 2, numbers)\n- n2_txt, n2_val = range_str(15, 21, 1, numbers)\n- n1_txt, n1_val = range_str(30, 43, 2, numbers)\n- $w4 = range(1, 4)\n- $w3 = range(8, 13, 2)\n- $w2 = range(45, 70, 5)\n- $w1 = range(55, 80, 5)\n- $total = range(1500, 2300, 150)\n\n#conditions:\n- w4*n4_val < w3*n3_val < w2*n2_val < w1 * n1_val\n- divides(n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4, total)\n\n#answer: (n1_val*w1 + n2_val*w2 + n3_val*w3 + n4_val*w4)//total",
+    "count": 100
+  },
+  {
+    "id": 8,
+    "question_annotated": "Žonglieris var žonglēt ar {n, 16} bumbiņām. {frac_1_txt,puse} no bumbiņām ir {ball_type, golfa} bumbiņas, un {frac_2_txt,puse} no {ball_type, golfa} bumbiņām ir {color, zila}. Cik {color, zila} {ball_type, golfa} bumbiņu ir?\n\n#init:\n- ball_type = sample([\"golfa\", \"tenisa\"])\n- color = sample(colors)\n- frac_1_txt, frac_1_val = sample(fraction_alnum)\n- frac_2_txt, frac_2_val = sample(fraction_alnum)\n- $n = range(16, 100, 2)\n\n#conditions:\n- is_int(n * frac_1_val)\n- is_int(n * frac_1_val * frac_2_val)\n\n#answer:  int(n * frac_1_val * frac_2_val)",
+    "count": 100
+  }
+]

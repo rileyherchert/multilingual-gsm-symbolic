@@ -1,0 +1,42 @@
+[
+  {
+    "id": 2,
+    "question_annotated": "{name,Jerry} nagtambak og {sides_txt,unom ka kilid} nga dice. Unsa ka mas posibleng (gipahayag isip puntos sa persentase) nga siya makatambak og numero nga mas dako kay sa {target,3} kaysa sa siya makatambak og duha ka {z,pares} nga numero sunod-sunod?\n\n#init:\n- name=sample(names_male)\n- sides_txt, sides_val = sample([(\"upat ka kilid\", 4), (\"unom ka kilid\", 6), (\"walo ka kilid\", 8), (\"napulo ka kilid\", 10), (\"napulog duha ka kilid\", 12), (\"napulog upat ka kilid\", 14), (\"napulog unom ka kilid\", 16), (\"napulog walo ka kilid\", 18), (\"kaluhaan ka kilid\", 20), (\"kaluhaan ug duha ka kilid\", 22), (\"kaluhaan ug upat ka kilid\", 24), (\"kaluhaan ug unom ka kilid\", 26), (\"kaluhaan ug walo ka kilid\", 28), (\"katloan ka kilid\", 30), (\"katloan ug duha ka kilid\", 32), (\"katloan ug upat ka kilid\", 34), (\"katloan ug unom ka kilid\", 36), (\"katloan ug walo ka kilid\", 38), (\"upatnapu ka kilid\", 40), (\"upatnapu ug duha ka kilid\", 42), (\"upatnapu ug upat ka kilid\", 44), (\"upatnapu ug unom ka kilid\", 46), (\"upatnapu ug walo ka kilid\", 48), (\"lima,napu ka kilid\", 50), (\"lima,napu ug duha ka kilid\", 52), (\"lima,napu ug upat ka kilid\", 54), (\"lima,napu ug unom ka kilid\", 56), (\"lima,napu ug walo ka kilid\", 58), (\"unom,napu ka kilid\", 60), (\"unom,napu ug duha ka kilid\", 62), (\"unom,napu ug upat ka kilid\", 64), (\"unom,napu ug unom ka kilid\", 66), (\"unom,napu ug walo ka kilid\", 68), (\"pito,napu ka kilid\", 70), (\"pito,napu ug duha ka kilid\", 72), (\"pito,napu ug upat ka kilid\", 74), (\"pito,napu ug unom ka kilid\", 76), (\"pito,napu ug walo ka kilid\", 78), (\"walo,napu ka kilid\", 80), (\"walo,napu ug duha ka kilid\", 82), (\"walo,napu ug upat ka kilid\", 84), (\"walo,napu ug unom ka kilid\", 86), (\"walo,napu ug walo ka kilid\", 88), (\"siyam,napu ka kilid\", 90), (\"siyam,napu ug duha ka kilid\", 92), (\"siyam,napu ug upat ka kilid\", 94), (\"siyam,napu ug unom ka kilid\", 96), (\"siyam,napu ug walo ka kilid\", 98), (\"usa ka gatos ka kilid\", 100)])\n- $target = range(1, 100)\n- z = sample([\"pares\", \"dili pares\"])\n\n#conditions: \n- target < sides_val\n- divides(sides_val-target, target)\n- is_int((sides_val-target)/sides_val * 100)\n-  int((sides_val-target)/sides_val * 100) > 25\n\n#answer: int((sides_val-target)/sides_val * 100) - 25",
+    "count": 100
+  },
+  {
+    "id": 3,
+    "question_annotated": "Usa ka {g,klase} sa {n, 50} ka estudyante may lain-laing mga hobi. {n_1, 10} gusto sa {h_1,magluto}, {n_2,5} gusto sa {h_2,basketball}, ug ang uban gusto usab sa {h_3,maglaro og video games} o {h_4,magtugtog og music}. Pila ka gusto sa {h_3,maglaro og video games} kung ang gidaghanon sa mga gusto sa {h_4,magtugtog og music} mao ang duha ka beses sa gidaghanon sa mga nagpili sa {h_2, basketball}?\n\n#init:\n- g = sample([\"tropa\", \"klase\"])\n- h_2 = sample(sports)\n- h_1, h_3, h_4 = sample(['magbasa', 'magpintura', 'maghikay', 'magsayaw', 'magluto', 'maglaro og video games', 'magtugtog og music'], 3)\n- $n = range(5, 200)\n- $n_1 = range(2, 200)\n- $n_2 = range(2, 200)\n\n#conditions:\n- n_1 < n\n- n_2 < n\n- n - (n_1 + n_2) - (2 * n_2) > 0\n\n#answer: int(n - (n_1 + n_2) - (2 * n_2))",
+    "count": 100
+  },
+  {
+    "id": 4,
+    "question_annotated": "{name,Garrett} nagpopopcorn para sa meryenda. Sa dihang ang {p, kawali} sa mga butong nagpainit, magsugod og mas paspas ang pagpopping sa mga butong. {n,20} nagpopping sa unang {s, 30} ka segundo sa pagluto, unya {k_2_txt,tulo} ka beses kadtong gidaghanon sa sunod nga {s, 30} ka segundo. Ang mga butong magsaka ngadto sa {k_3_txt,upat} ka beses ang unang rate sa pagpopping sa sunod nga {s, 30} ka segundo, pero sa katapusang {s, 30} ka segundo, ang pagpopping mopahinay ngadto sa katunga sa rate sa nakalabayng {s, 30} ka segundo. Human ni {name,Garrett} nga tangtangon ang {p, kawali} gikan sa kalayo, usa ka kwarto sa gidaghanon sa mga butong nagpopping sa katapusang {s, 30} ka segundo sa pagluto usab nagpopping gikan sa nahabilin nga init. Pila ka piraso sa popcorn ang kinahanglan nga mokaon ni {name,Garrett}?\n\n\n#init:\n- name = sample(names)\n- p = sample(['kawali', 'kaldero', 'kawali'])\n- $n = range(10, 101, 10)\n- $s = range(10, 31, 2)\n- k_2_txt, k_2_val = range_str(2, 5, 1, numbers)\n- k_3_txt, k_3_val = range_str(3, 8, 1, numbers)\n\n#conditions:\n- k_3_val > k_2_val\n- divides(k_3_val * n, 8)\n\n#answer: n + (k_2_val * n + k_3_val * n) + (k_3_val * n // 2) + (k_3_val * n // 8)",
+    "count": 100
+  },
+  {
+    "id": 5,
+    "question_annotated": "{name,Katy} naghimo og {drink,kape} gamit og kutsarita sa asukal ug tasa sa tubig sa rasyo sa {m,7}:{n,13}. Kung siya nagamit og kinatibuk-an nga {x,120} kutsarita sa asukal ug tasa sa tubig, kalkulahon ang gidaghanon sa kutsarita sa asukal nga iyang gigamit.\n\n#init:\n- name = sample(names_female)\n- drink = sample(['kape', 'tsaa'])\n- $m = range(7, 101, 3)\n- $n = range(4, 61, 3)\n- $x = range(5, 500, 5)\n\n#conditions: \n- divides(x, m+n)\n\n#answer: ((m*x)//(m+n))",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "question_annotated": "{name,John} adunay {x,10} ka {area,hektar} sa lupang {fruit,pinya}. Adunay {k,100} ka {fruit,pinya} matag {area,hektar}. {name, John} makapag-ani sa iyang mga {fruit,pinya} matag {n,3} ka bulan. Pila ka {fruit,pinya} ang makapag-ani si {name,John} sulod sa usa ka tuig?\n\n#init:\n- name = sample(names_male)\n- fruit = sample(fruits)\n- area = sample(['hektar', 'metro kwadrado'])\n- $x = range(5, 100, 5)\n- $k = range(2, 101)\n- $n = sample([1, 2, 3, 4, 6, 12])\n\n#answer: x * k * (12//n)",
+    "count": 100
+  },
+  {
+    "id": 8,
+    "question_annotated": "Usa ka juggler makajuggle og {n, 16} ka bola. {frac_1_txt, katunga} sa mga bola mao ang mga {ball_type, golf} bola, ug {frac_2_txt, katunga} sa mga {ball_type, golf} bola mao ang {color, asul}. Pila ka {color, asul} nga {ball_type, golf} bola ang naa?\n\n#init:\n- ball_type = sample([\"golf\", \"tenis\"])\n- color = sample(colors)\n- frac_1_txt, frac_1_val = sample(fraction_alnum)\n- frac_2_txt, frac_2_val = sample(fraction_alnum)\n- $n = range(16, 100, 2)\n\n#conditions:\n- is_int(n * frac_1_val)\n- is_int(n * frac_1_val * frac_2_val)\n\n#answer:  int(n * frac_1_val * frac_2_val)",
+    "count": 100
+  },
+  {
+    "id": 9,
+    "question_annotated": "Samtang si {name, Sophie} nagbantay sa iyang {family, pamugang}, nagkuha siya og lain-laing mga dulaan para kaniya. Ang bag sa mga bloke sa pagtukod adunay {x,31} ka bloke. Ang lalag sa mga dulaan nga gipuno adunay {y,8} ka dulaan nga gipuno sulod. Ang toro sa mga singsing nga magkadugtong adunay {z,9} ka singsing nga daghang kolor. Si {name, Sophie} gibakal bag-ong og usa ka tubo sa mga bouncy balls, nga nagdugang sa iyang kinatibuk-ang gidaghanon sa mga dulaan alang kaniyang {family, pamugang} ngadto sa {total,62}. Pila ka bouncy balls ang anaa sa tubo?\n\n#init:\n- name = sample(names_female)\n- family = sample([\"pamugang\", \"kagang\", \"igsoon\"])\n- $x = range(31, 75)\n- $y = range(8, 50)\n- $z = range(9, 35)\n- $total = range(60, 250)\n\n#conditions:\n- total - (x + y + z) >= 20 \n- total - (x + y + z) < 100\n\n#answer: total - (x + y + z)",
+    "count": 100
+  },
+  {
+    "id": 10,
+    "question_annotated": "Para makatawag gikan sa usa ka {dev,tawag-an}, kinahanglan magbayad ka og {currency,₱}{frac1,0.25} para matag minuto sa imong tawag. Human sa {t,16} ka minuto, mababa ang presyo ngadto sa {currency,₱}{frac2,0.2} matag minuto. Kinsa man ang presyo sa usa ka {total,36}-minuto nga tawag?\n\n#init:\n- dev = sample(['tawag-an', 'telepono sa kwarto'])\n- currency = sample(currencies_sym)\n- $frac1 = sample(fraction_decimals)\n- $frac2 = sample(fraction_decimals)\n- $t = range(10, 50)\n- $total = range(36, 100)\n\n#conditions:\n- is_int(frac1 * t)\n- is_int((total-t) * frac2)\n- frac2 < frac1\n- t < total\n\n#answer: int((frac1 * t) + frac2*(total-t))",
+    "count": 100
+  }
+]
