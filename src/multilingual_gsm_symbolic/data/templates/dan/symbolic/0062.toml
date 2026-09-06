@@ -25,15 +25,15 @@ I en sæt {item,magiker}-kort er der {n1,15} {c1,røde} kort og {p,60}% flere {c
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-Der er {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} flere {c2} kort end {c1} kort.
-Hvilket betyder, at der er {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)} {c2} kort.
-{c3} kort udgør op til {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))} kort.
-Så i alt er der {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{ 2*(n1+(n1+int(p/100*n1)))} kort i forskellige farver.
-#### {2*(n1+(n1+int(p/100*n1)))}
+Der er {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} flere {c2} kort end {c1} kort.
+Hvilket betyder, at der er {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)} {c2} kort.
+{c3} kort udgør op til {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))} kort.
+Så i alt er der {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{ 2*(n1+(n1+(p*n1//100)))} kort i forskellige farver.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "machine-translated from English, localized and validated by humans, computationally validated"

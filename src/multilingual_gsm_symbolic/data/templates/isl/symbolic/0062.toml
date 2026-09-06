@@ -28,15 +28,15 @@ question_annotated = """
 - c3_nf != c1_nf
 - c3_nf != c2_nf
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-Það eru {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} fleiri {c2_nf} spil en {c1_nf} spil.
-Sem þýðir að það eru {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)} {c2_nf} spil.
-Það eru því {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))} {c3_nf} spil.
-Samtals eru því {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{2*(n1+(n1+int(p/100*n1)))} spil í mismunandi litum.
-#### {2*(n1+(n1+int(p/100*n1)))}
+Það eru {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} fleiri {c2_nf} spil en {c1_nf} spil.
+Sem þýðir að það eru {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)} {c2_nf} spil.
+Það eru því {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))} {c3_nf} spil.
+Samtals eru því {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{2*(n1+(n1+(p*n1//100)))} spil í mismunandi litum.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "machine-translated from Danish using gpt-5.4, based on Danish templates; computationally and human validated"

@@ -25,15 +25,15 @@ I en {item,trolleri}kortlek finns det {n1,15} {c1,röda} kort och {p,60}% fler {
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-Det finns {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} fler {c2} kort än {c1} kort.
-Det betyder att det finns {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)} {c2} kort.
-Det finns {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))} {c3} kort.
-Sammanlagt finns det {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{2*(n1+(n1+int(p/100*n1)))} kort i de nämnda färgerna.
-#### {2*(n1+(n1+int(p/100*n1)))}
+Det finns {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} fler {c2} kort än {c1} kort.
+Det betyder att det finns {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)} {c2} kort.
+Det finns {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))} {c3} kort.
+Sammanlagt finns det {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{2*(n1+(n1+(p*n1//100)))} kort i de nämnda färgerna.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "machine-translated from Danish by Claude Opus 5 (manual), based on Danish templates; computationally validated; manually corrected by a group of Swedish native speakers at KB-Lab, namely Marie Mattson, Kevin Kelly, Faton Rekathati, Antonio Tällberg Ilestad, Viktoria Lundborg, Agnes Toftgård, Andreas Hedberg, and Johan Bisse Mattsson."

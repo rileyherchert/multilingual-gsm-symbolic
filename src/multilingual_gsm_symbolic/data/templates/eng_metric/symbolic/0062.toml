@@ -25,15 +25,15 @@ In a set of {item,magician}'s cards, there are {n1,15} {c1,red} cards, and {p,60
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-There are {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} more {c2} cards than {c1} cards.
-Which means there are {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)} {c2} cards.
-{c3} cards make up to {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))} cards.
-So in total, there are {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{ 2*(n1+(n1+int(p/100*n1)))} cards of different colors.
-#### {2*(n1+(n1+int(p/100*n1)))}
+There are {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} more {c2} cards than {c1} cards.
+Which means there are {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)} {c2} cards.
+{c3} cards make up to {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))} cards.
+So in total, there are {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{ 2*(n1+(n1+(p*n1//100)))} cards of different colors.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "derived from GSM-Symbolic (Apple) templates; samples may differ from the original paper where templates were inconsistent or incorrect; computationally validated"

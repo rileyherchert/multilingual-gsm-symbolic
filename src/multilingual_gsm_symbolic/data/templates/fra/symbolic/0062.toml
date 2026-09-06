@@ -25,15 +25,15 @@ Dans un jeu de cartes {item,de magicien}, il y a {n1,15} cartes {c1,rouges} et {
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-Il y a {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} cartes {c2} de plus que de cartes {c1}.
-Ce qui signifie qu'il y a {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)} cartes {c2}.
-Les cartes {c3} représentent {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))} cartes.
-Donc au total il y a {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{ 2*(n1+(n1+int(p/100*n1)))} cartes de différentes couleurs.
-#### {2*(n1+(n1+int(p/100*n1)))}
+Il y a {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} cartes {c2} de plus que de cartes {c1}.
+Ce qui signifie qu'il y a {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)} cartes {c2}.
+Les cartes {c3} représentent {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))} cartes.
+Donc au total il y a {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{ 2*(n1+(n1+(p*n1//100)))} cartes de différentes couleurs.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "machine-translated from Danish using anthropic/claude-opus-4-8, based on Danish templates; computationally validated; validated by native speaker."

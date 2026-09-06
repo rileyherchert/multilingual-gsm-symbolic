@@ -25,15 +25,15 @@ question_annotated = """
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-{c2_par_pl} kaarte on {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} võrra rohkem kui {c1_par_pl} kaarte.
-See tähendab, et {c2_par_pl} kaarte on {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)}.
-{c3_par_pl_cap} kaarte on {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))}.
-Seega kokku on {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{2*(n1+(n1+int(p/100*n1)))} kaarti.
-#### {2*(n1+(n1+int(p/100*n1)))}
+{c2_par_pl} kaarte on {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} võrra rohkem kui {c1_par_pl} kaarte.
+See tähendab, et {c2_par_pl} kaarte on {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)}.
+{c3_par_pl_cap} kaarte on {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))}.
+Seega kokku on {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{2*(n1+(n1+(p*n1//100)))} kaarti.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "machine-translated from eng_metric using gpt-5.4-nano, based on eng_metric templates; computationally validated; validated by a native speaker."

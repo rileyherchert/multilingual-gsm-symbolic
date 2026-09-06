@@ -19,13 +19,13 @@ question_annotated = """{item,手品師}のカードのセットには、{c1,赤
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
-answer_annotated = """{c2}カードは{c1}カードより {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)}枚多いです。
-つまり、{c2}カードは {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)}枚あります。
-{c3}カードは {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))}枚あります。
-したがって、全部で {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{ 2*(n1+(n1+int(p/100*n1)))}枚のカードがあります。
-#### {2*(n1+(n1+int(p/100*n1)))}
+answer_annotated = """{c2}カードは{c1}カードより {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)}枚多いです。
+つまり、{c2}カードは {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)}枚あります。
+{c3}カードは {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))}枚あります。
+したがって、全部で {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{ 2*(n1+(n1+(p*n1//100)))}枚のカードがあります。
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 creation = "machine-translated from English using gpt-5.4, based on English templates; computationally validated; validated by native speaker"
 language = "jpn"

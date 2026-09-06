@@ -25,15 +25,15 @@ I en kortstokk med {item,magiker}kort er det {n1,15} {c1,røde} kort og {p,60}% 
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-Det er {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} flere {c2} kort enn {c1} kort.
-Det betyr at det er {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)} {c2} kort.
-{c3} kort utgjør {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))} kort.
-Så totalt er det {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{ 2*(n1+(n1+int(p/100*n1)))} kort i forskjellige farger.
-#### {2*(n1+(n1+int(p/100*n1)))}
+Det er {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} flere {c2} kort enn {c1} kort.
+Det betyr at det er {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)} {c2} kort.
+{c3} kort utgjør {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))} kort.
+Så totalt er det {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{ 2*(n1+(n1+(p*n1//100)))} kort i forskjellige farger.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "machine-translated from Danish using gpt-5.4, based on Danish templates; computationally validated"

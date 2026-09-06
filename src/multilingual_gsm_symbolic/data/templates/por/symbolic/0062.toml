@@ -25,15 +25,15 @@ Num conjunto de {item,magician}'s cartas, há {n1,15} {c1,red} cartas e {p,60}% 
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-Há {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} cartas {c2} a mais do que {c1}.
-Isso significa que há {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)} cartas {c2}.
-As {c3} cartas perfazem {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))} cartas.
-Portanto, no total, há {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{ 2*(n1+(n1+int(p/100*n1)))} cartas de cores diferentes.
-#### {2*(n1+(n1+int(p/100*n1)))}
+Há {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} cartas {c2} a mais do que {c1}.
+Isso significa que há {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)} cartas {c2}.
+As {c3} cartas perfazem {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))} cartas.
+Portanto, no total, há {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{ 2*(n1+(n1+(p*n1//100)))} cartas de cores diferentes.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "machine-translated from English using gpt-5.4-nano, based on English templates; computationally validated"

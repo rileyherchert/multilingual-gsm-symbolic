@@ -25,15 +25,15 @@ In een set kaarten van een {item,goochelaar} zijn er {n1,15} {c1,rode} kaarten, 
 - p < 100
 - is_int(p/100 * n1)
 
-#answer: 2 * (n1 + (p/100 * n1))
+#answer: 2 * (n1 + (n1 + p*n1//100))
 """
 
 answer_annotated = """
-Er zijn {p}/100 * {n1} = <<{p}/100*{n1}={int(p/100*n1)}>>{int(p/100*n1)} meer {c2} kaarten dan {c1} kaarten.
-Dat betekent dat er {n1} + {int(p/100*n1)} = <<{n1}+{int(p/100*n1)}={n1+int(p/100*n1)}>>{n1+int(p/100*n1)} {c2} kaarten zijn.
-{c3} kaarten vormen samen {n1} + {n1+int(p/100*n1)} = <<{n1}+{n1+int(p/100*n1)}={n1+(n1+int(p/100*n1))}>>{n1+(n1+int(p/100*n1))} kaarten.
-Dus in totaal zijn er {n1+(n1+int(p/100*n1))} + {n1+(n1+int(p/100*n1))} = <<{n1+(n1+int(p/100*n1))}+{n1+(n1+int(p/100*n1))}={2*(n1+(n1+int(p/100*n1)))}>>{ 2*(n1+(n1+int(p/100*n1)))} kaarten van verschillende kleuren.
-#### {2*(n1+(n1+int(p/100*n1)))}
+Er zijn {p}/100 * {n1} = <<{p}/100*{n1}={(p*n1//100)}>>{(p*n1//100)} meer {c2} kaarten dan {c1} kaarten.
+Dat betekent dat er {n1} + {(p*n1//100)} = <<{n1}+{(p*n1//100)}={n1+(p*n1//100)}>>{n1+(p*n1//100)} {c2} kaarten zijn.
+{c3} kaarten vormen samen {n1} + {n1+(p*n1//100)} = <<{n1}+{n1+(p*n1//100)}={n1+(n1+(p*n1//100))}>>{n1+(n1+(p*n1//100))} kaarten.
+Dus in totaal zijn er {n1+(n1+(p*n1//100))} + {n1+(n1+(p*n1//100))} = <<{n1+(n1+(p*n1//100))}+{n1+(n1+(p*n1//100))}={2*(n1+(n1+(p*n1//100)))}>>{ 2*(n1+(n1+(p*n1//100)))} kaarten van verschillende kleuren.
+#### {2*(n1+(n1+(p*n1//100)))}
 """
 
 creation = "machine-translated from Danish using gpt-5.4-nano, based on Danish templates; computationally validated; validated by a native speaker."
