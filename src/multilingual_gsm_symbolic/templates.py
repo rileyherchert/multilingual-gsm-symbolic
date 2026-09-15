@@ -579,14 +579,14 @@ class AnnotatedQuestion:
             replacements = load_replacements(self.language)
 
         valid_combinations = (
-            self._evaluate_constrained_init_lines(self.constrained_lines, replacements, fixed)
+            self._evaluate_constrained_init_lines(self.constrained_lines, replacements, fixed, limit=limit)
             if self.constrained_lines
             else [{}]
         )
         unconstrained_choices = self._precompute_unconstrained(replacements, fixed)
 
         combinations: list[dict[str, Any]] = []
-        seen: set[tuple[tuple[str, str], ...]] = set()
+        seen: set[tuple[tuple[str, Any], ...]] = set()
 
         for constrained_assignment in valid_combinations:
             # When only_numeric=True, non-numeric unconstrained variables (names, strings)
@@ -612,7 +612,7 @@ class AnnotatedQuestion:
                     assignment.update(partial_assignment)
 
                 projected = self._project_assignment(assignment, only_numeric=only_numeric)
-                key = tuple(sorted((variable, repr(value)) for variable, value in projected.items()))
+                key = tuple(sorted(projected.items()))
                 if key in seen:
                     continue
                 seen.add(key)

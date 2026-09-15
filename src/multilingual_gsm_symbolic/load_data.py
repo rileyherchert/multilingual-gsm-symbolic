@@ -1,6 +1,7 @@
+import functools
 import json
 import logging
-import tomllib
+import re
 from pathlib import Path
 
 from pydantic import BaseModel
@@ -8,20 +9,21 @@ from pydantic import BaseModel
 from multilingual_gsm_symbolic.templates import AnnotatedQuestion
 
 _DATA_ROOT = Path(__file__).parent / "data" / "templates"
+_RE_IGNORE = re.compile(rb"^\s*ignore\s*=\s*true", re.MULTILINE | re.IGNORECASE)
 
 logger = logging.getLogger(__name__)
 
 
+@functools.cache
 def _active_template_files(lang_dir: Path) -> list[Path]:
     files = []
     for f in sorted((lang_dir / "symbolic").glob("*.toml")):
-        with f.open("rb") as fp:
-            data = tomllib.load(fp)
-        if not data.get("ignore"):
+        if not _RE_IGNORE.search(f.read_bytes()):
             files.append(f)
     return files
 
 
+@functools.cache
 def available_languages() -> dict[str, dict]:
     """Return the available languages and their sample counts.
 
