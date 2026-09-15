@@ -35,6 +35,34 @@ def test_get_combinations_deduplicates_numeric_solutions():
     assert combinations == [{"x": 1}, {"x": 2}, {"x": 3}]
 
 
+def test_vectorized_filtering_with_conditions_and_tuples():
+    template = AnnotatedQuestion(
+        question="Q",
+        answer="A",
+        id_orig=2,
+        id_shuffled=2,
+        question_annotated=(
+            "{name,Jerry} rolls a {sides_txt,6-sided} die.\n"
+            "#init:\n"
+            '- name = sample(["Jerry"])\n'
+            '- sides_txt, sides_val = sample([("4-sided", 4), ("6-sided", 6), ("8-sided", 8)])\n'
+            "- $target = range(1, 10)\n"
+            "#conditions:\n"
+            "- target < sides_val\n"
+            "- divides(sides_val - target, 2)\n"
+            "- is_int((sides_val - target) / 2)\n"
+            "#answer: target"
+        ),
+        answer_annotated="{target}",
+    )
+    combinations = template.get_combinations(replacements={}, only_numeric=False)
+    assert len(combinations) > 0
+    for combo in combinations:
+        assert combo["target"] < combo["sides_val"]
+        assert (combo["sides_val"] - combo["target"]) % 2 == 0
+        assert (combo["sides_txt"], combo["sides_val"]) in [("4-sided", 4), ("6-sided", 6), ("8-sided", 8)]
+
+
 _CACHE_DIR = Path(__file__).with_name("combinations_cache")
 
 

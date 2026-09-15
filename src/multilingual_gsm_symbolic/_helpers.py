@@ -6,6 +6,7 @@ Extracted from ``templates``; these have no dependency on the ``AnnotatedQuestio
 
 import ast
 import decimal
+import functools
 import itertools
 import operator as _operator
 import re
@@ -72,21 +73,18 @@ def eval_node(node: ast.expr, env: dict[str, Any]) -> Any:
         return func(*args, **kwargs)
     if isinstance(node, ast.Compare):
         left = eval_node(node.left, env)
+        res = True
         for op, comparator in zip(node.ops, node.comparators):
             op_fn = _CMPOPS.get(type(op))
             if op_fn is None:
                 raise ValueError(f"Unsupported comparison: {type(op).__name__}")
             right = eval_node(comparator, env)
-            if not op_fn(left, right):
-                return False
+            res = res & op_fn(left, right)
             left = right
-        return True
+        return res
     if isinstance(node, ast.BoolOp):
-        if isinstance(node.op, ast.And):
-            return all(eval_node(v, env) for v in node.values)
-        if isinstance(node.op, ast.Or):
-            return any(eval_node(v, env) for v in node.values)
-        raise ValueError(f"Unsupported bool operator: {type(node.op).__name__}")
+        vals = [eval_node(v, env) for v in node.values]
+        return functools.reduce(_operator.and_ if isinstance(node.op, ast.And) else _operator.or_, vals)
     if isinstance(node, ast.IfExp):
         return eval_node(node.body if eval_node(node.test, env) else node.orelse, env)
     raise ValueError(f"Unsupported AST node type: {type(node).__name__}")
