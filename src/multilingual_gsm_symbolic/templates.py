@@ -13,6 +13,8 @@ from pathlib import Path
 from random import Random
 from typing import Any, Self
 
+import numpy as np
+
 from multilingual_gsm_symbolic._helpers import (
     COMBINATION_HELPERS,
     EVAL_CONTEXT_HELPERS,
@@ -354,10 +356,14 @@ class AnnotatedQuestion:
         return any(v in self._extract_variables_from_init_line(line) for v in constrained_variables)
 
     def _evaluate_constrained_init_lines(
-        self, init_lines: list[str], replacements: dict[str, Any], fixed: dict[str, Any] | None = None
+        self,
+        init_lines: list[str],
+        replacements: dict[str, Any],
+        fixed: dict[str, Any] | None = None,
+        limit: int | None = None,
     ) -> list[dict]:
         possible_assignments = self._get_all_possible_assignments(init_lines, replacements, fixed)
-        return self._filter_invalid_combinations_streaming(possible_assignments)
+        return self._filter_invalid_combinations_streaming(possible_assignments, limit=limit)
 
     def _get_all_possible_assignments(
         self, init_lines: list[str], replacements: dict[str, Any], fixed: dict[str, Any] | None = None
@@ -408,22 +414,51 @@ class AnnotatedQuestion:
     def _filter_invalid_combinations_streaming(
         self, possibilities: dict[str, list[dict]], limit: int | None = None
     ) -> list[dict]:
-        """Stream combinations from itertools.product and stop as soon as limit is reached."""
-        num_combinations = math.prod(len(v) for v in possibilities.values())
+        """Filter combinations using vectorized NumPy broadcasting."""
+        num_combinations = math.prod(len(v) for v in possibilities.values()) if possibilities else 0
         logger.info(f"Number of combinations: {num_combinations}")
         if num_combinations > 10_000_000:
             raise ValueError(
                 f"Too many combinations ({num_combinations}) for question {self.id_shuffled}. "
                 "Please reduce the number of variables or their possible values."
             )
-        condition_asts = self._condition_asts
-        valid = []
-        for combo in itertools.product(*possibilities.values()):
-            assignment = {k: parse_value(v) for d in combo for k, v in d.items()}
-            if all(eval_node(cond, EVAL_CONTEXT_HELPERS | assignment) for cond in condition_asts):
-                valid.append(assignment)
-                if limit is not None and len(valid) >= limit:
-                    break
+        items = list(possibilities.values())
+        if not items:
+            return []
+        if not self._condition_asts:
+            return [{k: parse_value(v) for d in combo for k, v in d.items()} for combo in itertools.product(*items)][
+                :limit
+            ]
+
+        env = dict(EVAL_CONTEXT_HELPERS)
+        env.update(
+            {
+                "divides": lambda a, b: (b != 0) & (a % np.where(b != 0, b, 1) == 0),
+                "is_int": lambda a: np.isclose(a, np.round(a), atol=1e-5),
+                "ensure_int": lambda a: np.isclose(a, np.round(a), atol=1e-5),
+                "int": lambda a: np.floor(a).astype(int),
+                "round": np.round,
+            }
+        )
+        parsed_items = [[{k: parse_value(v) for k, v in d.items()} for d in cands] for cands in items]
+        ndim = len(items)
+        for i, cands in enumerate(parsed_items):
+            shape = [1] * ndim
+            shape[i] = len(cands)
+            for k in cands[0]:
+                try:
+                    env[k] = np.array([float(c[k]) for c in cands]).reshape(shape)
+                except (ValueError, TypeError):
+                    pass
+
+        mask = np.broadcast_to(True, [len(c) for c in items])
+        for cond in self._condition_asts:
+            mask = mask & eval_node(cond, env)
+
+        coords = np.argwhere(mask)
+        if limit is not None:
+            coords = coords[:limit]
+        valid = [{k: v for i, idx in enumerate(c) for k, v in parsed_items[i][idx].items()} for c in coords]
         logger.debug(f"Number of valid combinations: {len(valid)}")
         return valid
 
@@ -544,14 +579,14 @@ class AnnotatedQuestion:
             replacements = load_replacements(self.language)
 
         valid_combinations = (
-            self._evaluate_constrained_init_lines(self.constrained_lines, replacements, fixed)
+            self._evaluate_constrained_init_lines(self.constrained_lines, replacements, fixed, limit=limit)
             if self.constrained_lines
             else [{}]
         )
         unconstrained_choices = self._precompute_unconstrained(replacements, fixed)
 
         combinations: list[dict[str, Any]] = []
-        seen: set[tuple[tuple[str, str], ...]] = set()
+        seen: set[tuple[tuple[str, Any], ...]] = set()
 
         for constrained_assignment in valid_combinations:
             # When only_numeric=True, non-numeric unconstrained variables (names, strings)
@@ -577,7 +612,7 @@ class AnnotatedQuestion:
                     assignment.update(partial_assignment)
 
                 projected = self._project_assignment(assignment, only_numeric=only_numeric)
-                key = tuple(sorted((variable, repr(value)) for variable, value in projected.items()))
+                key = tuple(sorted(projected.items()))
                 if key in seen:
                     continue
                 seen.add(key)
