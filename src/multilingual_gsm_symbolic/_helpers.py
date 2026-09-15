@@ -64,7 +64,7 @@ def eval_node(node: ast.expr, env: dict[str, Any]) -> Any:
         if isinstance(node.op, ast.UAdd):
             return +val
         if isinstance(node.op, ast.Not):
-            return not val
+            return ~val if isinstance(val, np.ndarray) else not val
         raise ValueError(f"Unsupported unary operator: {type(node.op).__name__}")
     if isinstance(node, ast.Call):
         func = eval_node(node.func, env)
