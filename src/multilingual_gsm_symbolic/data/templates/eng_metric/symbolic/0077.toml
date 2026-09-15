@@ -32,6 +32,8 @@ So, she still needs to write {n} pages - {int(n*frac)} pages = <<{n}-{int(n*frac
 #### {n-int(n*frac)}
 """
 
-creation = "derived from GSM-Symbolic (Apple) templates; samples may differ from the original paper where templates were inconsistent or incorrect; computationally validated"
-
 language = "eng_metric"
+source-language = "none"
+initial_translation_model = "none"
+human-validated = "none"
+error-analysis = "none"
