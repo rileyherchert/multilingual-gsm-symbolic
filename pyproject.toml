@@ -16,7 +16,6 @@ eval = [
     "inspect-ai==0.3.239",
     "vllm==0.26.0",
     "huggingface-hub>=1.0.0",
-    "datasets>=5.0.1",
 ]
 
 [build-system]
